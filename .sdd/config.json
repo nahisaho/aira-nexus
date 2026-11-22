@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "testCmd": [
+    "node",
+    "node_modules/vitest/vitest.mjs",
+    "run",
+    "{file}",
+    "--testNamePattern",
+    "{id}(?![0-9A-Za-z])"
+  ],
+  "checks": [
+    {
+      "name": "typecheck",
+      "cmd": ["npm", "run", "typecheck"]
+    },
+    {
+      "name": "lint",
+      "cmd": ["npm", "run", "lint"]
+    },
+    {
+      "name": "test",
+      "cmd": ["npm", "test"]
+    },
+    {
+      "name": "build",
+      "cmd": ["npm", "run", "build"]
+    },
+    {
+      "name": "format",
+      "cmd": ["npm", "run", "format:check"]
+    }
+  ],
+  "scan": {
+    "include": [
+      "src/**",
+      "tests/**",
+      "scripts/**",
+      ".github/skills/lean-sdd-tdd/scripts/native-ledger.mjs",
+      ".github/skills/lean-sdd-tdd/scripts/native-ledger.test.mjs",
+      ".github/skills/lean-sdd-tdd/scripts/native-discovery-capacity.test.mjs",
+      ".github/skills/lean-sdd-tdd/scripts/implementation-plan-readiness.mjs",
+      ".github/skills/lean-sdd-tdd/scripts/implementation-plan-readiness.test.mjs"
+    ]
+  },
+  "timeoutMs": 180000,
+  "scopePolicy": "strict",
+  "planning": {
+    "required": true,
+    "features": [
+      "identity",
+      "projects",
+      "workbench",
+      "remote-proxy",
+      "auth-popup",
+      "copilot-connection",
+      "user-preferences",
+      "research-services",
+      "project-sidebar",
+      "native-ledger-capacity",
+      "native-plan-replanning",
+      "native-discovery-capacity",
+      "file-explorer",
+      "file-toolbar",
+      "file-trash-purge",
+      "file-trash-drop",
+      "docling-runtime",
+      "document-conversion",
+      "conversion-job-ui",
+      "chat-history",
+      "chat-consent",
+      "chat-runtime",
+      "chat-ui"
+    ],
+    "nativeLedgerMaxBytes": 536870912
+  },
+  "projects": [
+    {
+      "root": ".github/skills/lean-sdd-tdd",
+      "testCmd": ["node", "--test", "--test-name-pattern", "{id}(?![0-9A-Za-z])", "{file}"],
+      "checks": [
+        {
+          "name": "discovery-capacity",
+          "cmd": [
+            "node",
+            "--test",
+            "--test-concurrency=1",
+            "scripts/native-discovery-capacity.test.mjs"
+          ]
+        },
+        {
+          "name": "ledger-contract",
+          "cmd": ["node", "--test", "--test-concurrency=1", "scripts/native-ledger.test.mjs"]
+        },
+        {
+          "name": "planning-regressions",
+          "cmd": [
+            "node",
+            "--test",
+            "--test-concurrency=1",
+            "scripts/implementation-plan.test.mjs",
+            "scripts/implementation-plan-evidence.test.mjs"
+          ]
+        },
+        {
+          "name": "pending-readiness",
+          "cmd": [
+            "/home/nahisaho/.nvm/versions/node/v24.22.1/bin/node",
+            "--test",
+            "--test-concurrency=1",
+            "scripts/implementation-plan-readiness.test.mjs"
+          ]
+        }
+      ]
+    }
+  ]
+}

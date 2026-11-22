@@ -1,0 +1,17 @@
+id|sev|path:line|state
+CHS-001|Medium|src/server/chat/repository.ts:219|Fixed
+CHS-002|Medium|src/server/chat/repository.ts:598|Fixed
+CHC-001|Blocking|src/server/index.ts:33|Deferred
+CHC-002|Blocking|src/server/chat/routes.ts:75|Deferred
+CHC-003|Non-blocking|src/server/chat/routes.ts:61|Fixed
+CHC-004|Non-blocking|src/server/config.ts:100|Rejected
+CHC-005|Non-blocking|tests/chat-history.test.ts:253|Fixed
+CHT-001|High|.sdd/tdd.jsonl:1829|Fixed
+CHT-002|High|tests/chat-history.test.ts:76|Fixed
+CHT-003|High|tests/chat-history.test.ts:76|Fixed
+CHT-004|Medium|tests/chat-history.test.ts:76|Fixed
+CHT-005|Medium|tests/chat-history.test.ts:171|Fixed
+CHT-006|Medium|tests/chat-history.test.ts:225|Fixed
+CHT-007|Medium|tests/chat-history.test.ts:253|Fixed
+CHT-008|Non-blocking|.sdd/tdd.jsonl:1907-1908|Rejected
+CHT-009|Medium|tests/chat-history.test.ts:702-714|Fixed

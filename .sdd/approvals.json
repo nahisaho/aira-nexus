@@ -1,0 +1,366 @@
+{
+  "identity": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-12T09:52:47.896Z",
+    "artifacts": {
+      ".sdd/specs/identity.md": "af219aa84624f12b43eef036fd9644a4e4f3ae0c998598af6f8c9e8cd5cf53ab"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/app.ts": "32edd20b8492bc09cee47f5cfcc7cff680ae013733392c43d959422877f467e3",
+      "src/server/config.ts": "cb3e98ac154f4963044efd452c69c44c534f7b27938ddd2355e112849b0bcf7c",
+      "src/server/identity.ts": "e25556736d3754e1475fb74dd1421fc3bb9edaf46005dff76f57d0f48b1c529c"
+    }
+  },
+  "projects": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Explicit approve_source_only response; exact frozen-v2 manifest 8fcfdf55f4658ebd84f92d72818fef7db49e30fd6ce0db0877910cfc40561204; source development only, no live acceptance.",
+    "at": "2026-11-14T04:16:54.193Z",
+    "artifacts": {
+      ".sdd/specs/projects.md": "ffd4278243f6f7111a05347875ace97860d06f5814db2fbcf93200d537803bb5"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "scripts/migrate.ts": "5b484a3f4d933b6cd01c38dddfe46a12892358fec0ea43f9f2e149b250abe526",
+      "src/server/app.ts": "027e521be5213f7313ad1a7439460b3a26a91958517da6fc7b433b3e49c1654c",
+      "src/server/config.ts": "26bc7f224c87236aba482aca2943e5a6adb329c91aac99fd54f8c49b07cbe979",
+      "src/server/http-input.ts": "9287c2303aeeb89d651f9d5b65c35c3a3097d9e868f17ab54640f44f8dac8278",
+      "src/server/projects.ts": "285719ae907fdb75b4bf76a5d8ff4ef45d68c843833522a7a07174c75bfbabe4"
+    }
+  },
+  "workbench": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Human approved exact spec2d15802a94a5669ab32118d500897ec03271cb25d7126a3bafaa0b88379aa0a8: Edge-like trapezoid tabs, sibling close within same shape, zero strip/view gap; preserve interaction and view padding.",
+    "at": "2026-11-16T11:12:19.600Z",
+    "artifacts": {
+      ".sdd/specs/workbench.md": "2d15802a94a5669ab32118d500897ec03271cb25d7126a3bafaa0b88379aa0a8"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "research-services": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-19T10:05:29.573Z",
+    "artifacts": {
+      ".sdd/specs/research-services.md": "7268c4c163110e67065b82b1e7dbfd323cf89be43fc297d42a0a477492b63253"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/client/components/image-safety.ts": "41511b4d03f4f48e13bb57944ad0d2408159a09c3a1983c43a6a31a4956dc7ba",
+      "src/client/components/markdown-preview.tsx": "9674aa7c22f6add40292dc8fb4cb65eeca11258f024b5df9b8f4fadc754b7203",
+      "src/client/components/pdf-viewer.tsx": "8220de609087c1fea04954ada7c9c66fe280109fa3ea0b02907545b3cc3cac21",
+      "src/client/components/project-files.tsx": "64e81a83ed61aa75d94ed4cb8ac19ae7349ae63b8a33a5012981266c16986774",
+      "src/client/files-api.ts": "b21f23068b167053b12eb8e4372960d83f8b5b69e863dad88cfaed2054d9064f",
+      "src/client/markdown-renderer.ts": "43550536345b4d0d5cf79680af4709806690c61a06bbfc215048f71e66a995db",
+      "src/server/app.ts": "097515d8e418ae67324d1b9a4b15d42f81a96bfcb12506eacd3111fb7d5ee3c0",
+      "src/server/files/repository.ts": "c32e2065375145a302c436567c66f7e3e01e1a03d7f7ea3803f3bf1798f1b373",
+      "src/server/files/service.ts": "c2bb3c3d36d80f216b26cbc3151c7406848089d17a50c22b3b50e990e9025ca2",
+      "src/server/jobs/index.ts": "8e3ec1cf27bb205acfbcd95ab2f3e631fd40b485340a7ed60f281ff31a31ef14",
+      "src/server/jobs/repository.ts": "e8554d8a383514d167ef11038528a582e5c9b6a9d4ce5075d8ac1b2c93bdf189",
+      "src/server/jobs/service.ts": "679edf79d803dbb8ded16f4d72e6ee4fc12977bc249d8e714b628c4822c5b1e5",
+      "src/server/jobs/worker.ts": "92fa681e15bc977b92ba8858801e57bf725ae533e2e632122be47d20fba9ffb1",
+      "src/shared/jobs.ts": "4064f099f7b33b4d0d0efb934e90e5ae84a497f67f9dc45aeac24cbf899526f2"
+    }
+  },
+  "notebook-runtime": {
+    "by": "ai:claude-sonnet-5.5",
+    "kind": "ai",
+    "review": "Claude Sonnet 5.5 independent review: no blocking findings for unchanged deferred future intent only. No activation, spike, implementation, readiness or publication approval; activation follow-ups recorded in the feature review ledger.",
+    "at": "2026-11-12T10:41:22.155Z",
+    "artifacts": {
+      ".sdd/specs/notebook-runtime.md": "3c56b5331ebf597c00f60dd92c6373407f0a1d4a6f2fed72219dec851789122c"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "agent-extensions": {
+    "by": "ai:claude-sonnet-5.5",
+    "kind": "ai",
+    "review": "Claude Sonnet 5.5 independent review: no blocking findings for unchanged deferred future intent only. No activation, spike, implementation, readiness or publication approval; activation follow-ups recorded in the feature review ledger.",
+    "at": "2026-11-12T10:41:22.344Z",
+    "artifacts": {
+      ".sdd/specs/agent-extensions.md": "52d151eec80f825f42747432410018152517047388eb1a239e69c508831d563d"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "research-evidence": {
+    "by": "ai:claude-sonnet-5.5",
+    "kind": "ai",
+    "review": "Claude Sonnet 5.5 independent review: no blocking findings for unchanged deferred future intent only. No activation, spike, implementation, readiness or publication approval; activation follow-ups recorded in the feature review ledger.",
+    "at": "2026-11-12T10:41:22.530Z",
+    "artifacts": {
+      ".sdd/specs/research-evidence.md": "ef8f3c431bf283026cde5d4d0bcc01ace610d8947eca6f841a480c5ed13223a2"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "platform-operations": {
+    "by": "ai:claude-sonnet-5.5",
+    "kind": "ai",
+    "review": "Claude Sonnet 5.5 independent review: no blocking findings for unchanged deferred future intent only. No activation, spike, implementation, readiness or publication approval; activation follow-ups recorded in the feature review ledger.",
+    "at": "2026-11-12T10:41:22.712Z",
+    "artifacts": {
+      ".sdd/specs/platform-operations.md": "c8d8937cca093218b60e32034e8b5ef2fdaf9ecdd56c4336b85a51cb028b95c2"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "remote-proxy": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Human approved exact spec SHA-256 993e716f53e62eb593def9800fb993f0a045f88e25d45f9debc95ef77922a0b1 via ask_user; independent Sonnet 5.5 design delta clean; host-network non-root nginx spike passed; Windows SSH/live Entra and manual existing-process restart remain unverified.",
+    "at": "2026-11-12T12:15:49.667Z",
+    "artifacts": {
+      ".sdd/specs/remote-proxy.md": "993e716f53e62eb593def9800fb993f0a045f88e25d45f9debc95ef77922a0b1"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "scripts/check-loopback.sh": "104f2cbaf0d906f97d84be2e6ec4e1fe5e1a3c6086f9bae3906644e00f97e610",
+      "scripts/proxy.sh": "b708d55964a02b95b8886615f629087178e34aa0ba41831f83f9de06121b55f5",
+      "src/server/index.ts": "2b3916bb0e534c6ba1a73257121243c2c7a4d31e9f08906330e9bc54ee846344"
+    }
+  },
+  "auth-popup": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Explicit human approval of c94495595fc4f880110f0714758f97b148671da57c8a9d6b7d3b9b87ce321ff5: successful GET/HEAD exact callback COOP exception, residual opener isolation risk, bounded implementation paths; synthetic Chromium spike and Sonnet design reviews clean.",
+    "at": "2026-11-12T13:39:03.539Z",
+    "artifacts": {
+      ".sdd/specs/auth-popup.md": "c94495595fc4f880110f0714758f97b148671da57c8a9d6b7d3b9b87ce321ff5"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/app.ts": "c25d7695fe609e183cefbcedebef659036ae5e2fee1929c049fa0460e547d417"
+    }
+  },
+  "copilot-connection": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Explicit ask_user approval of c6cf8642d21b196989b6ea11d80d27b7ef6dc222d612fcbc84c83ec3efb08f10 after fixed-manifest Sonnet reviews; first connection-management unit only.",
+    "at": "2026-11-12T21:11:45.318Z",
+    "artifacts": {
+      ".sdd/specs/copilot-connection.md": "c6cf8642d21b196989b6ea11d80d27b7ef6dc222d612fcbc84c83ec3efb08f10"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/client/api.ts": "d113e667065e0a7418f97ded31618c6d60ac6bcc5bf2832a43a081ff2ef315d3",
+      "src/client/components/copilot-settings.tsx": "744be249f84247bd42e7373d130c241dbca02ca2b1de8ec5317db2b5c29f311a",
+      "src/server/app.ts": "b5b6c2becf4bd733f2b4899aa8d92fd61955515ce53f2e3e2a25a2ab51d1c2c0",
+      "src/server/config.ts": "a80882d99d1ac237d95fd8a65438fab4eb05d25db5d22f546d3e0178c6302593",
+      "src/server/copilot/provider.ts": "d9e96411190df7f54bdc2e14624faf9e2f6181e4f9575137ecfe3e5103044583",
+      "src/server/copilot/secrets.ts": "35fcf7a239857e50cf129029338d05e412aea4b93313a941b0f0d18ade5847b1",
+      "src/server/copilot/service.ts": "90650485e0d6309141179e0ebd6195134925ab0a8f86de67f70a99b70921deee",
+      "src/shared/copilot.ts": "08aeff9e44b7ac6e974582a330e2e5a1b0526b687fcfcdbfbe469a0328968de4"
+    }
+  },
+  "user-preferences": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Human approved exact spec7b2e47dd283769799cb47e1aa55ae86c1701dabb01a884726bd87b06a7e6631e: extra-small70%, compatible additive constraint migration, isolated SQL/CSS spikes passed.",
+    "at": "2026-11-16T10:28:30.539Z",
+    "artifacts": {
+      ".sdd/specs/user-preferences.md": "7b2e47dd283769799cb47e1aa55ae86c1701dabb01a884726bd87b06a7e6631e"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "project-sidebar": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Human approved exact spec 0100f3f142c58f10eeaa6a7173625f81602c26d29ff711cb1a05e8c8b60bf2d4 after direct-archive feasibility spike and explicit no-confirmation clarification.",
+    "at": "2026-11-16T10:06:49.390Z",
+    "artifacts": {
+      ".sdd/specs/project-sidebar.md": "0100f3f142c58f10eeaa6a7173625f81602c26d29ff711cb1a05e8c8b60bf2d4"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "native-ledger-capacity": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Human approved .sdd/specs/native-ledger-capacity.md SHA2560904b4a08c41c30544edf3ac67b9e262fb139fa2335f9629c444b89d22669f5b with record/merge/memory constraints and isolated implementation only; frozen-artifact Root512MiB opt-in requires separate human approval.",
+    "at": "2026-11-17T12:47:45.883Z",
+    "artifacts": {
+      ".sdd/specs/native-ledger-capacity.md": "0904b4a08c41c30544edf3ac67b9e262fb139fa2335f9629c444b89d22669f5b"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      ".github/skills/lean-sdd-tdd/scripts/native-ledger.mjs": "b23930997727802b4ec539e003afc5b5ff1d8f87204d4182f13a628dddada0d7"
+    }
+  },
+  "native-plan-replanning": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-14T11:09:46.041Z",
+    "artifacts": {
+      ".sdd/specs/native-plan-replanning.md": "e0cb6855d62e1b63ea4344a9c4e3e3e53fc4edc5e429f00234b58d92c5f4a5e6"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      ".github/skills/lean-sdd-tdd/scripts/implementation-plan-readiness.mjs": "668f5c726dc71a29a7a12d569c65fe10baf55a599c8deb5d8a1398275f9db333"
+    }
+  },
+  "file-explorer": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-16T12:34:08.127Z",
+    "artifacts": {
+      ".sdd/specs/file-explorer.md": "f07b13fce4531daefe890e6a10c63caa1b02538a6fa31c6f3aa81d296727ed19"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/client/components/project-files.tsx": "174d2a66faf49d20a012738183b6b92c2004c47d5b8f1917759769a1ad5ad962",
+      "src/client/files-api.ts": "b21f23068b167053b12eb8e4372960d83f8b5b69e863dad88cfaed2054d9064f",
+      "src/server/app.ts": "027e521be5213f7313ad1a7439460b3a26a91958517da6fc7b433b3e49c1654c",
+      "src/server/files/repository.ts": "c32e2065375145a302c436567c66f7e3e01e1a03d7f7ea3803f3bf1798f1b373",
+      "src/server/files/service.ts": "c2bb3c3d36d80f216b26cbc3151c7406848089d17a50c22b3b50e990e9025ca2"
+    }
+  },
+  "file-trash-purge": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-16T12:34:06.713Z",
+    "artifacts": {
+      ".sdd/specs/file-trash-purge.md": "b198f4c780c12a845865e7459f6538d5709b973d4bbae9affc4c7060c57f45fb"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/client/components/project-files.tsx": "174d2a66faf49d20a012738183b6b92c2004c47d5b8f1917759769a1ad5ad962",
+      "src/client/files-api.ts": "b21f23068b167053b12eb8e4372960d83f8b5b69e863dad88cfaed2054d9064f",
+      "src/server/app.ts": "027e521be5213f7313ad1a7439460b3a26a91958517da6fc7b433b3e49c1654c",
+      "src/server/files/repository.ts": "c32e2065375145a302c436567c66f7e3e01e1a03d7f7ea3803f3bf1798f1b373",
+      "src/server/files/service.ts": "c2bb3c3d36d80f216b26cbc3151c7406848089d17a50c22b3b50e990e9025ca2",
+      "src/server/files/store.ts": "85b74a533cabead7b7b0b2456a9903522ead0e1a094347fffc9e31c03129a369"
+    }
+  },
+  "native-discovery-capacity": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-16T13:35:58.529Z",
+    "artifacts": {
+      ".sdd/specs/native-discovery-capacity.md": "b9530ca6c157735f608c48e61559d96d24e4d94276b10a95db5316f2d657311d"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {}
+  },
+  "docling-runtime": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-17T01:04:13.986Z",
+    "artifacts": {
+      ".sdd/specs/docling-runtime.md": "001ddb7391eed94ea331130f644c32621a2aca56817ee4ac8e87f742887699ee"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/conversion/parser.py": "ce241ce3041f9a2beff473a970c65814b30f721c9fe580a99ec62e05776899b3",
+      "src/server/conversion/runtime.ts": "20573d30b26b4a9506e4738913de2237b3d0ef9504efcab86a5d217e0ee15279"
+    }
+  },
+  "document-conversion": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-17T01:04:16.054Z",
+    "artifacts": {
+      ".sdd/specs/document-conversion.md": "4ef6c4bf978adf2a123f1b70556829e5f0f2059e1ccb6edc11cfa9e92e9dcb0e"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/conversion/config.ts": "2848d9826dbce0ae66aab888bf9385ef2c319912af403e402d6b6044c8d76604",
+      "src/server/conversion/repository.ts": "007a64e29686ed291f347af890bc1990e073ff1e92751fcad66a41a8faab7438",
+      "src/shared/conversions.ts": "4f94b1e2e2b552151142f1139be02b56b530356d6c1e661a73906b43449e5975"
+    }
+  },
+  "conversion-job-ui": {
+    "by": "ai:claude-sonnet-5.5",
+    "kind": "ai",
+    "review": "Design-only re-lock: approved spec SHA 1755631c61b97455a9714c9f1f19f4cc3d0aa7e79b053ceb752dcd880bc13617 is unchanged; original independent Sonnet design approval is retained in .sdd/ui-work-evidence/baseline.json. Current implementation findings remain OPEN in .sdd/review-conversion-job-ui.md; this is not implementation approval or gate evidence.",
+    "at": "2026-11-18T00:14:22.386Z",
+    "artifacts": {
+      ".sdd/specs/conversion-job-ui.md": "1755631c61b97455a9714c9f1f19f4cc3d0aa7e79b053ceb752dcd880bc13617"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "chat-consent": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-20T02:48:11.754Z",
+    "artifacts": {
+      ".sdd/specs/chat-consent.md": "3202286d32ab2a98e577cf3d3d3c9e04b6151826b72d4b3b8ae9626c9a9deafe"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/chat/consent.ts": "ce01d26dd3e63012fb2f476e94acdfec1d6e4f1066379722a8c0f882f8ada149",
+      "src/server/chat/models.ts": "17f1e8a65f77310fdd9be1ad52411d39dd7c5a30dc57cb807dbdc125dc19d321",
+      "src/server/chat/runtime.ts": "92ba441039da5c993e41bfc7f381b324492834aa7d05d69ee365ba63558604c8",
+      "src/server/chat/sdk-child.ts": "7b9cece9d91a83a10a146fdb88121d508c3b064aa04599b70cd2b1c9ed904880",
+      "src/server/chat/snapshot.ts": "543ea2cf5ab4bc610ec3ddeccb35f34ec7c1b6272b52eb04a4ee1ab2ff87e525",
+      "src/server/chat/worker.ts": "1fcbacdceaa6fd718b8c4ae7f035c6f9e2add9ee83018f8a9770ceb0baae52c3",
+      "src/server/copilot/service.ts": "7fdfa0fb898906bfd8f83dc2d356ce163070ab450dc7aa24b74b054e5be428b4"
+    }
+  },
+  "chat-history": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-19T10:05:47.346Z",
+    "artifacts": {
+      ".sdd/specs/chat-history.md": "8cd103bfce08930cccdc8f75f0516fead8fa997ee9a5035294741ef743d4899a"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/chat/config.ts": "166231ee6428b1a1cf14471d418a4fa6ea31d3dd8d6f9c458324e198fb44ebe1",
+      "src/server/chat/repository.ts": "5f9ea08b1e2d0822da997f99c1c570359c4d02b756c4d0bc8c72f4b507f87815"
+    }
+  },
+  "chat-runtime": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-19T10:05:50.206Z",
+    "artifacts": {
+      ".sdd/specs/chat-runtime.md": "84a6ee563a82afffaf829c2e081b4e0a87c0a96d3db2aef1075e84820042543a"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/chat/event-writer.ts": "2d03a27343a540589907bab3840190dfca94bb3904bdbedd8fa0f57a93845c19",
+      "src/server/chat/repository.ts": "8db1178915eb05bc783a88fdf94f30542603526c0f6fa06ee5c9df17234de871",
+      "src/server/chat/runtime.ts": "f1a03a10f26d34aa6e027e03ba63e148bf9eb6803b653036ebe2f00b3155e0af",
+      "src/server/chat/sdk-child.ts": "83c251342c12ee04d7f259314ee1f1d9639b5b74094e20c2fa6ec093ce4d8a41",
+      "src/server/chat/stream.ts": "caf23997c30f566fb4fffa57d67383960617b100c28ed5512e7c813de07bc289"
+    }
+  },
+  "chat-ui": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-19T10:05:52.966Z",
+    "artifacts": {
+      ".sdd/specs/chat-ui.md": "408d8c8ada0f60a975c4532929c70805192deee2e79ae46eaa8bfbebda49aa20"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/client/chat-api.ts": "a36a7acef60b6adb70a4314b1b650b325a5cf24559741e668b4c24004e787895",
+      "src/client/components/project-chat.tsx": "ee22b1c29bef1986c170194c10f41e105fa8c56add55792cdfc13e92e20f262a"
+    }
+  }
+}

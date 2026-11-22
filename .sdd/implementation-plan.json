@@ -1,0 +1,1950 @@
+{
+  "schemaVersion": 1,
+  "features": [
+    {
+      "id": "native-discovery-capacity",
+      "dependsOn": []
+    },
+    {
+      "id": "identity",
+      "dependsOn": [
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "projects",
+      "dependsOn": [
+        "identity",
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "workbench",
+      "dependsOn": [
+        "projects",
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "research-services",
+      "dependsOn": [
+        "workbench",
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "notebook-runtime",
+      "dependsOn": [
+        "research-services",
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "agent-extensions",
+      "dependsOn": [
+        "notebook-runtime",
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "research-evidence",
+      "dependsOn": [
+        "agent-extensions",
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "platform-operations",
+      "dependsOn": [
+        "research-evidence",
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "remote-proxy",
+      "dependsOn": [
+        "identity",
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "auth-popup",
+      "dependsOn": [
+        "identity",
+        "workbench",
+        "remote-proxy",
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "copilot-connection",
+      "dependsOn": [
+        "identity",
+        "projects",
+        "workbench",
+        "auth-popup",
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "user-preferences",
+      "dependsOn": [
+        "workbench",
+        "copilot-connection",
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "project-sidebar",
+      "dependsOn": [
+        "workbench",
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "native-ledger-capacity",
+      "dependsOn": []
+    },
+    {
+      "id": "native-plan-replanning",
+      "dependsOn": [
+        "native-ledger-capacity"
+      ]
+    },
+    {
+      "id": "file-explorer",
+      "dependsOn": []
+    },
+    {
+      "id": "file-toolbar",
+      "dependsOn": []
+    },
+    {
+      "id": "file-trash-purge",
+      "dependsOn": []
+    },
+    {
+      "id": "file-trash-drop",
+      "dependsOn": [
+        "file-explorer"
+      ]
+    },
+    {
+      "id": "docling-runtime",
+      "dependsOn": []
+    },
+    {
+      "id": "document-conversion",
+      "dependsOn": [
+        "docling-runtime",
+        "research-services"
+      ]
+    },
+    {
+      "id": "conversion-job-ui",
+      "dependsOn": [
+        "document-conversion"
+      ]
+    },
+    {
+      "id": "chat-history",
+      "dependsOn": [
+        "projects"
+      ]
+    },
+    {
+      "id": "chat-consent",
+      "dependsOn": [
+        "chat-history",
+        "copilot-connection"
+      ]
+    },
+    {
+      "id": "chat-runtime",
+      "dependsOn": [
+        "chat-consent"
+      ]
+    },
+    {
+      "id": "chat-ui",
+      "dependsOn": [
+        "chat-history",
+        "chat-consent",
+        "chat-runtime"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "native-discovery-capacity",
+      "feature": "native-discovery-capacity",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-NDC-001",
+        "REQ-NDC-002"
+      ],
+      "dependsOn": [],
+      "artifacts": [
+        ".github/skills/lean-sdd-tdd/scripts/sdd.mjs",
+        ".github/skills/lean-sdd-tdd/scripts/sdd.test.mjs",
+        ".github/skills/lean-sdd-tdd/scripts/native-discovery-capacity.test.mjs",
+        ".sdd/config.json"
+      ],
+      "condition": "Bounded16384-directory discovery preserves genuine assertion Red/Green, installed package provenance and explicit pre-execution refusal above the ceiling without changing historical evidence or other budgets.",
+      "tests": [
+        "TEST-NDC-001",
+        "TEST-NDC-002"
+      ],
+      "checks": [
+        {
+          "name": "discovery-capacity",
+          "argv": [
+            "node",
+            "--test",
+            "--test-concurrency=1",
+            ".github/skills/lean-sdd-tdd/scripts/native-discovery-capacity.test.mjs"
+          ],
+          "timeoutMs": 180000
+        },
+        {
+          "name": "closure-budgets",
+          "argv": [
+            "node",
+            "--test",
+            "--test-concurrency=1",
+            "--test-name-pattern",
+            "TEST-R34-CLOSURE-00[1-4]",
+            ".github/skills/lean-sdd-tdd/scripts/sdd.test.mjs"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/native-discovery-capacity.md": "b9530ca6c157735f608c48e61559d96d24e4d94276b10a95db5316f2d657311d"
+      },
+      "dependencies": {},
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/af6f0a5fba2b6095a76ded163e8d82ad92ebbddca314dc0c3083f6515c7915ff/6d2f062d8c64d82ca45d5cadf0168051114f3e6c28cf23a4bd17c0fdefff48d8.json"
+    },
+    {
+      "id": "file-trash-drop",
+      "feature": "file-trash-drop",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-FTD-001",
+        "REQ-FTD-002"
+      ],
+      "dependsOn": [
+        "file-explorer-actions"
+      ],
+      "artifacts": [
+        "src/client/components/project-files.tsx",
+        "src/client/i18n.ts",
+        "tests/files-ui.test.tsx"
+      ],
+      "condition": "A current active-file drag onto Trash invokes existing reversible trash once; target feedback, failure retention, busy/cancel/foreign/stale rejection and normal file/menu behavior are preserved.",
+      "tests": [
+        "TEST-FTD-001",
+        "TEST-FTD-002"
+      ],
+      "checks": [
+        {
+          "name": "trash-drop-regressions",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/files-ui.test.tsx",
+            "--testNamePattern",
+            "TEST-FTD-"
+          ],
+          "timeoutMs": 120000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/file-trash-drop.md": "aff8b0d8212afb8667ce6762c07376813982dbd4bd54bf7ae38203b9abe7cbca"
+      },
+      "dependencies": {
+        "file-explorer-actions": "97133074f42b03111b8f8568f559f6dbaaa9474faa3f4735866e277513e4ee8c"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/13cb60d7469d6477c3c52d092f905f44800db9967710c37c6e4a29f2a3740610/a977d1a5e5728137cc675d8f5c1182cda091d9e4eec304b4c2444c14a7a6959c.json"
+    },
+    {
+      "id": "file-trash-purge",
+      "feature": "file-trash-purge",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-FTP-001",
+        "REQ-FTP-002",
+        "REQ-FTP-003"
+      ],
+      "dependsOn": [
+        "file-explorer-actions",
+        "file-toolbar-actions"
+      ],
+      "artifacts": [
+        "db/migrations/012_file_trash_purge.sql",
+        "src/server/files/repository.ts",
+        "src/server/files/service.ts",
+        "src/server/files/store.ts",
+        "src/server/app.ts",
+        "src/client/components/project-files.tsx",
+        "src/client/files-api.ts",
+        "src/client/i18n.ts",
+        "tests/files.test.ts",
+        "tests/files-ui.test.tsx",
+        "tests/helpers/app.tsx",
+        "tests/markdown-preview.test.tsx",
+        "tests/markdown-security.test.tsx",
+        "tests/project-sidebar.test.tsx"
+      ],
+      "condition": "Confirmed project-local purge deletes all selected trash blobs with stored ETags, retains durable pending/quota on partial failure, blocks missing-file restore and preserves upload/reload and foreign/active files.",
+      "tests": [
+        "TEST-FTP-001",
+        "TEST-FTP-002",
+        "TEST-FTP-003"
+      ],
+      "checks": [
+        {
+          "name": "trash-purge-regressions",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/files.test.ts",
+            "tests/files-ui.test.tsx",
+            "--testNamePattern",
+            "TEST-FTP-"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/file-trash-purge.md": "b198f4c780c12a845865e7459f6538d5709b973d4bbae9affc4c7060c57f45fb"
+      },
+      "dependencies": {
+        "file-explorer-actions": "97133074f42b03111b8f8568f559f6dbaaa9474faa3f4735866e277513e4ee8c",
+        "file-toolbar-actions": "727bf0c5e822c3ca4609ddf4717f1c0e8001209e0a7a3fbdb2037c454a6136c0"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/0a05f411a66089fedccce14b80892eb2052f01dff7dffd10dde11b3e8220188b/621bc8cb1e793c8093b29e9befbedd95f320fa17d82e96352e750718471977df.json"
+    },
+    {
+      "id": "file-toolbar-actions",
+      "feature": "file-toolbar",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-FTB-001"
+      ],
+      "dependsOn": [
+        "file-explorer-actions"
+      ],
+      "artifacts": [
+        "src/client/components/project-files.tsx",
+        "tests/files-ui.test.tsx"
+      ],
+      "condition": "The Files heading contains localized upload/reload icon actions, the native picker and old text reload button are hidden/removed, and picker/reload operations retain all existing guards.",
+      "tests": [
+        "TEST-FTB-001"
+      ],
+      "checks": [
+        {
+          "name": "file-toolbar-regression",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/files-ui.test.tsx",
+            "--testNamePattern",
+            "TEST-FTB-001"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/file-toolbar.md": "7b17a796647c5b26daa32193692be5470261234505e35a1969726db3f1e9b412"
+      },
+      "dependencies": {
+        "file-explorer-actions": "97133074f42b03111b8f8568f559f6dbaaa9474faa3f4735866e277513e4ee8c"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/52f9131f4f383a09391ac750a940185ba52a90116453f3b6f648e474e2483037/056954b664206be264770d0302637dec5b6d1ea274a08d819fdb096c6553384e.json"
+    },
+    {
+      "id": "file-explorer-actions",
+      "feature": "file-explorer",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-FEX-001",
+        "REQ-FEX-002",
+        "REQ-FEX-003"
+      ],
+      "dependsOn": [
+        "project-files-backend",
+        "project-files-ui"
+      ],
+      "artifacts": [
+        "db/migrations/011_file_trash.sql",
+        "src/server/files/repository.ts",
+        "src/server/files/service.ts",
+        "src/server/app.ts",
+        "src/client/files-api.ts",
+        "src/client/components/project-files.tsx",
+        "src/client/components/workspace-tabs.tsx",
+        "src/client/App.tsx",
+        "src/client/i18n.ts",
+        "tests/files.test.ts",
+        "tests/files-ui.test.tsx",
+        "tests/helpers/app.tsx",
+        "tests/markdown-preview.test.tsx",
+        "tests/markdown-security.test.tsx",
+        "tests/project-sidebar.test.tsx"
+      ],
+      "condition": "Filename-only rows, accessible action menus, central opening, owner-isolated reversible trash/restore, retained quota and stale-response fencing pass focused PostgreSQL/Azurite and UI regressions.",
+      "tests": [
+        "TEST-FEX-001",
+        "TEST-FEX-002",
+        "TEST-FEX-003"
+      ],
+      "checks": [
+        {
+          "name": "file-explorer-regressions",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/files.test.ts",
+            "tests/files-ui.test.tsx",
+            "--testNamePattern",
+            "TEST-FEX-"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/file-explorer.md": "f07b13fce4531daefe890e6a10c63caa1b02538a6fa31c6f3aa81d296727ed19"
+      },
+      "dependencies": {
+        "project-files-backend": "e6a3ade34180e55a3a087d9498a6727368b1c715bff8db797ddce5340f799e9b",
+        "project-files-ui": "7a231519f2577b764f2e633235cbfd78790d5e8ac2768b83ffbdb2b49339f14c"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/ff09268faf77269e879718b17678ff1a8d4eb65a8a8e95125e1cb32317596f7a/508aca607862f84ff80a69d1bd4087b28ad84c4290131142958595454cedd804.json"
+    },
+    {
+      "id": "identity-foundation",
+      "feature": "identity",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-ID-001",
+        "REQ-ID-002",
+        "REQ-ID-003",
+        "REQ-ID-004"
+      ],
+      "dependsOn": [
+        "native-planner-readiness"
+      ],
+      "artifacts": [
+        "src/server/identity.ts",
+        "src/server/config.ts",
+        "src/server/app.ts",
+        "src/server/index.ts",
+        "src/shared/contracts.ts",
+        "tests/identity.test.ts",
+        "tests/helpers/identity.ts",
+        "tests/setup.ts",
+        "package.json",
+        "package-lock.json",
+        "tsconfig.json",
+        "tsconfig.server.json",
+        "vitest.config.ts",
+        "eslint.config.js",
+        ".env.example",
+        "README.md",
+        "docs/architecture.md",
+        "docs/requirements.md",
+        "docs/prompts/phase-1.md"
+      ],
+      "condition": "Signed-token and configuration/health assertions pass without any authentication bypass; live Entra remains explicitly unverified.",
+      "tests": [
+        "TEST-ID-001",
+        "TEST-ID-002",
+        "TEST-ID-003",
+        "TEST-ID-004"
+      ],
+      "checks": [
+        {
+          "name": "identity-tests",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/identity.test.ts"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/identity.md": "af219aa84624f12b43eef036fd9644a4e4f3ae0c998598af6f8c9e8cd5cf53ab"
+      },
+      "dependencies": {
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "native-planner-readiness": "39a1201a14e6be5dddb2b5d2d2c58d4aee92739f293cbf5bc1b79b529bf924e5"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/01dfd5903b7cc23b9357f199c772b613f4ff02bec656aafd587b39e56c851fe7/6302ce720751d1f8b64a5a2e5c45fa711635138e67abf3eda090b02ece164a24.json"
+    },
+    {
+      "id": "private-projects",
+      "feature": "projects",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-PROJ-001",
+        "REQ-PROJ-002",
+        "REQ-PROJ-003",
+        "REQ-PROJ-004",
+        "REQ-PMG-001",
+        "REQ-PMG-002",
+        "REQ-PMG-003",
+        "REQ-PMG-004",
+        "REQ-PMG-005"
+      ],
+      "dependsOn": [
+        "native-planner-readiness"
+      ],
+      "artifacts": [
+        "src/server/projects.ts",
+        "src/server/http-input.ts",
+        "src/server/app.ts",
+        "src/shared/contracts.ts",
+        "scripts/migrate.ts",
+        "db/migrations/001_projects.sql",
+        "tests/projects.test.ts",
+        "compose.yml",
+        "src/server/config.ts",
+        "src/server/index.ts",
+        ".env.example"
+      ],
+      "condition": "Actual PostgreSQL tests prove durable owner-only access, validation/stream limits and atomic compare-and-set rename. Owner-scoped descriptions, versioned reversible trash/restore, busy-job/upload exclusion, always-active authorization including pin lists and default-disabled management preserve legacy DTOs; final native/API/race proof required, no live migration.",
+      "tests": [
+        "TEST-PROJ-001",
+        "TEST-PROJ-002",
+        "TEST-PROJ-003",
+        "TEST-PROJ-004",
+        "TEST-PMG-001",
+        "TEST-PMG-002",
+        "TEST-PMG-003",
+        "TEST-PMG-004",
+        "TEST-PMG-005"
+      ],
+      "checks": [
+        {
+          "name": "project-tests",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/projects.test.ts"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/projects.md": "ffd4278243f6f7111a05347875ace97860d06f5814db2fbcf93200d537803bb5"
+      },
+      "dependencies": {
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "native-planner-readiness": "39a1201a14e6be5dddb2b5d2d2c58d4aee92739f293cbf5bc1b79b529bf924e5"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/4be3dce0ef8093cc43dc84e5974a043933714a7e93ee04736edb74ef955db9e9/f01df2c93545ebd2c8fa2d2ae5a62834ce140a24adea3437b36ca7ac033aa11d.json"
+    },
+    {
+      "id": "research-shell",
+      "feature": "workbench",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-UI-001",
+        "REQ-UI-002",
+        "REQ-UI-003",
+        "REQ-UI-004",
+        "REQ-UI-005",
+        "REQ-UI-006",
+        "REQ-UI-007",
+        "REQ-UI-008",
+        "REQ-SCR-001"
+      ],
+      "dependsOn": [
+        "native-planner-readiness"
+      ],
+      "artifacts": [
+        "src/client/App.tsx",
+        "src/client/api.ts",
+        "src/client/auth.ts",
+        "src/client/main.tsx",
+        "src/client/styles.css",
+        "src/client/lib/utils.ts",
+        "src/client/components/ui/button.tsx",
+        "src/client/components/ui/input.tsx",
+        "src/client/components/ui/label.tsx",
+        "src/client/components/ui/tabs.tsx",
+        "src/client/components/workspace-tabs.tsx",
+        "src/client/components/resizable-workspace.tsx",
+        "src/client/i18n.ts",
+        "components.json",
+        "src/shared/contracts.ts",
+        "index.html",
+        "public/auth-redirect.html",
+        "vite.config.ts",
+        "tests/workbench.test.tsx",
+        "tests/workspace-tabs.test.tsx",
+        "tests/resizable-workspace.test.tsx",
+        "tests/helpers/app.tsx",
+        "tests/auth.test.ts",
+        "tests/pane-scrollbars.test.tsx"
+      ],
+      "condition": "Labeled three-pane shell manages projects and fixed Chat/Notebook plus dynamic file tabs with close/reorder/scope isolation; every central tab has an Edge-like trapezoid including its sibling close control and joins the view with zero gap, preserving keyboard focus and horizontal overflow. Accessible captured-pointer separators resize bounded panes. The center retains the selected-project heading without a name editor/Save name action; sidebar Project settings retains acknowledged rename. File I/O is owned by research-services; persisted widths and chat/Notebook execution remain unavailable. Each visible pane is a labelled focusable independent native vertical scroll area within remaining viewport height.",
+      "tests": [
+        "TEST-UI-001",
+        "TEST-UI-002",
+        "TEST-UI-003",
+        "TEST-UI-004",
+        "TEST-UI-005",
+        "TEST-UI-006",
+        "TEST-UI-007",
+        "TEST-UI-008",
+        "TEST-UI-009",
+        "TEST-UI-010",
+        "TEST-UI-011",
+        "TEST-UI-012",
+        "TEST-SCR-001"
+      ],
+      "checks": [
+        {
+          "name": "workbench-tests",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/workbench.test.tsx",
+            "tests/workspace-tabs.test.tsx",
+            "tests/resizable-workspace.test.tsx",
+            "tests/auth.test.ts",
+            "tests/pane-scrollbars.test.tsx"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/workbench.md": "2d15802a94a5669ab32118d500897ec03271cb25d7126a3bafaa0b88379aa0a8"
+      },
+      "dependencies": {
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "native-planner-readiness": "39a1201a14e6be5dddb2b5d2d2c58d4aee92739f293cbf5bc1b79b529bf924e5",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/8941662ec8a935e7aa0ca54b2ef62f3b44667d205e0c3cfc00fd27bc3dc6146b/8ac94f02a91b297998fa9b2235409e8e0cb12bff2ca937aaba276da6b3b8259d.json"
+    },
+    {
+      "id": "ssh-nginx-proxy",
+      "feature": "remote-proxy",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-TUN-001",
+        "REQ-TUN-002",
+        "REQ-TUN-003",
+        "REQ-TUN-004"
+      ],
+      "dependsOn": [
+        "native-planner-readiness"
+      ],
+      "artifacts": [
+        "compose.proxy.yml",
+        "nginx/tunnel.conf",
+        "scripts/proxy.sh",
+        "scripts/check-loopback.sh",
+        "tests/proxy.test.ts",
+        "docs/ssh-tunnel-verification.md",
+        "docs/entra-sso-verification.md",
+        "src/server/config.ts",
+        "src/server/index.ts",
+        ".env.example",
+        "package.json",
+        "README.md"
+      ],
+      "condition": "Actual nginx and Node listeners, forwarding/authentication, all socket-policy rows and runtime isolation/health regressions pass; Windows SSH/live Entra and manual existing-service restart are explicitly unverified.",
+      "tests": [
+        "TEST-TUN-001",
+        "TEST-TUN-002",
+        "TEST-TUN-003",
+        "TEST-TUN-004"
+      ],
+      "checks": [
+        {
+          "name": "proxy-tests",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/proxy.test.ts"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/remote-proxy.md": "993e716f53e62eb593def9800fb993f0a045f88e25d45f9debc95ef77922a0b1"
+      },
+      "dependencies": {
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "native-planner-readiness": "39a1201a14e6be5dddb2b5d2d2c58d4aee92739f293cbf5bc1b79b529bf924e5"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/bd825289e9417f53e0edf8745b5d3c274b9caad93a1908acdeda6a621fe2aa98/11c019d242a3fdbf400ad90de7a32b2a5837c98b8166e9dc25d801d0cb34ef89.json"
+    },
+    {
+      "id": "msal-popup-callback",
+      "feature": "auth-popup",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-POP-001"
+      ],
+      "dependsOn": [
+        "native-planner-readiness"
+      ],
+      "artifacts": [
+        "src/server/app.ts",
+        "tests/popup.test.ts",
+        "public/auth-redirect.html",
+        "docs/entra-sso-verification.md",
+        "docs/ssh-tunnel-verification.md"
+      ],
+      "condition": "Successful exact callback GET/HEAD alone returns unsafe-none; path/method/status negatives, unchanged callback headers/content and protected API 401 pass. Real Windows/Entra retest and owner restart remain manual.",
+      "tests": [
+        "TEST-POP-001"
+      ],
+      "checks": [
+        {
+          "name": "popup-tests",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/popup.test.ts"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/auth-popup.md": "c94495595fc4f880110f0714758f97b148671da57c8a9d6b7d3b9b87ce321ff5"
+      },
+      "dependencies": {
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "native-planner-readiness": "39a1201a14e6be5dddb2b5d2d2c58d4aee92739f293cbf5bc1b79b529bf924e5",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89",
+        "ssh-nginx-proxy": "0e2a00761c32ddc3a36757b44ffb66e8c41bf35a8c7a925baca8211854926d51"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/57bc4d44de6df2419c423392ac3d5eaa072af94cd48d5e0a5d49e2b74704442c/a4c73828dd0aace476350479eb945ce88c9546936a3b5039abbc33e804881a91.json"
+    },
+    {
+      "id": "copilot-user-connection",
+      "feature": "copilot-connection",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-CON-001",
+        "REQ-CON-002",
+        "REQ-CON-003",
+        "REQ-CON-004"
+      ],
+      "dependsOn": [
+        "native-planner-readiness"
+      ],
+      "artifacts": [
+        "src/shared/copilot.ts",
+        "src/server/copilot/errors.ts",
+        "src/server/copilot/secrets.ts",
+        "src/server/copilot/provider.ts",
+        "src/server/copilot/service.ts",
+        "src/client/components/copilot-settings.tsx",
+        "src/client/App.tsx",
+        "src/client/api.ts",
+        "src/server/app.ts",
+        "src/server/config.ts",
+        "src/server/index.ts",
+        "db/migrations/002_copilot_connections.sql",
+        "tests/copilot-connection.test.ts",
+        "tests/copilot-settings.test.tsx",
+        "tests/helpers/app.tsx",
+        "tests/copilot-recovery.test.ts",
+        "tests/helpers/database.ts",
+        ".env.example",
+        "README.md",
+        "docs/lab-notebook.md"
+      ],
+      "condition": "Owner-isolated device flow, all transition cells, leases/generations, encrypted secrets, optional configuration and accessible stale-safe settings pass with synthetic providers and actual private PostgreSQL; no live OAuth, entitlement or chat completion claimed.",
+      "tests": [
+        "TEST-CON-001",
+        "TEST-CON-002",
+        "TEST-CON-003",
+        "TEST-CON-004",
+        "TEST-CON-005"
+      ],
+      "checks": [
+        {
+          "name": "copilot-connection-tests",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/copilot-connection.test.ts",
+            "tests/copilot-settings.test.tsx",
+            "tests/copilot-recovery.test.ts"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/copilot-connection.md": "c6cf8642d21b196989b6ea11d80d27b7ef6dc222d612fcbc84c83ec3efb08f10"
+      },
+      "dependencies": {
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "msal-popup-callback": "ad28b1495974a5f6329d203fafbd832b2e39729cccd80ae69480a37cdbdc1f63",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "native-planner-readiness": "39a1201a14e6be5dddb2b5d2d2c58d4aee92739f293cbf5bc1b79b529bf924e5",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89",
+        "ssh-nginx-proxy": "0e2a00761c32ddc3a36757b44ffb66e8c41bf35a8c7a925baca8211854926d51"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/2986eaf16e7147d4658d23d9a2bebacebabbc97d1e91aa4525c6d984d65eee6e/b981b0ea92a8b4d4694efdeda74632951af7874783cd41515395179ee8d5087d.json"
+    },
+    {
+      "id": "user-preferences",
+      "feature": "user-preferences",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-PREF-001",
+        "REQ-PREF-002",
+        "REQ-PREF-003",
+        "REQ-PREF-004",
+        "REQ-PREF-005",
+        "REQ-FONT-001",
+        "REQ-FONT-002",
+        "REQ-FONT-003",
+        "REQ-FONT-004"
+      ],
+      "dependsOn": [
+        "native-planner-readiness"
+      ],
+      "artifacts": [
+        "src/shared/preferences.ts",
+        "src/server/preferences.ts",
+        "src/server/http-input.ts",
+        "src/server/app.ts",
+        "src/server/index.ts",
+        "src/client/preferences-api.ts",
+        "src/client/use-user-preferences.ts",
+        "src/client/i18n.ts",
+        "src/client/App.tsx",
+        "src/client/main.tsx",
+        "src/client/styles.css",
+        "src/client/components/copilot-settings.tsx",
+        "tests/preferences.test.ts",
+        "tests/preferences-ui.test.tsx",
+        "tests/helpers/app.tsx",
+        "db/migrations/003_user_preferences.sql",
+        "db/migrations/008_user_text_preferences.sql",
+        "db/migrations/010_extra_small_text_size.sql",
+        "README.md",
+        "docs/lab-notebook.md",
+        "src/server/config.ts",
+        ".env.example"
+      ],
+      "condition": "Owner-scoped preferences persist with field-preserving concurrent patches, whole-UI language/theme and stale-safe saves; GitHub authentication remains visible and reuses the approved flow. Live migration remains operator-owned. Independent owner-scoped acknowledged large/medium/small/extra-small settings preserve old DTOs, default and font-only geometry with explicit read/write/error/session fences; migration010 preserves008 and existing rows; final native/browser proof required.",
+      "tests": [
+        "TEST-PREF-001",
+        "TEST-PREF-002",
+        "TEST-PREF-003",
+        "TEST-PREF-004",
+        "TEST-PREF-005",
+        "TEST-FONT-001",
+        "TEST-FONT-002",
+        "TEST-FONT-003",
+        "TEST-FONT-004"
+      ],
+      "checks": [
+        {
+          "name": "preferences-tests",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/preferences.test.ts",
+            "tests/preferences-ui.test.tsx"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/user-preferences.md": "7b2e47dd283769799cb47e1aa55ae86c1701dabb01a884726bd87b06a7e6631e"
+      },
+      "dependencies": {
+        "copilot-user-connection": "06a7ec3a83ecee09bb8122ce76e78d39999203a8c91b395168f260ccc8bb220c",
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "msal-popup-callback": "ad28b1495974a5f6329d203fafbd832b2e39729cccd80ae69480a37cdbdc1f63",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "native-planner-readiness": "39a1201a14e6be5dddb2b5d2d2c58d4aee92739f293cbf5bc1b79b529bf924e5",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89",
+        "ssh-nginx-proxy": "0e2a00761c32ddc3a36757b44ffb66e8c41bf35a8c7a925baca8211854926d51"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/b93a2f57490ae4cf89e32f9a6524dd5ecacc83f3477f6bd71450275c0dd31300/eb843274d5932d045a69b699f3d5d6790e64dd38d7702b2b982ce16664255385.json"
+    },
+    {
+      "id": "project-files-backend",
+      "feature": "research-services",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-SVC-001",
+        "REQ-SVC-004",
+        "REQ-SVC-005",
+        "REQ-SVC-006"
+      ],
+      "dependsOn": [
+        "native-planner-readiness"
+      ],
+      "artifacts": [
+        "src/shared/files.ts",
+        "src/server/files/config.ts",
+        "src/server/files/store.ts",
+        "src/server/files/repository.ts",
+        "src/server/files/service.ts",
+        "src/server/app.ts",
+        "src/server/config.ts",
+        "src/server/index.ts",
+        "src/client/api.ts",
+        "src/client/files-api.ts",
+        "db/migrations/004_project_files.sql",
+        "tests/helpers/blob.ts",
+        "tests/files.test.ts",
+        "package.json",
+        "package-lock.json",
+        "compose.yml",
+        ".env.example"
+      ],
+      "condition": "Actual disposable PostgreSQL/Azurite prove private owner-isolated original-byte roundtrip, exact bounded streaming, atomic quota/expiry/terminal fences and ETag/integrity failure including interrupted HTTP. Live migration and storage activation require separate consent.",
+      "tests": [
+        "TEST-SVC-001",
+        "TEST-SVC-002",
+        "TEST-SVC-003",
+        "TEST-SVC-004"
+      ],
+      "checks": [
+        {
+          "name": "file-backend-tests",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/files.test.ts"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/research-services.md": "7268c4c163110e67065b82b1e7dbfd323cf89be43fc297d42a0a477492b63253"
+      },
+      "dependencies": {
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "native-planner-readiness": "39a1201a14e6be5dddb2b5d2d2c58d4aee92739f293cbf5bc1b79b529bf924e5",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/92d6f6fedfb4ccc30f89cb4ad81c6952ecb58ec0fb2e4d198d8d3dbf8219cea1/aab8b486c8f4de5df46893a6fa2bc816b6b557a59bb0106b36480f54893662f8.json"
+    },
+    {
+      "id": "project-files-ui",
+      "feature": "research-services",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-SVC-007",
+        "REQ-SVC-008",
+        "REQ-SVC-009",
+        "REQ-MDV-001",
+        "REQ-MDV-002",
+        "REQ-MDV-003",
+        "REQ-MDV-004",
+        "REQ-MDV-005"
+      ],
+      "dependsOn": [
+        "project-files-backend",
+        "user-preferences",
+        "native-planner-readiness"
+      ],
+      "artifacts": [
+        "src/shared/files.ts",
+        "src/client/files-api.ts",
+        "src/client/components/project-files.tsx",
+        "src/client/components/pdf-viewer.tsx",
+        "src/client/components/workspace-tabs.tsx",
+        "src/client/App.tsx",
+        "src/client/main.tsx",
+        "src/client/i18n.ts",
+        "src/client/styles.css",
+        "src/client/env.d.ts",
+        ".gitignore",
+        "src/server/index.ts",
+        "scripts/copy-pdf-assets.mjs",
+        "tests/files-ui.test.tsx",
+        "tests/helpers/app.tsx",
+        "README.md",
+        "docs/lab-notebook.md",
+        "package.json",
+        "package-lock.json",
+        "tests/markdown-preview.test.tsx"
+      ],
+      "condition": "Actual explorer-to-tab flow, scoped cancellation and stable localization pass; bounded escaped text/inert image/PDF viewers refuse active content and release dedicated workers. Packaged same-origin assets and unchanged CSP are verified in the built browser UI. New manual-order/Markdown requirements require current native assertion Red/Green, scoped restored mutations and implementation verification; earlier receipts are historical, not new-feature completion.",
+      "tests": [
+        "TEST-SVC-005",
+        "TEST-SVC-006",
+        "TEST-SVC-007",
+        "TEST-MDV-001",
+        "TEST-MDV-002",
+        "TEST-MDV-003",
+        "TEST-MDV-004",
+        "TEST-MDV-005"
+      ],
+      "checks": [
+        {
+          "name": "file-ui-tests",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/files-ui.test.tsx",
+            "tests/markdown-preview.test.tsx"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/research-services.md": "7268c4c163110e67065b82b1e7dbfd323cf89be43fc297d42a0a477492b63253"
+      },
+      "dependencies": {
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "native-planner-readiness": "39a1201a14e6be5dddb2b5d2d2c58d4aee92739f293cbf5bc1b79b529bf924e5",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "project-files-backend": "e6a3ade34180e55a3a087d9498a6727368b1c715bff8db797ddce5340f799e9b",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89",
+        "user-preferences": "e9e046016d54dd4d8ab14e5562f58fec90096b5c1297bfd910e58877a55b36c3"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/3483ada355bc5a3dc97a1ed33e306a411df6e69877f2ecc246719957aae99113/5eb9125bf97618cf61c9f98e188a41f4ca0ab9a25371ab7aef76565c1da24805.json"
+    },
+    {
+      "id": "durable-jobs-foundation",
+      "feature": "research-services",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-SVC-003",
+        "REQ-SVC-010",
+        "REQ-SVC-011",
+        "REQ-SVC-012",
+        "REQ-SVC-013",
+        "REQ-SVC-014"
+      ],
+      "dependsOn": [
+        "project-files-ui",
+        "native-planner-readiness"
+      ],
+      "artifacts": [
+        "src/shared/jobs.ts",
+        "src/server/jobs/errors.ts",
+        "src/server/jobs/repository.ts",
+        "src/server/jobs/service.ts",
+        "src/server/jobs/worker.ts",
+        "src/server/jobs/index.ts",
+        "src/server/chat/job-transitions.ts",
+        "src/server/app.ts",
+        "src/server/config.ts",
+        "src/server/index.ts",
+        "db/migrations/005_durable_jobs.sql",
+        "tests/jobs.test.ts",
+        "package.json",
+        ".env.example",
+        "README.md",
+        "docs/lab-notebook.md"
+      ],
+      "condition": "Actual disposable PostgreSQL proves owner/project-isolated durable queue, canonical idempotency, exact state transitions, global/owner/project limits, current leases and cancel-deadline fencing, interruption without retry and synthetic-only dedicated worker lifecycle. Existing weak retests and implementation warnings are preserved; no live migration, activation, real handler or UI is authorized.",
+      "tests": [
+        "TEST-SVC-008",
+        "TEST-SVC-009",
+        "TEST-SVC-010",
+        "TEST-SVC-011",
+        "TEST-SVC-012",
+        "TEST-SVC-013"
+      ],
+      "checks": [
+        {
+          "name": "durable-jobs-tests",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/jobs.test.ts"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/research-services.md": "7268c4c163110e67065b82b1e7dbfd323cf89be43fc297d42a0a477492b63253"
+      },
+      "dependencies": {
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "native-planner-readiness": "39a1201a14e6be5dddb2b5d2d2c58d4aee92739f293cbf5bc1b79b529bf924e5",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "project-files-ui": "7a231519f2577b764f2e633235cbfd78790d5e8ac2768b83ffbdb2b49339f14c",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/c208d846dd79dc0c0c9662865a3e2222c59a1e5d4047eea7348ae0f45042cc1c/36e4881a7bd9f0fcf20edca52ac288016d2ad0119084c1631af0d88452104285.json"
+    },
+    {
+      "id": "project-pins-backend",
+      "feature": "project-sidebar",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-SID-001",
+        "REQ-SID-002",
+        "REQ-SID-006",
+        "REQ-SID-007",
+        "REQ-SID-009"
+      ],
+      "dependsOn": [
+        "native-planner-readiness"
+      ],
+      "artifacts": [
+        "src/server/project-pins.ts",
+        "src/shared/project-pins.ts",
+        "db/migrations/006_project_pins.sql",
+        "src/server/app.ts",
+        "src/server/config.ts",
+        "src/server/index.ts",
+        ".env.example",
+        "tests/project-pins.test.ts",
+        "src/server/project-order.ts",
+        "tests/project-order.test.ts"
+      ],
+      "condition": "Owner-scoped durable ordered pins, strict authenticated idempotent API and default-disabled configuration pass; migration006 has no005 dependency and is not live-applied by this implementation task. New manual-order/Markdown requirements require current native assertion Red/Green, scoped restored mutations and implementation verification; earlier receipts are historical, not new-feature completion.",
+      "tests": [
+        "TEST-SID-001",
+        "TEST-SID-002",
+        "TEST-SID-006",
+        "TEST-SID-007",
+        "TEST-SID-009",
+        "TEST-SID-010"
+      ],
+      "checks": [
+        {
+          "name": "project-pins-backend",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/project-pins.test.ts",
+            "tests/project-order.test.ts"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/project-sidebar.md": "0100f3f142c58f10eeaa6a7173625f81602c26d29ff711cb1a05e8c8b60bf2d4"
+      },
+      "dependencies": {
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "native-planner-readiness": "39a1201a14e6be5dddb2b5d2d2c58d4aee92739f293cbf5bc1b79b529bf924e5",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/ca3e513dfc58ec4400a74109d79005e5635e7e8df76b29c910fd29000025f5da/77c5869c0a9078c71c8476d1636f7d7396ce577afeed8c6198cc6e9acb34cbfb.json"
+    },
+    {
+      "id": "project-sidebar-ui",
+      "feature": "project-sidebar",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-SID-003",
+        "REQ-SID-004",
+        "REQ-SID-005",
+        "REQ-DLG-001",
+        "REQ-DLG-002",
+        "REQ-DLG-003",
+        "REQ-DLG-004",
+        "REQ-SID-008"
+      ],
+      "dependsOn": [
+        "project-pins-backend",
+        "user-preferences",
+        "project-files-ui",
+        "native-planner-readiness"
+      ],
+      "artifacts": [
+        "src/client/project-pins-api.ts",
+        "src/client/components/project-sidebar.tsx",
+        "src/client/components/resizable-workspace.tsx",
+        "src/client/App.tsx",
+        "src/client/main.tsx",
+        "src/client/i18n.ts",
+        "tests/project-pins-api.test.ts",
+        "tests/project-sidebar.test.tsx",
+        "tests/project-order-ui.test.tsx",
+        "tests/project-order-api.test.ts",
+        "src/client/project-order-api.ts",
+        "src/client/use-project-order.ts",
+        "tests/helpers/app.tsx",
+        "tests/workbench.test.tsx",
+        "tests/preferences-ui.test.tsx"
+      ],
+      "condition": "Search/New/Pinned/Recent navigation uses validated server acknowledgements and preserves selection/focus/tabs. Project reordering exposes a mouse drag handle and focused-handle ArrowUp/ArrowDown keys, no arrow buttons; same-group drops above/below rows save only acknowledged order, reject invalid/filtered drags and preserve pending/error/session guards. Current native/browser proof is required; earlier receipts remain historical.",
+      "tests": [
+        "TEST-SID-003",
+        "TEST-SID-004",
+        "TEST-SID-005",
+        "TEST-DLG-001",
+        "TEST-DLG-002",
+        "TEST-DLG-003",
+        "TEST-DLG-004",
+        "TEST-SID-008",
+        "TEST-SID-010",
+        "TEST-SID-011"
+      ],
+      "checks": [
+        {
+          "name": "project-sidebar-ui",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/project-pins-api.test.ts",
+            "tests/project-sidebar.test.tsx",
+            "tests/project-order-ui.test.tsx",
+            "tests/project-order-api.test.ts"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/project-sidebar.md": "0100f3f142c58f10eeaa6a7173625f81602c26d29ff711cb1a05e8c8b60bf2d4"
+      },
+      "dependencies": {
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "native-planner-readiness": "39a1201a14e6be5dddb2b5d2d2c58d4aee92739f293cbf5bc1b79b529bf924e5",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "project-files-ui": "7a231519f2577b764f2e633235cbfd78790d5e8ac2768b83ffbdb2b49339f14c",
+        "project-pins-backend": "8a16cbaafca3b71ca6e58d2ac82d4ba1094da8e358bc4187e9b56481c7bc242d",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89",
+        "user-preferences": "e9e046016d54dd4d8ab14e5562f58fec90096b5c1297bfd910e58877a55b36c3"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/b031862480e72820d3abcd42524ae9ac2780cbb9cb3061dad8e302aaa5764aa2/94072a1225bf95ef0d74ee699cf7c914dd58bb73b0267ce6e81a0a40ceb2f024.json"
+    },
+    {
+      "id": "native-ledger-reader",
+      "feature": "native-ledger-capacity",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-NLR-001",
+        "REQ-NLR-002",
+        "REQ-NLR-003",
+        "REQ-NLR-004",
+        "REQ-NLR-005"
+      ],
+      "dependsOn": [],
+      "artifacts": [
+        ".github/skills/lean-sdd-tdd/scripts/sdd.mjs",
+        ".github/skills/lean-sdd-tdd/scripts/implementation-plan.mjs",
+        ".github/skills/lean-sdd-tdd/scripts/native-ledger.mjs",
+        ".github/skills/lean-sdd-tdd/scripts/native-ledger.test.mjs",
+        ".sdd/config.json"
+      ],
+      "condition": "Approved512MiB opt-in with default64MiB, chunked current/Git reads, immutable full-history validation, record/merge/write guards and fingerprint invalidation pass current five-test Native evidence and actual CLI qualification; frozen promotion requires separate exact-artifact human approval.",
+      "tests": [
+        "TEST-NLR-001",
+        "TEST-NLR-002",
+        "TEST-NLR-003",
+        "TEST-NLR-004",
+        "TEST-NLR-005"
+      ],
+      "checks": [
+        {
+          "name": "ledger-contract",
+          "argv": [
+            "node",
+            "--test",
+            "--test-concurrency=1",
+            ".github/skills/lean-sdd-tdd/scripts/native-ledger.test.mjs"
+          ],
+          "timeoutMs": 180000
+        },
+        {
+          "name": "planning-regressions",
+          "argv": [
+            "node",
+            "--test",
+            "--test-concurrency=1",
+            ".github/skills/lean-sdd-tdd/scripts/implementation-plan.test.mjs",
+            ".github/skills/lean-sdd-tdd/scripts/implementation-plan-evidence.test.mjs"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/native-ledger-capacity.md": "0904b4a08c41c30544edf3ac67b9e262fb139fa2335f9629c444b89d22669f5b"
+      },
+      "dependencies": {},
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/6017c13eef402400a6bb7fdf744e5c5718ed446d69ad8eed44b2b0f3e8ebbb33/7fd263d1493b4bb065f7ea87c0f90c066a49a4b6686a21f48eebe8852e858454.json"
+    },
+    {
+      "id": "native-planner-readiness",
+      "feature": "native-plan-replanning",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-NPR-002",
+        "REQ-NPR-003",
+        "REQ-NPR-004"
+      ],
+      "dependsOn": [
+        "native-ledger-reader"
+      ],
+      "artifacts": [
+        ".github/skills/lean-sdd-tdd/scripts/implementation-plan-readiness.mjs",
+        ".github/skills/lean-sdd-tdd/scripts/implementation-plan-readiness.test.mjs",
+        ".github/skills/lean-sdd-tdd/scripts/implementation-plan-cli.mjs",
+        ".github/skills/lean-sdd-tdd/scripts/sdd.mjs",
+        ".github/skills/lean-sdd-tdd/scripts/native-ledger.test.mjs"
+      ],
+      "condition": "Current actual Native NPR002/003/004 pass with intact history, input refusal and strict gate/verification.",
+      "tests": [
+        "TEST-NPR-002",
+        "TEST-NPR-003",
+        "TEST-NPR-004"
+      ],
+      "checks": [
+        {
+          "name": "pending-readiness",
+          "argv": [
+            "/home/nahisaho/.nvm/versions/node/v24.22.1/bin/node",
+            "--test",
+            "--test-concurrency=1",
+            ".github/skills/lean-sdd-tdd/scripts/implementation-plan-readiness.test.mjs"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/native-plan-replanning.md": "e0cb6855d62e1b63ea4344a9c4e3e3e53fc4edc5e429f00234b58d92c5f4a5e6"
+      },
+      "dependencies": {
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/5cd30eff9898b89a8d34de8f76ab3ea2f7393dfa8349cac896209ed9e9e2c5d1/6da06d03aa0aa42b410c664abff4156a49116c665f6fe39fe0b3a0be866f03aa.json"
+    },
+    {
+      "id": "docling-runtime",
+      "feature": "docling-runtime",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-DRT-001",
+        "REQ-DRT-002",
+        "REQ-DRT-003",
+        "REQ-DRT-004",
+        "REQ-DRT-005",
+        "REQ-DRT-006"
+      ],
+      "dependsOn": [],
+      "artifacts": [
+        "src/shared/conversion-protocol.json",
+        "src/server/conversion/runtime.ts",
+        "src/server/conversion/parser.py",
+        "tests/docling-runtime.test.ts"
+      ],
+      "condition": "Pinned offline bounded converter produces validated paired artifacts, enforces input/IPC/resource/provenance limits and never acknowledges unconfirmed cleanup, with genuine current Native Red/Green and restored controls.",
+      "tests": [
+        "TEST-DRT-001",
+        "TEST-DRT-002",
+        "TEST-DRT-003",
+        "TEST-DRT-004",
+        "TEST-DRT-005",
+        "TEST-DRT-006"
+      ],
+      "checks": [
+        {
+          "name": "docling-runtime",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/docling-runtime.test.ts"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/docling-runtime.md": "001ddb7391eed94ea331130f644c32621a2aca56817ee4ac8e87f742887699ee"
+      },
+      "dependencies": {},
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/45f3c36ea2b696e21280e653c71599b9dfe5c6239988a74ecea373956f8c4a85/f2a7ba6c6a54de6913c276778bb74c92f9bd0f6eb181987247416cc53a16b648.json"
+    },
+    {
+      "id": "document-conversion",
+      "feature": "document-conversion",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-DCV-001",
+        "REQ-DCV-002",
+        "REQ-DCV-003",
+        "REQ-DCV-004",
+        "REQ-DCV-005",
+        "REQ-DCV-006",
+        "REQ-DCV-007"
+      ],
+      "dependsOn": [
+        "docling-runtime"
+      ],
+      "artifacts": [
+        "src/shared/conversions.ts",
+        "src/shared/conversion-protocol.json",
+        "src/server/conversion/config.ts",
+        "src/server/conversion/repository.ts",
+        "src/server/conversion/service.ts",
+        "src/server/conversion/routes.ts",
+        "src/server/conversion/worker.ts",
+        "src/server/jobs/repository.ts",
+        "src/server/jobs/service.ts",
+        "src/server/jobs/worker.ts",
+        "src/server/jobs/index.ts",
+        "src/server/config.ts",
+        "src/server/index.ts",
+        "src/server/app.ts",
+        "db/migrations/013_document_conversion.sql",
+        "tests/conversions.test.ts",
+        "tests/jobs.test.ts"
+      ],
+      "condition": "Explicit opt-in atomically retains automatic/manual requests, admits fairly under unchanged limits and publishes exactly two ordinary files plus canonical success in one fenced transaction; cancellation, quota, replay, availability and disabled defaults remain owner-safe.",
+      "tests": [
+        "TEST-DCV-001",
+        "TEST-DCV-002",
+        "TEST-DCV-003",
+        "TEST-DCV-004",
+        "TEST-DCV-005",
+        "TEST-DCV-006",
+        "TEST-DCV-007",
+        "TEST-DCV-008"
+      ],
+      "checks": [
+        {
+          "name": "conversion-and-job-regressions",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/conversions.test.ts",
+            "tests/jobs.test.ts",
+            "tests/files.test.ts"
+          ],
+          "timeoutMs": 300000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/document-conversion.md": "4ef6c4bf978adf2a123f1b70556829e5f0f2059e1ccb6edc11cfa9e92e9dcb0e"
+      },
+      "dependencies": {
+        "chat-integration": "1f2e651906e87c1d51e718b0abe6b1b6e164952a801c3f74090f29744b4f22ce",
+        "docling-runtime": "846026b7d2067d6cf8b511090ae27727ead9f4d313c09eec43133e5668580df2",
+        "durable-jobs-foundation": "a4f8dba1f0607851f17984f1a0247aadab32c2f43c5ba5237808d0af6e35ae8f",
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "project-files-backend": "e6a3ade34180e55a3a087d9498a6727368b1c715bff8db797ddce5340f799e9b",
+        "project-files-ui": "7a231519f2577b764f2e633235cbfd78790d5e8ac2768b83ffbdb2b49339f14c",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/e7ffc474c59366ebda4eaee0ec714b835580df338e450b57e56adfc843226f36/c83ef055ecb0f14641eea52616bd2e64524a12b0838414932700ea2e4582193c.json"
+    },
+    {
+      "id": "conversion-jobs-ui",
+      "feature": "conversion-job-ui",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-CJU-001",
+        "REQ-CJU-002",
+        "REQ-CJU-003",
+        "REQ-CJU-004",
+        "REQ-CJU-005"
+      ],
+      "dependsOn": [
+        "document-conversion"
+      ],
+      "artifacts": [
+        "src/shared/conversions.ts",
+        "src/client/conversions-api.ts",
+        "src/client/components/conversion-jobs.tsx",
+        "src/client/components/workspace-tabs.tsx",
+        "src/client/components/project-files.tsx",
+        "src/client/App.tsx",
+        "src/client/i18n.ts",
+        "tests/conversion-jobs.test.tsx",
+        "tests/helpers/app.tsx",
+        "tests/files-ui.test.tsx",
+        "tests/workbench.test.tsx",
+        "docs/conversion-jobs.md"
+      ],
+      "condition": "One project Jobs tab exposes only acknowledged safe conversion states/actions/results, preserves existing file/tab behavior, bounds active-only polling and rejects stale account/project results, with accessible localized controls and synthetic browser integration.",
+      "tests": [
+        "TEST-CJU-001",
+        "TEST-CJU-002",
+        "TEST-CJU-003",
+        "TEST-CJU-004",
+        "TEST-CJU-005",
+        "TEST-CJU-006",
+        "TEST-CJU-007",
+        "TEST-CJU-008",
+        "TEST-CJU-009",
+        "TEST-CJU-010",
+        "TEST-CJU-011",
+        "TEST-CJU-012",
+        "TEST-CJU-013",
+        "TEST-CJU-014",
+        "TEST-CJU-015",
+        "TEST-CJU-016"
+      ],
+      "checks": [
+        {
+          "name": "conversion-job-ui",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/conversion-jobs.test.tsx",
+            "tests/files-ui.test.tsx",
+            "tests/workbench.test.tsx"
+          ],
+          "timeoutMs": 180000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/conversion-job-ui.md": "1755631c61b97455a9714c9f1f19f4cc3d0aa7e79b053ceb752dcd880bc13617"
+      },
+      "dependencies": {
+        "chat-integration": "1f2e651906e87c1d51e718b0abe6b1b6e164952a801c3f74090f29744b4f22ce",
+        "docling-runtime": "846026b7d2067d6cf8b511090ae27727ead9f4d313c09eec43133e5668580df2",
+        "document-conversion": "5b91ea0a79fae26c401bae8c5b42933d6074bc16d8a3769a7833e830bf8910cb",
+        "durable-jobs-foundation": "a4f8dba1f0607851f17984f1a0247aadab32c2f43c5ba5237808d0af6e35ae8f",
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "project-files-backend": "e6a3ade34180e55a3a087d9498a6727368b1c715bff8db797ddce5340f799e9b",
+        "project-files-ui": "7a231519f2577b764f2e633235cbfd78790d5e8ac2768b83ffbdb2b49339f14c",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/26a5524077018a8de8c948fffe83f4926dc3c8e7fc512aa76a4cccd466f03a24/c42eba562a0084354d49ba230f8818f3b38e79980400284f3740148e0e074591.json"
+    },
+    {
+      "id": "chat-history",
+      "feature": "chat-history",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-CHH-001",
+        "REQ-CHH-002",
+        "REQ-CHH-003",
+        "REQ-CHH-004",
+        "REQ-CHH-005"
+      ],
+      "dependsOn": [
+        "durable-jobs-foundation"
+      ],
+      "artifacts": [
+        "src/shared/chat.ts",
+        "src/server/chat/errors.ts",
+        "src/server/chat/config.ts",
+        "src/server/chat/repository.ts",
+        "src/server/chat/service.ts",
+        "src/server/chat/routes.ts",
+        "src/server/chat/job-transitions.ts",
+        "src/shared/jobs.ts",
+        "src/server/jobs/repository.ts",
+        "src/server/jobs/service.ts",
+        "src/server/jobs/worker.ts",
+        "src/server/jobs/index.ts",
+        "src/server/app.ts",
+        "src/server/config.ts",
+        "src/server/index.ts",
+        "db/migrations/014_chat_history.sql",
+        "tests/chat-history.test.ts",
+        "tests/jobs.test.ts",
+        "tests/projects.test.ts",
+        "tests/helpers/database.ts",
+        ".env.example",
+        "README.md",
+        "docs/chat.md"
+      ],
+      "condition": "Actual disposable PostgreSQL proves both-owner-axis project/conversation isolation, strict bounded pagination and restart durability; atomic immutable turn/run/job admission and replay; contiguous deduplicated events and revisions; retained terminal partials; both project-trash race orders; and all generic job cancel/expiry/shutdown transition cells, including disabled/unregistered chat and missing014 rollback. Disabled pre005/pre014 routes preserve error precedence without optional-schema access; enabled readiness fails sanitized. No live migration, service enablement, credentials or provider requests are authorized.",
+      "tests": [
+        "TEST-CHH-001",
+        "TEST-CHH-002",
+        "TEST-CHH-003",
+        "TEST-CHH-004",
+        "TEST-CHH-005"
+      ],
+      "checks": [
+        {
+          "name": "chat-history-and-job-project-regressions",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/chat-history.test.ts",
+            "tests/jobs.test.ts",
+            "tests/projects.test.ts"
+          ],
+          "timeoutMs": 300000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/chat-history.md": "8cd103bfce08930cccdc8f75f0516fead8fa997ee9a5035294741ef743d4899a"
+      },
+      "dependencies": {
+        "durable-jobs-foundation": "a4f8dba1f0607851f17984f1a0247aadab32c2f43c5ba5237808d0af6e35ae8f",
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/c97b7220174b694d8bc0d06e5682dbff78fa8f3b8754499ca32482ffa0a2a4fd/7d0f5496a99f1367b3650335377787556a474a46b1bc1ea49b63bcf948ca998f.json"
+    },
+    {
+      "id": "chat-consent",
+      "feature": "chat-consent",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-CHC-001",
+        "REQ-CHC-002",
+        "REQ-CHC-003",
+        "REQ-CHC-004",
+        "REQ-CHC-005"
+      ],
+      "dependsOn": [],
+      "artifacts": [
+        "src/shared/chat.ts",
+        "src/server/chat/errors.ts",
+        "src/server/chat/repository.ts",
+        "src/server/chat/service.ts",
+        "src/server/chat/routes.ts",
+        "src/server/chat/consent.ts",
+        "src/server/chat/snapshot.ts",
+        "src/server/chat/models.ts",
+        "src/server/chat/runtime.ts",
+        "src/server/chat/sdk-child.ts",
+        "src/server/chat/worker.ts",
+        "src/server/jobs/index.ts",
+        "db/migrations/015_chat_consent.sql",
+        "src/server/app.ts",
+        "src/server/index.ts",
+        "package.json",
+        "package-lock.json",
+        "src/server/copilot/service.ts",
+        "src/server/copilot/provider.ts",
+        "src/server/copilot/secrets.ts",
+        "tests/chat-consent.test.ts",
+        "tests/copilot-connection.test.ts",
+        "tests/copilot-recovery.test.ts",
+        "tests/helpers/chat.ts",
+        "tests/helpers/database.ts",
+        "README.md",
+        "docs/chat.md"
+      ],
+      "condition": "Synthetic request capture and actual disposable PostgreSQL prove explicitly confirmed owner-bound model discovery, strict inventory and payload boundaries, independent exact Unicode snapshot/framing/hash oracle, DB-time expiry equality and supersession, atomic one-use consumption and same-key replay before freshness checks, credential replacement between validation/dispatch, fail-closed model checks and no tokens/raw data in public output. Only confirmed text/history and at most one account-only validation plus one generation are admitted; no automatic retry/fallback, live credentials or provider calls.",
+      "tests": [
+        "TEST-CHC-001",
+        "TEST-CHC-002",
+        "TEST-CHC-003",
+        "TEST-CHC-004",
+        "TEST-CHC-005"
+      ],
+      "checks": [
+        {
+          "name": "chat-consent-and-connection-regressions",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/chat-consent.test.ts",
+            "tests/copilot-connection.test.ts",
+            "tests/copilot-recovery.test.ts"
+          ],
+          "timeoutMs": 300000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/chat-consent.md": "3202286d32ab2a98e577cf3d3d3c9e04b6151826b72d4b3b8ae9626c9a9deafe"
+      },
+      "dependencies": {
+        "chat-history": "065d460285ed211324ce07524a3facc042654eab786112036621e27317a0d59d",
+        "copilot-user-connection": "06a7ec3a83ecee09bb8122ce76e78d39999203a8c91b395168f260ccc8bb220c",
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "msal-popup-callback": "ad28b1495974a5f6329d203fafbd832b2e39729cccd80ae69480a37cdbdc1f63",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89",
+        "ssh-nginx-proxy": "0e2a00761c32ddc3a36757b44ffb66e8c41bf35a8c7a925baca8211854926d51"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/2c8b56b253c5be4672d3a8e78334b9141a65fe97e7114e494c4cdf79272920a2/354dfb621133b4b52fe5dbc40a34d20ac4ddace31450acf81a9e1c546c2ef190.json"
+    },
+    {
+      "id": "chat-runtime",
+      "feature": "chat-runtime",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-CHR-001",
+        "REQ-CHR-002",
+        "REQ-CHR-003",
+        "REQ-CHR-004",
+        "REQ-CHR-005",
+        "REQ-CHR-006"
+      ],
+      "dependsOn": [
+        "durable-jobs-foundation"
+      ],
+      "artifacts": [
+        "src/shared/chat.ts",
+        "src/server/chat/config.ts",
+        "src/server/chat/repository.ts",
+        "src/server/chat/service.ts",
+        "src/server/chat/routes.ts",
+        "src/server/chat/job-transitions.ts",
+        "src/server/chat/models.ts",
+        "src/server/chat/runtime.ts",
+        "src/server/chat/sdk-child.ts",
+        "src/server/chat/worker.ts",
+        "src/server/chat/event-writer.ts",
+        "src/server/chat/stream.ts",
+        "src/shared/jobs.ts",
+        "src/server/jobs/repository.ts",
+        "src/server/jobs/service.ts",
+        "src/server/jobs/worker.ts",
+        "src/server/jobs/index.ts",
+        "src/server/config.ts",
+        "src/server/index.ts",
+        "src/server/app.ts",
+        "db/migrations/016_chat_active_owner.sql",
+        "package.json",
+        "package-lock.json",
+        "tests/chat-runtime.test.ts",
+        "tests/jobs.test.ts",
+        "tests/conversions.test.ts",
+        "tests/helpers/chat.ts",
+        "tests/helpers/database.ts",
+        ".env.example",
+        "README.md",
+        "docs/chat.md"
+      ],
+      "condition": "Actual disposable PostgreSQL cross-process races and synthetic pinned SDK/runtime capture prove one active chat per(tid,oid) with independent-owner controls and unchanged caps, internal-only registration, dedicated0700 owner-credential child and exact restrictive options, zero tools/discovery/telemetry, bounded serialized visible-text writes and current fences/deadlines. Matching-attempt drained local settlement, not abort acknowledgement/old events, controls cancellation; browser detach preserves execution while crash/lease/deadline loss retains partials without retry. Existing document conversion remains independently opt-in. No live provider, credentials, activation or automatic SDK-state deletion is authorized.",
+      "tests": [
+        "TEST-CHR-001",
+        "TEST-CHR-002",
+        "TEST-CHR-003",
+        "TEST-CHR-004",
+        "TEST-CHR-005",
+        "TEST-CHR-006"
+      ],
+      "checks": [
+        {
+          "name": "chat-runtime-and-existing-handler-regressions",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/chat-runtime.test.ts",
+            "tests/jobs.test.ts",
+            "tests/conversions.test.ts"
+          ],
+          "timeoutMs": 300000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/chat-runtime.md": "84a6ee563a82afffaf829c2e081b4e0a87c0a96d3db2aef1075e84820042543a"
+      },
+      "dependencies": {
+        "chat-consent": "7896d6f5760e88d6dcd7c548052655ad32f590260b5219ab6d13e597fc04bcda",
+        "chat-history": "065d460285ed211324ce07524a3facc042654eab786112036621e27317a0d59d",
+        "copilot-user-connection": "06a7ec3a83ecee09bb8122ce76e78d39999203a8c91b395168f260ccc8bb220c",
+        "durable-jobs-foundation": "a4f8dba1f0607851f17984f1a0247aadab32c2f43c5ba5237808d0af6e35ae8f",
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "msal-popup-callback": "ad28b1495974a5f6329d203fafbd832b2e39729cccd80ae69480a37cdbdc1f63",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89",
+        "ssh-nginx-proxy": "0e2a00761c32ddc3a36757b44ffb66e8c41bf35a8c7a925baca8211854926d51"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/75b48740be758ecae7fc44c77308d11c9d8000dbc48839a0490aa92fda57957d/0bb5dcb20997d331e9b1b50a5a0161b880280b1c17e611c4e166ce7bfcebb870.json"
+    },
+    {
+      "id": "chat-ui",
+      "feature": "chat-ui",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-CHU-001",
+        "REQ-CHU-002",
+        "REQ-CHU-003",
+        "REQ-CHU-004"
+      ],
+      "dependsOn": [],
+      "artifacts": [
+        "src/shared/chat.ts",
+        "src/client/chat-api.ts",
+        "src/client/components/project-chat.tsx",
+        "src/client/components/chat-conversations.tsx",
+        "src/client/components/chat-confirmation.tsx",
+        "src/client/components/copilot-settings.tsx",
+        "src/client/components/workspace-tabs.tsx",
+        "src/client/App.tsx",
+        "src/client/api.ts",
+        "src/client/i18n.ts",
+        "src/client/styles.css",
+        "tests/chat-ui.test.tsx",
+        "tests/workbench.test.tsx",
+        "tests/workspace-tabs.test.tsx",
+        "tests/files-ui.test.tsx",
+        "tests/copilot-settings.test.tsx",
+        "tests/helpers/app.tsx",
+        "tests/helpers/chat.ts",
+        "docs/chat.md"
+      ],
+      "condition": "Focused Testing Library assertions and synthetic offline browser replay prove two-conversation lifecycle, exact model-discovery and per-snapshot confirmations, latest-run recovery and same-body/key uncertain-send replay, ordered reconnect without resending, retained pending-cancel partials, both-owner-axis/401/epoch/connection fencing, escaped plain text and no browser persistence. Tab/project/account changes abort reads only, never generation; existing files/viewer, Settings, Jobs, focus and localized accessible shell behavior remain intact. Bounded mutations and resource cleanup are required; no live provider or real user data.",
+      "tests": [
+        "TEST-CHU-001",
+        "TEST-CHU-002",
+        "TEST-CHU-003",
+        "TEST-CHU-004"
+      ],
+      "checks": [
+        {
+          "name": "chat-ui-and-shell-regressions",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/chat-ui.test.tsx",
+            "tests/workbench.test.tsx",
+            "tests/workspace-tabs.test.tsx",
+            "tests/files-ui.test.tsx",
+            "tests/copilot-settings.test.tsx"
+          ],
+          "timeoutMs": 300000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/chat-ui.md": "408d8c8ada0f60a975c4532929c70805192deee2e79ae46eaa8bfbebda49aa20"
+      },
+      "dependencies": {
+        "chat-consent": "7896d6f5760e88d6dcd7c548052655ad32f590260b5219ab6d13e597fc04bcda",
+        "chat-history": "065d460285ed211324ce07524a3facc042654eab786112036621e27317a0d59d",
+        "chat-runtime": "26034f7f6e9924c8f0c4815ac5f087310895d0797c08b45c711c56cd2940ac9a",
+        "copilot-user-connection": "06a7ec3a83ecee09bb8122ce76e78d39999203a8c91b395168f260ccc8bb220c",
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "msal-popup-callback": "ad28b1495974a5f6329d203fafbd832b2e39729cccd80ae69480a37cdbdc1f63",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89",
+        "ssh-nginx-proxy": "0e2a00761c32ddc3a36757b44ffb66e8c41bf35a8c7a925baca8211854926d51"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/c44c5634553fa0fdabc866399721ca88ac7a5f53f64240a97e80f1fc962dc77d/0baf45ac7f3172a25a83e0035a9b14006b3b41138432f60856bdd04b951ba912.json"
+    },
+    {
+      "id": "chat-integration",
+      "feature": "research-services",
+      "kind": "implementation",
+      "reqs": [
+        "REQ-SVC-002"
+      ],
+      "dependsOn": [
+        "chat-history",
+        "chat-consent",
+        "chat-runtime",
+        "chat-ui"
+      ],
+      "artifacts": [
+        "src/client/chat-api.ts",
+        "tests/chat-integration.test.tsx",
+        "tests/helpers/chat.ts",
+        "tests/helpers/database.ts",
+        "tests/helpers/app.tsx",
+        "scripts/verify-chat-browser.mjs",
+        "scripts/chat-browser-harness.tsx",
+        "docs/chat.md"
+      ],
+      "condition": "Integration validation, not a component stub: a synthetic provider and disposable PostgreSQL exercise the admitted authenticated API-to-dedicated-worker-to-committed-events-to-browser path, with separate conversations, exact confirmed model/snapshot, detached generation, sequenced reconnect, uncertain-send same-key recovery, cancellation-pending partials and owner isolation. Real offline browser replay and cleanup must agree with durable DB outcomes. All four chat task prerequisites need genuine native TDD evidence and current receipts; inherited services require real requalification. All-zero dependency hashes anywhere in this plan are unresolved sentinels, not current input bindings: missing native chat TEST inputs prevent complete fingerprints; replace sentinels only with complete actual plan-check fingerprints after those inputs exist, then genuinely revalidate rather than refreshing completion by hash. No live credentials/provider, service enablement, real migrations or full-gate completion is implied.",
+      "tests": [
+        "TEST-SVC-014"
+      ],
+      "checks": [
+        {
+          "name": "chat-api-worker-database-browser-integration",
+          "argv": [
+            "node",
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "tests/chat-integration.test.tsx"
+          ],
+          "timeoutMs": 300000
+        },
+        {
+          "name": "chat-offline-browser-replay",
+          "argv": [
+            "node",
+            "scripts/verify-chat-browser.mjs"
+          ],
+          "timeoutMs": 300000
+        }
+      ],
+      "specs": {
+        ".sdd/specs/research-services.md": "7268c4c163110e67065b82b1e7dbfd323cf89be43fc297d42a0a477492b63253"
+      },
+      "dependencies": {
+        "chat-consent": "7896d6f5760e88d6dcd7c548052655ad32f590260b5219ab6d13e597fc04bcda",
+        "chat-history": "065d460285ed211324ce07524a3facc042654eab786112036621e27317a0d59d",
+        "chat-runtime": "26034f7f6e9924c8f0c4815ac5f087310895d0797c08b45c711c56cd2940ac9a",
+        "chat-ui": "7e281821ba8cbe0623ec43110ac24308e17da9f9c59765ee1cf2a2efd93f5409",
+        "identity-foundation": "75a7cb38e8e13ae9b663ad271c347e83f30ff0d156844c2fd1d2580b9e8bf474",
+        "native-ledger-reader": "dc14f6afcc0dade3264e6d91c9731756e33d7521a85856bea1b1d30a32313658",
+        "private-projects": "60a209e756cc734164cff51b6237507daece688eb2841967020c30724e6d282d",
+        "research-shell": "7a103605b84c45d165b549a94a10491777f779020757641c306d9e38ee6aba89"
+      },
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/9ca50881c96275b9bc65b096dea8e62b187a015b86742846d6b7227f64463501/6325adceebedbe2e43c206d6b3dd2069049ba7efc8e844af1158bb605a1ceedb.json"
+    }
+  ]
+}
