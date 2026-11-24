@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowRight,
   BookOpen,
-  FileCode2,
   LogOut,
   Microscope,
   PanelLeftOpen,
@@ -34,6 +33,9 @@ import { ConversionJobs } from './components/conversion-jobs';
 import { createChatApi } from './chat-api';
 import type { ChatApi } from './chat-api';
 import { ProjectChat } from './components/project-chat';
+import { Notebook } from './components/notebook';
+import { createNotebookApi } from './notebook-api';
+import type { NotebookApi } from './notebook-api';
 
 const ordered = (projects: Project[]) =>
   [...projects].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt) || a.id.localeCompare(b.id));
@@ -50,6 +52,7 @@ export function App({
   filesApi,
   orderApi: injectedOrderApi,
   conversionsApi: injectedConversionsApi,
+  notebookApi: injectedNotebookApi,
 }: {
   auth: BrowserAuth;
   api: ProjectsApi;
@@ -61,6 +64,7 @@ export function App({
   filesApi: FilesApi;
   orderApi?: ProjectOrderApi;
   conversionsApi?: ConversionsApi;
+  notebookApi?: NotebookApi;
 }) {
   const [user, setUser] = useState<UserAccount | null>(() => auth.account());
   const [projects, setProjects] = useState<Project[]>([]);
@@ -95,6 +99,7 @@ export function App({
     [auth, injectedConversionsApi],
   );
   const chatApi = useMemo(() => injectedChatApi ?? createChatApi(auth), [auth, injectedChatApi]);
+  const notebookApi = useMemo(()=>injectedNotebookApi ?? createNotebookApi(auth),[auth,injectedNotebookApi]);
   const [connectionEpoch, setConnectionEpoch] = useState(0);
   const [jobsRevision, setJobsRevision] = useState(0);
   const mounted = useRef(false);
@@ -489,16 +494,9 @@ export function App({
                 )
               }
               notebook={
-                <>
-                  <FileCode2 aria-hidden="true" className="mx-auto mb-4 size-10 text-primary/60" />
-                  <h2 className="font-semibold">Python / R Notebook</h2>
-                  <p className="my-4 text-sm text-muted-foreground">
-                    {t('段階③で提供予定です。コード編集・セル実行・計算環境はまだ利用できません。')}
-                  </p>
-                  <Button variant="outline" disabled>
-                    {t('セルを実行')}
-                  </Button>
-                </>
+                selectedId && user
+                  ? <Notebook key={scopeKey} api={notebookApi} projectId={selectedId} t={t} />
+                  : <p>{t('まずプロジェクトを作成または選択してください。')}</p>
               }
             />
           </section>

@@ -6,6 +6,7 @@ import { jobsEnabled } from './jobs/worker.js';
 import { readConversionConfig } from './conversion/config.js';
 import type { ConversionRuntimeConfig } from './conversion/runtime.js';
 import { chatEnabled } from './chat/config.js';
+import { notebookEnabled } from './notebook/config.js';
 
 export const uuid = z.uuid();
 
@@ -26,6 +27,7 @@ export interface AppConfig {
   projectOrderEnabled?: boolean;
   textSizeEnabled?: boolean;
   chatEnabled?: true;
+  notebookEnabled?: boolean;
 }
 
 /** @id CODE-SID-012 @implements REQ-SID-009 */
@@ -98,6 +100,7 @@ export function readConfig(env: NodeJS.ProcessEnv): AppConfig {
   const copilot = copilotConfig(env);
   const jobs = jobsEnabled(env);
   const chat = chatEnabled(env);
+  const notebook = notebookEnabled(env);
   if (chat && (!jobs || !copilot))
     throw new Error('CHAT_ENABLED requires jobs and Copilot configuration.');
   const files = readFileStorageConfig(env);
@@ -133,6 +136,7 @@ export function readConfig(env: NodeJS.ProcessEnv): AppConfig {
     ...(projectManagementEnabled(env) ? { projectManagementEnabled: true } : {}),
     ...(textSizeEnabled(env) ? { textSizeEnabled: true } : {}),
     ...(chat ? { chatEnabled: true } : {}),
+    ...(notebook ? { notebookEnabled: true } : {}),
     ...(values.BIND_HOST === undefined ? {} : { bindHost: values.BIND_HOST }),
     ...(copilot === undefined ? {} : { copilot }),
     ...(files === undefined ? {} : { files }),

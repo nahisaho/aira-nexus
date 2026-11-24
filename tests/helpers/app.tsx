@@ -9,6 +9,7 @@ import type { ProjectOrderApi } from '../../src/client/project-order-api';
 import type { ProjectManagementApi } from '../../src/client/project-management-api';
 import type { ConversionsApi } from '../../src/client/conversions-api';
 import type { ChatApi } from '../../src/client/chat-api';
+import type { NotebookApi } from '../../src/client/notebook-api';
 import { chatFixture } from './chat';
 // jsdom has no layout observer; resize tests supply measured geometry explicitly.
 globalThis.ResizeObserver ??= class {
@@ -93,6 +94,7 @@ export function App(props: {
   auth: BrowserAuth;
   api: ProjectsApi;
   chatApi?: ChatApi;
+  notebookApi?: NotebookApi;
   preferencesApi?: PreferencesApi;
   textSizeApi?: TextSizeApi;
   filesApi?: FilesApi;

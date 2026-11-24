@@ -6,6 +6,7 @@ import { App } from './helpers/app';
 import type { BrowserAuth, UserAccount } from '../src/client/auth';
 import { ApiError, createProjectsApi } from '../src/client/api';
 import type { ProjectsApi } from '../src/client/api';
+import type { NotebookApi } from '../src/client/notebook-api';
 import type { Project } from '../src/shared/contracts';
 import { BrowserAuthError } from '@azure/msal-browser';
 
@@ -41,7 +42,18 @@ function setup(signedIn = false) {
       return updated;
     }),
   };
-  return { auth, api };
+  const unavailable = async () => {
+    throw new Error('Disabled Notebook operation was called.');
+  };
+  const notebookApi: NotebookApi = {
+    capabilities: vi.fn(async () => ({ enabled: false })),
+    list: vi.fn(unavailable),
+    create: vi.fn(unavailable),
+    save: vi.fn(unavailable),
+    execute: vi.fn(unavailable),
+    restart: vi.fn(unavailable),
+  };
+  return { auth, api, notebookApi };
 }
 
 describe('research workbench foundation', () => {
@@ -152,7 +164,10 @@ describe('research workbench foundation', () => {
     expect(screen.getByRole('tab', { name: 'Notebook' })).toHaveAttribute('aria-selected', 'true');
     await user.keyboard('{End}');
     expect(screen.getByRole('tab', { name: 'Notebook' })).toHaveFocus();
-    expect(screen.getByRole('tabpanel')).toHaveTextContent('段階③');
+    expect(screen.getByRole('tabpanel')).toHaveTextContent(
+      'まずプロジェクトを作成または選択してください。',
+    );
+    expect(fixture.notebookApi.capabilities).not.toHaveBeenCalled();
   });
 
   /** @id TEST-UI-002 @verifies REQ-UI-002 */
@@ -209,7 +224,10 @@ describe('research workbench foundation', () => {
     expect(screen.getByRole('textbox', { name: 'メッセージ' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'プレビュー' })).toBeDisabled();
     await user.click(screen.getByRole('tab', { name: 'Notebook' }));
-    expect(screen.getByRole('button', { name: 'セルを実行' })).toBeDisabled();
+    expect(await screen.findByText('Notebookは現在利用できません。')).toBeVisible();
+    expect(screen.queryByRole('button', { name: 'セルを実行' })).not.toBeInTheDocument();
+    expect(fixture.notebookApi.list).not.toHaveBeenCalled();
+    expect(fixture.notebookApi.execute).not.toHaveBeenCalled();
     await user.click(screen.getByRole('button', { name: 'プロジェクト設定: 研究A' }));
     await user.click(screen.getByRole('menuitem', { name: 'プロジェクト設定' }));
     const dialog = await screen.findByRole('dialog');

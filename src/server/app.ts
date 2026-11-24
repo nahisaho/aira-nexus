@@ -27,6 +27,11 @@ import type { ConversionRepository } from './conversion/repository.js';
 import type { ChatService } from './chat/service.js';
 import { ChatError } from './chat/errors.js';
 import { registerChatRoutes } from './chat/routes.js';
+import type { Pool } from 'pg';
+import { NotebookRepository, NotebookError } from './notebook/repository.js';
+import { NotebookService } from './notebook/service.js';
+import type { NotebookDriver } from './notebook/service.js';
+import { registerNotebookRoutes } from './notebook/routes.js';
 
 export type Environment = { Variables: { principal: Principal; requestId: string } };
 
@@ -111,8 +116,12 @@ export function createApp(options: {
   chat?: ChatService;
   projectPins?: ProjectPinsRepository;
   projectOrder?: ProjectOrderRepository;
+  notebook?: { pool: Pool; runtime: NotebookDriver; files?: FileService };
 }) {
   const app = new Hono<Environment>();
+  const notebook = options.config.notebookEnabled && options.notebook
+    ? new NotebookService(new NotebookRepository(options.notebook.pool),options.notebook.runtime,options.notebook.files)
+    : undefined;
   app.use('*', async (c, next) => {
     c.set('requestId', randomUUID());
     c.header('X-Request-ID', c.get('requestId'));
@@ -142,6 +151,8 @@ export function createApp(options: {
     }
   });
   app.onError((_error, c) => {
+    if (_error instanceof NotebookError)
+      return failure(c,_error.status,'NOTEBOOK_ERROR',_error.message);
     if (_error instanceof ProjectError)
       return failure(c, _error.status, _error.code, _error.message);
     if (_error instanceof ChatError) {
@@ -318,7 +329,10 @@ export function createApp(options: {
         throw new InputError(400, 'Provide an empty JSON object.');
       const id = managementId(c.req.param('id'));
       const version = projectVersion(c.req.header('If-Match'));
-      const result = await options.projects[action](c.get('principal'), id, version);
+      const change = () => options.projects[action](c.get('principal'), id, version);
+      const result = action === 'trash' && notebook
+        ? await notebook.trash(c.get('principal'),id,change)
+        : await change();
       c.header('ETag', `"${result.project.version}"`);
       return c.json(result);
     });
@@ -518,6 +532,12 @@ export function createApp(options: {
     projects: options.projects,
     enabled: options.config.chatEnabled === true,
     ...(options.chat ? { service: options.chat } : {}),
+  });
+  registerNotebookRoutes(app, {
+    projects: options.projects,
+    enabled: options.config.notebookEnabled === true,
+    origin: options.config.publicOrigin,
+    ...(notebook ? {service:notebook} : {}),
   });
   registerConversionRoutes(app, {
     projects: options.projects,

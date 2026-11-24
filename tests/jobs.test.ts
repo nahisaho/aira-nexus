@@ -411,6 +411,38 @@ it('TEST-SVC-013 defaults disabled without job-table access and runs only inject
     expect(() => jobsEnabled({ JOBS_ENABLED: value })).toThrow();
   expect(productionJobHandlers.size).toBe(0);
   const p = await projects.create(owner, 'Worker lifecycle');
+  const internalRun = vi.fn(async () => {});
+  const internalJobs = new JobService(
+    repository,
+    new Map([
+      ...handlers,
+      ['notebook.execute', { input: z.strictObject({}), run: internalRun }],
+    ]),
+  );
+  const internalApp = createApp({
+    config: { ...config, jobsEnabled: true },
+    projects,
+    verifyToken: identity.verify,
+    jobs: internalJobs,
+  });
+  const internalRequest = (type: string, input: unknown) =>
+    internalApp.request(`/api/projects/${p.id}/jobs`, {
+      method: 'POST',
+      headers: {
+        ...auth(),
+        'Content-Type': 'application/json',
+        'Idempotency-Key': randomUUID(),
+      },
+      body: JSON.stringify({ type, input }),
+    });
+  expect((await internalRequest('notebook.execute', {})).status).toBe(400);
+  expect(internalRun).not.toHaveBeenCalled();
+  expect(
+    (await db.pool.query("SELECT id FROM durable_jobs WHERE type='notebook.execute'")).rows,
+  ).toEqual([]);
+  const publicControl = await internalRequest('test', { value: 'public control' });
+  expect(publicControl.status).toBe(201);
+  await repository.cancel(owner, p.id, ((await publicControl.json()) as Job).id);
   const disabled = createApp({ config, projects, verifyToken: identity.verify });
   await db.pool.query('ALTER TABLE durable_jobs RENAME TO isolated_unapplied_jobs');
   try {
