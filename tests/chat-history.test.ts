@@ -57,9 +57,12 @@ beforeAll(async () => {
   genericJobsApp = createApp({
     config: { ...config, jobsEnabled: true },
     projects,
-    jobs: new JobService(new JobRepository(db.pool), new Map([
-      ['chat.generate', { input: z.strictObject({ runId: z.uuid() }), run: async () => {} }],
-    ])),
+    jobs: new JobService(
+      new JobRepository(db.pool),
+      new Map([
+        ['chat.generate', { input: z.strictObject({ runId: z.uuid() }), run: async () => {} }],
+      ]),
+    ),
     verifyToken: identity.verify,
   });
   unregisteredJobsApp = createApp({
@@ -127,10 +130,9 @@ it('TEST-CHH-001 isolates and paginates conversation history', async () => {
     .map((item) => item.id);
   expect([...first.items, ...second.items].map((item) => item.id)).toEqual(expected);
   expect(created).toHaveLength(100);
-  const missingConversation = await readyApp.request(
-    `${conversationsPath}/${randomUUID()}`,
-    { headers: routeHeaders },
-  );
+  const missingConversation = await readyApp.request(`${conversationsPath}/${randomUUID()}`, {
+    headers: routeHeaders,
+  });
   expect(missingConversation.status).toBe(404);
   await db.pool.query(
     `INSERT INTO chat_turns(id,tenant_id,owner_oid,project_id,conversation_id,sequence,role,text)
@@ -165,18 +167,16 @@ it('TEST-CHH-001 isolates and paginates conversation history', async () => {
   await expect(chat.listConversations(owner, project.id, 'not-a-cursor')).rejects.toMatchObject({
     status: 400,
   });
-  await expect(
-    chat.listConversations(owner, project.id, 'a'.repeat(257)),
-  ).rejects.toMatchObject({ status: 400 });
+  await expect(chat.listConversations(owner, project.id, 'a'.repeat(257))).rejects.toMatchObject({
+    status: 400,
+  });
   const tamperedCursor = Buffer.from(
     JSON.stringify(['2026-01-01T00:00:00.000Z', 'not-a-uuid']),
   ).toString('base64url');
-  await expect(
-    chat.listConversations(owner, project.id, tamperedCursor),
-  ).rejects.toMatchObject({ status: 400 });
-  await db.pool.query('UPDATE projects SET trashed_at=clock_timestamp() WHERE id=$1', [
-    project.id,
-  ]);
+  await expect(chat.listConversations(owner, project.id, tamperedCursor)).rejects.toMatchObject({
+    status: 400,
+  });
+  await db.pool.query('UPDATE projects SET trashed_at=clock_timestamp() WHERE id=$1', [project.id]);
   await expect(chat.getConversation(owner, project.id, conversation.id)).rejects.toMatchObject({
     status: 404,
   });
@@ -195,9 +195,7 @@ it('TEST-CHH-002 atomically admits immutable turns and replays only the same own
   };
   const jobs = new JobRepository(db.pool);
   const run = await chat.admitConfirmed(owner, project.id, conversation.id, input);
-  expect(run.id).toMatch(
-    /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i,
-  );
+  expect(run.id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
   const replay = await chat.admitConfirmed(owner, project.id, conversation.id, input);
   expect(replay.id).toBe(run.id);
   const secondConversation = await chat.createConversation(owner, project.id);
@@ -214,9 +212,7 @@ it('TEST-CHH-002 atomically admits immutable turns and replays only the same own
   await expect(
     chat.admitConfirmed(owner, project.id, secondConversation.id, busyInput),
   ).rejects.toMatchObject({ status: 409, code: 'CHAT_BUSY' });
-  await Promise.all(
-    capacityJobs.map(({ job }) => jobs.cancel(owner, project.id, job.id)),
-  );
+  await Promise.all(capacityJobs.map(({ job }) => jobs.cancel(owner, project.id, job.id)));
   const turns = await chat.listTurns(owner, project.id, conversation.id);
   expect(turns.items.map((turn) => [turn.role, turn.text])).toEqual([
     ['user', 'hello'],
@@ -254,8 +250,11 @@ it('TEST-CHH-002 atomically admits immutable turns and replays only the same own
   });
   expect(generic.status).toBe(400);
   expect(
-    (await db.pool.query("SELECT count(*)::int AS jobs FROM durable_jobs WHERE type='chat.generate'"))
-      .rows[0].jobs,
+    (
+      await db.pool.query(
+        "SELECT count(*)::int AS jobs FROM durable_jobs WHERE type='chat.generate'",
+      )
+    ).rows[0].jobs,
   ).toBe(1);
   const claim = await jobs.claim(['chat.generate']);
   if (!claim) throw new Error('Expected admitted chat job.');
@@ -333,18 +332,20 @@ it('TEST-CHH-002 atomically admits immutable turns and replays only the same own
     const deadline = Date.now() + 5000;
     let count = 0;
     do {
-      count = (
-        await db.pool.query<{ count: number }>(
-          `SELECT count(*)::int AS count FROM pg_locks WHERE locktype='advisory'
+      count =
+        (
+          await db.pool.query<{ count: number }>(
+            `SELECT count(*)::int AS count FROM pg_locks WHERE locktype='advisory'
            AND objid=1747289124::oid AND NOT granted
            AND database=(SELECT oid FROM pg_database WHERE datname=current_database())`,
-        )
-      ).rows[0]?.count ?? 0;
+          )
+        ).rows[0]?.count ?? 0;
       if (count >= minimum) return;
     } while (Date.now() < deadline);
-    expect(count, 'chat admission and project trash must share the global lock').toBeGreaterThanOrEqual(
-      minimum,
-    );
+    expect(
+      count,
+      'chat admission and project trash must share the global lock',
+    ).toBeGreaterThanOrEqual(minimum);
   };
   for (const first of ['admission', 'trash'] as const) {
     const racedProject = await projects.create(owner, `Chat admission race ${first}`);
@@ -352,11 +353,9 @@ it('TEST-CHH-002 atomically admits immutable turns and replays only the same own
     const gate = await db.pool.connect();
     let released = false;
     let admission:
-      | ReturnType<typeof capture<Awaited<ReturnType<ChatRepository['admitConfirmed']>>>>
-      | undefined;
+      ReturnType<typeof capture<Awaited<ReturnType<ChatRepository['admitConfirmed']>>>> | undefined;
     let trash:
-      | ReturnType<typeof capture<Awaited<ReturnType<ProjectRepository['trash']>>>>
-      | undefined;
+      ReturnType<typeof capture<Awaited<ReturnType<ProjectRepository['trash']>>>> | undefined;
     const admit = () =>
       capture(
         chat.admitConfirmed(owner, racedProject.id, racedConversation.id, {
@@ -515,20 +514,17 @@ it('TEST-CHH-004 retains committed partial text after confirmed cancellation and
   await chat.appendEvent(claim, { eventKey: 'partial', type: 'delta', text: 'partial answer' });
   const genericCancels = await Promise.all(
     Array.from({ length: 2 }, () =>
-      unregisteredJobsApp.request(
-        `/api/projects/${project.id}/jobs/${claim.job.id}/cancel`,
-        { method: 'POST', headers: headers(token) },
-      ),
+      unregisteredJobsApp.request(`/api/projects/${project.id}/jobs/${claim.job.id}/cancel`, {
+        method: 'POST',
+        headers: headers(token),
+      }),
     ),
   );
   expect(genericCancels.map(({ status }) => status)).toEqual([200, 200]);
   const cancelledJobs = await Promise.all(
     genericCancels.map((response) => response.json() as Promise<{ state: string }>),
   );
-  expect(cancelledJobs.map(({ state }) => state)).toEqual([
-    'cancel_requested',
-    'cancel_requested',
-  ]);
+  expect(cancelledJobs.map(({ state }) => state)).toEqual(['cancel_requested', 'cancel_requested']);
   expect((await chat.getRun(owner, project.id, run.id)).state).toBe('cancel_requested');
   await chat.settle(claim, 'stop_ack');
   const settled = await chat.getRun(owner, project.id, run.id);
@@ -560,14 +556,12 @@ it('TEST-CHH-004 retains committed partial text after confirmed cancellation and
   expect(expiryClaim?.input).toEqual({ runId: next.id });
   if (!expiryClaim) throw new Error('Expected expiry chat claim.');
   await chat.appendEvent(expiryClaim, { eventKey: 'expiry-partial', type: 'delta', text: 'kept' });
-  await db.pool.query('UPDATE durable_jobs SET lease_until=clock_timestamp()-interval \'1 second\' WHERE id=$1', [
-    expiryClaim.job.id,
-  ]);
+  await db.pool.query(
+    "UPDATE durable_jobs SET lease_until=clock_timestamp()-interval '1 second' WHERE id=$1",
+    [expiryClaim.job.id],
+  );
   const reconciledByRead = await chat.getRun(owner, project.id, next.id);
-  expect([reconciledByRead.state, reconciledByRead.failureCode]).toEqual([
-    'failed',
-    'interrupted',
-  ]);
+  expect([reconciledByRead.state, reconciledByRead.failureCode]).toEqual(['failed', 'interrupted']);
   expect((await jobs.get(owner, project.id, expiryClaim.job.id)).failureCode).toBe('interrupted');
   const failed = await chat.getRun(owner, project.id, next.id);
   expect([failed.state, failed.answer, failed.failureCode]).toEqual([
@@ -614,10 +608,9 @@ it('TEST-CHH-004 retains committed partial text after confirmed cancellation and
   );
   const expiryResponses = await Promise.all(
     Array.from({ length: 2 }, () =>
-      unregisteredJobsApp.request(
-        `/api/projects/${project.id}/jobs/${genericExpiryClaim.job.id}`,
-        { headers: headers(token) },
-      ),
+      unregisteredJobsApp.request(`/api/projects/${project.id}/jobs/${genericExpiryClaim.job.id}`, {
+        headers: headers(token),
+      }),
     ),
   );
   expect(expiryResponses.map(({ status }) => status)).toEqual([200, 200]);
@@ -739,7 +732,9 @@ it('TEST-CHH-005 leaves chat disabled by default and avoids optional chat-schema
 
   const project = await projects.create(owner, 'Chat disabled');
   const query = vi.spyOn(db.pool, 'query');
-  await db.pool.query('ALTER TABLE chat_conversations RENAME TO isolated_unapplied_chat_conversations');
+  await db.pool.query(
+    'ALTER TABLE chat_conversations RENAME TO isolated_unapplied_chat_conversations',
+  );
   await db.pool.query('ALTER TABLE durable_jobs RENAME TO isolated_unapplied_jobs');
   query.mockClear();
   try {
@@ -788,10 +783,9 @@ it('TEST-CHH-005 leaves chat disabled by default and avoids optional chat-schema
   const log = vi.spyOn(console, 'error').mockImplementation(() => {});
   await db.pool.query('ALTER TABLE chat_events RENAME TO isolated_unapplied_chat_events');
   try {
-    const missingSchema = await readyApp.request(
-      `/api/projects/${project.id}/chat/capabilities`,
-      { headers: headers(token) },
-    );
+    const missingSchema = await readyApp.request(`/api/projects/${project.id}/chat/capabilities`, {
+      headers: headers(token),
+    });
     expect(missingSchema.status).toBe(503);
     expect(await missingSchema.json()).toMatchObject({
       error: { code: 'CHAT_UNAVAILABLE', message: 'Chat is unavailable.' },

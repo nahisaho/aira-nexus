@@ -33,7 +33,8 @@ const runLabel = (state: ChatRun['state'], t: ProjectChatProps['t']) =>
   );
 const genericError = 'チャットの読み込みに失敗しました。再試行してください。';
 const actionError = 'チャット操作に失敗しました。入力と接続を確認して再試行してください。';
-const uncertainError = '送信結果を確認できませんでした。送信は再実行されていないため、同じ送信の回復を選択してください。';
+const uncertainError =
+  '送信結果を確認できませんでした。送信は再実行されていないため、同じ送信の回復を選択してください。';
 
 /** @id CODE-CHU-001 @implements REQ-CHU-001 */
 /** @id CODE-CHU-002 @implements REQ-CHU-002 */
@@ -212,31 +213,33 @@ function ProjectChatSession({
     const request = new AbortController();
     const after = sequence.current;
     void api
-      .subscribe(projectId, streamRunId, after, (event) => {
-        if (
-          !currentOwner(request.signal) ||
-          selectedRef.current !== streamConversationId
-        )
-          return;
-        if (event.sequence <= sequence.current) return;
-        if (event.sequence !== sequence.current + 1) {
-          setError('会話イベントの順序を確認できません。再接続してください。');
-          request.abort();
-          return;
-        }
-        sequence.current = event.sequence;
-        setRun((current) =>
-          !current || current.id !== streamRunId
-            ? current
-            : {
-                ...current,
-                answer: event.type === 'delta' ? current.answer + event.text : current.answer,
-                state: event.type === 'status' && event.state ? event.state : current.state,
-                failureCode: event.type === 'status' ? event.reason : current.failureCode,
-                lastSequence: event.sequence,
-              },
-        );
-      }, request.signal)
+      .subscribe(
+        projectId,
+        streamRunId,
+        after,
+        (event) => {
+          if (!currentOwner(request.signal) || selectedRef.current !== streamConversationId) return;
+          if (event.sequence <= sequence.current) return;
+          if (event.sequence !== sequence.current + 1) {
+            setError('会話イベントの順序を確認できません。再接続してください。');
+            request.abort();
+            return;
+          }
+          sequence.current = event.sequence;
+          setRun((current) =>
+            !current || current.id !== streamRunId
+              ? current
+              : {
+                  ...current,
+                  answer: event.type === 'delta' ? current.answer + event.text : current.answer,
+                  state: event.type === 'status' && event.state ? event.state : current.state,
+                  failureCode: event.type === 'status' ? event.reason : current.failureCode,
+                  lastSequence: event.sequence,
+                },
+          );
+        },
+        request.signal,
+      )
       .catch((cause: unknown) => {
         if (currentOwner(request.signal)) report(cause, genericError);
       });
@@ -376,7 +379,9 @@ function ProjectChatSession({
         if (current.historyRevision !== historyRevision) {
           setPreview(null);
           sendDraft.current = null;
-          setError('会話履歴が更新されたため、送信プレビューを破棄しました。もう一度プレビューしてください。');
+          setError(
+            '会話履歴が更新されたため、送信プレビューを破棄しました。もう一度プレビューしてください。',
+          );
           return;
         }
       }
@@ -411,7 +416,9 @@ function ProjectChatSession({
         setPreviewError(
           knownRejection
             ? busyConflict
-              ? translateRef.current('別の会話で生成中です。生成が完了してから新しいプレビューを作成してください。')
+              ? translateRef.current(
+                  '別の会話で生成中です。生成が完了してから新しいプレビューを作成してください。',
+                )
               : translateRef.current(apiError.message)
             : uncertainError,
         );
@@ -500,7 +507,9 @@ function ProjectChatSession({
             >
               <option value="">{t('モデルを選択')}</option>
               {models.map((model) => (
-                <option key={model.id} value={model.id}>{model.name}</option>
+                <option key={model.id} value={model.id}>
+                  {model.name}
+                </option>
               ))}
             </select>
           </label>
@@ -516,7 +525,9 @@ function ProjectChatSession({
               {t('会話を再読み込み')}
             </button>
             {run && activeStates.has(run.state) && (
-              <button type="button" onClick={() => void recoverRun()}>{t('再接続')}</button>
+              <button type="button" onClick={() => void recoverRun()}>
+                {t('再接続')}
+              </button>
             )}
           </div>
         )}
@@ -525,7 +536,9 @@ function ProjectChatSession({
         <div aria-label={t('会話履歴')} className="min-h-0 flex-1 overflow-y-auto">
           {turns.map((item) => (
             <article key={item.id} className="my-2 whitespace-pre-wrap rounded border p-3">
-              <p className="text-xs text-muted-foreground">{t(item.role === 'user' ? 'あなた' : 'AI')}</p>
+              <p className="text-xs text-muted-foreground">
+                {t(item.role === 'user' ? 'あなた' : 'AI')}
+              </p>
               <p>{item.text}</p>
             </article>
           ))}
@@ -535,7 +548,10 @@ function ProjectChatSession({
             </button>
           )}
           {run?.answer && (
-            <article aria-label={t('生成中の回答')} className="my-2 whitespace-pre-wrap rounded border p-3">
+            <article
+              aria-label={t('生成中の回答')}
+              className="my-2 whitespace-pre-wrap rounded border p-3"
+            >
               <p className="text-xs text-muted-foreground">{t('AI')}</p>
               <p>{run.answer}</p>
             </article>
@@ -562,7 +578,14 @@ function ProjectChatSession({
         </label>
         <button
           type="button"
-          disabled={!selected || !modelId || !models.some((item) => item.id === modelId) || !text.trim() || new TextEncoder().encode(text).byteLength > 8192 || busy}
+          disabled={
+            !selected ||
+            !modelId ||
+            !models.some((item) => item.id === modelId) ||
+            !text.trim() ||
+            new TextEncoder().encode(text).byteLength > 8192 ||
+            busy
+          }
           onClick={() => void createPreview()}
         >
           {t('プレビュー')}
@@ -577,10 +600,18 @@ function ProjectChatSession({
                   className="fixed left-1/2 top-1/2 z-50 w-[min(90vw,32rem)] -translate-x-1/2 -translate-y-1/2 space-y-4 rounded-xl border bg-card p-6 text-foreground shadow-xl"
                 >
                   <Dialog.Title className="font-semibold">{t('モデル一覧の取得')}</Dialog.Title>
-                  <p>{t('モデル一覧を取得するには、GitHub アカウントへの一覧取得リクエストを確認してください。')}</p>
+                  <p>
+                    {t(
+                      'モデル一覧を取得するには、GitHub アカウントへの一覧取得リクエストを確認してください。',
+                    )}
+                  </p>
                   <div className="flex justify-end gap-2">
-                    <button type="button" disabled={busy} onClick={() => setDiscoveryOpen(false)}>{t('戻る')}</button>
-                    <button type="button" disabled={busy} onClick={() => void discoverModels()}>{t('モデル一覧を取得する')}</button>
+                    <button type="button" disabled={busy} onClick={() => setDiscoveryOpen(false)}>
+                      {t('戻る')}
+                    </button>
+                    <button type="button" disabled={busy} onClick={() => void discoverModels()}>
+                      {t('モデル一覧を取得する')}
+                    </button>
                   </div>
                 </Dialog.Content>
               </>

@@ -1,4 +1,3 @@
-
 import type { Pool, PoolClient } from 'pg';
 import { createHash, randomUUID } from 'node:crypto';
 import { z } from 'zod';
@@ -168,7 +167,8 @@ function promptFromSnapshot(snapshot: string, modelId: string): string {
   try {
     value = JSON.parse(snapshot);
   } catch (error) {
-    if (error instanceof SyntaxError) throw new ChatError(400, 'INVALID_INPUT', 'Invalid chat snapshot.');
+    if (error instanceof SyntaxError)
+      throw new ChatError(400, 'INVALID_INPUT', 'Invalid chat snapshot.');
     throw error;
   }
   if (
@@ -189,7 +189,8 @@ function finalUserTextFromPrompt(prompt: string): string {
   try {
     value = JSON.parse(prompt);
   } catch (error) {
-    if (error instanceof SyntaxError) throw new ChatError(400, 'INVALID_INPUT', 'Invalid chat snapshot.');
+    if (error instanceof SyntaxError)
+      throw new ChatError(400, 'INVALID_INPUT', 'Invalid chat snapshot.');
     throw error;
   }
   if (!Array.isArray(value)) throw new ChatError(400, 'INVALID_INPUT', 'Invalid chat snapshot.');
@@ -289,17 +290,12 @@ export class ChatRepository {
       const last = items.at(-1);
       return {
         items,
-        nextCursor:
-          rows.length > pageSize && last ? encodeCursor([last.createdAt, last.id]) : null,
+        nextCursor: rows.length > pageSize && last ? encodeCursor([last.createdAt, last.id]) : null,
       };
     });
   }
 
-  async getConversation(
-    owner: Principal,
-    project: string,
-    id: string,
-  ): Promise<ChatConversation> {
+  async getConversation(owner: Principal, project: string, id: string): Promise<ChatConversation> {
     if (!uuid.safeParse(id).success) throw missing();
     return this.read(owner, project, async (client) => {
       const row = (
@@ -323,7 +319,10 @@ export class ChatRepository {
     input: ChatAdmission | ChatPreviewAdmission,
   ): Promise<ChatRun> {
     const previewAdmission = 'previewId' in input;
-    if (!keySchema.safeParse(input.idempotencyKey).success || !/^[a-f0-9]{64}$/.test(input.snapshotHash))
+    if (
+      !keySchema.safeParse(input.idempotencyKey).success ||
+      !/^[a-f0-9]{64}$/.test(input.snapshotHash)
+    )
       throw new ChatError(400, 'INVALID_INPUT', 'Invalid confirmed chat input.');
     if (
       (previewAdmission &&
@@ -358,7 +357,7 @@ export class ChatRepository {
            FROM chat_runs
            WHERE tenant_id=$1 AND owner_oid=$2 AND project_id=$3 AND conversation_id=$4
               AND idempotency_key=$5 FOR UPDATE`,
-           [owner.tenantId, owner.objectId, project, conversation, input.idempotencyKey],
+          [owner.tenantId, owner.objectId, project, conversation, input.idempotencyKey],
         )
       ).rows[0];
       if (existing) {
@@ -405,7 +404,11 @@ export class ChatRepository {
           !preview.expires ||
           preview.consumed_at
         )
-          throw new ChatError(409, 'CONSENT_REQUIRED', 'Preview is no longer available; prepare again.');
+          throw new ChatError(
+            409,
+            'CONSENT_REQUIRED',
+            'Preview is no longer available; prepare again.',
+          );
 
         const current = (
           await client.query<{
@@ -433,7 +436,11 @@ export class ChatRepository {
           input.connectionId !== preview.connection_id ||
           input.connectionGeneration !== preview.connection_generation
         )
-          throw new ChatError(409, 'CONSENT_REQUIRED', 'Conversation or connection changed; prepare again.');
+          throw new ChatError(
+            409,
+            'CONSENT_REQUIRED',
+            'Conversation or connection changed; prepare again.',
+          );
 
         const catalog = (
           await client.query<{
@@ -453,7 +460,11 @@ export class ChatRepository {
         try {
           models = parseModelInventory(catalog?.models);
         } catch {
-          throw new ChatError(409, 'CONSENT_REQUIRED', 'Model availability changed; prepare again.');
+          throw new ChatError(
+            409,
+            'CONSENT_REQUIRED',
+            'Model availability changed; prepare again.',
+          );
         }
         if (
           !catalog ||
@@ -462,7 +473,11 @@ export class ChatRepository {
           catalog.connection_generation !== preview.connection_generation ||
           !models.some((model) => model.id === preview.model_id)
         )
-          throw new ChatError(409, 'CONSENT_REQUIRED', 'Model availability changed; prepare again.');
+          throw new ChatError(
+            409,
+            'CONSENT_REQUIRED',
+            'Model availability changed; prepare again.',
+          );
 
         modelId = preview.model_id;
         snapshot = preview.snapshot;
@@ -536,7 +551,11 @@ export class ChatRepository {
           [input.previewId, input.idempotencyKey, id],
         );
         if (consumed.rowCount !== 1)
-          throw new ChatError(409, 'CONSENT_REQUIRED', 'Preview was already consumed; prepare again.');
+          throw new ChatError(
+            409,
+            'CONSENT_REQUIRED',
+            'Preview was already consumed; prepare again.',
+          );
       }
       const turns = await client.query(
         `INSERT INTO chat_turns(id,tenant_id,owner_oid,project_id,conversation_id,sequence,role,text)
@@ -631,7 +650,7 @@ export class ChatRepository {
       const last = items.at(-1);
       return {
         items,
-      nextCursor: rows.length > pageSize && last ? encodeCursor(last.sequence) : null,
+        nextCursor: rows.length > pageSize && last ? encodeCursor(last.sequence) : null,
       };
     });
   }
@@ -824,9 +843,14 @@ export class ChatRepository {
           ],
         )
       ).rows[0];
-      if (!row) throw new ChatError(409, 'CHAT_UNAVAILABLE', 'Chat dispatch is no longer available.');
+      if (!row)
+        throw new ChatError(409, 'CHAT_UNAVAILABLE', 'Chat dispatch is no longer available.');
       if (createHash('sha256').update(row.snapshot, 'utf8').digest('hex') !== row.snapshot_hash)
-        throw new ChatError(409, 'CHAT_UNAVAILABLE', 'Confirmed chat input failed integrity checks.');
+        throw new ChatError(
+          409,
+          'CHAT_UNAVAILABLE',
+          'Confirmed chat input failed integrity checks.',
+        );
       return {
         modelId: row.model_id,
         prompt: promptFromSnapshot(row.snapshot, row.model_id),

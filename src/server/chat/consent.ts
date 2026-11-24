@@ -69,10 +69,7 @@ export function parsePrepareInput(value: unknown): PrepareInput {
 }
 
 /** @id CODE-CHC-004 @implements REQ-CHC-003 */
-export function parseConfirmInput(
-  value: unknown,
-  idempotencyKey: string | null,
-): ConfirmInput {
+export function parseConfirmInput(value: unknown, idempotencyKey: string | null): ConfirmInput {
   const parsed = confirmSchema.safeParse(value);
   if (!parsed.success || !/^[A-Za-z0-9._:-]{1,128}$/.test(idempotencyKey ?? ''))
     throw new ChatError(400, 'INVALID_INPUT', 'Invalid chat confirmation input.');
@@ -192,10 +189,18 @@ export class ChatConsentRepository {
         catalog.connection_id !== binding.connectionId ||
         catalog.connection_generation !== binding.generation
       )
-        throw new ChatError(409, 'CONSENT_REQUIRED', 'Refresh model availability and prepare again.');
+        throw new ChatError(
+          409,
+          'CONSENT_REQUIRED',
+          'Refresh model availability and prepare again.',
+        );
       const models = parseModelInventory(catalog.models);
       if (!models.some((model) => model.id === input.modelId))
-        throw new ChatError(409, 'CONSENT_REQUIRED', 'Refresh model availability and prepare again.');
+        throw new ChatError(
+          409,
+          'CONSENT_REQUIRED',
+          'Refresh model availability and prepare again.',
+        );
 
       const turns = await client.query<SnapshotTurn>(
         `SELECT role,text FROM chat_turns
@@ -262,7 +267,11 @@ export class ChatConsentService {
     confirmed: boolean,
   ): Promise<{ models: ReturnType<typeof parseModelInventory>; expiresAt: string }> {
     if (confirmed !== true)
-      throw new ChatError(400, 'INVALID_INPUT', 'Explicit model discovery confirmation is required.');
+      throw new ChatError(
+        400,
+        'INVALID_INPUT',
+        'Explicit model discovery confirmation is required.',
+      );
     await this.repository.assertProject(owner, project);
     const binding = await this.copilot.chatCredential(owner);
     let response: unknown[];

@@ -51,12 +51,14 @@ export const preview: ChatPreview = {
   expiresAt: '2026-11-21T00:05:00.000Z',
 };
 
-export function chatFixture(options: {
-  conversations?: ChatConversation[];
-  turns?: ChatTurn[];
-  activeRun?: ChatRun | null;
-  accountId?: string;
-} = {}) {
+export function chatFixture(
+  options: {
+    conversations?: ChatConversation[];
+    turns?: ChatTurn[];
+    activeRun?: ChatRun | null;
+    accountId?: string;
+  } = {},
+) {
   let account: UserAccount | null = {
     id: options.accountId ?? 'alice',
     name: 'Researcher',
@@ -74,7 +76,11 @@ export function chatFixture(options: {
       ? options.activeRun.id
       : null;
   let conversations = options.conversations ?? [
-    { ...conversation(firstConversationId), latestRunId: options.activeRun?.id ?? null, activeRunId },
+    {
+      ...conversation(firstConversationId),
+      latestRunId: options.activeRun?.id ?? null,
+      activeRunId,
+    },
     conversation(secondConversationId),
   ];
   const defaultTurns = [

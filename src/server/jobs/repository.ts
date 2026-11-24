@@ -253,7 +253,12 @@ export class JobRepository {
     ).rows[0];
     if (!updated) throw new Error('Job cancel returned no row.');
     if (row.type === 'chat.generate')
-      await syncChatJobTransition(client, row, updated.state, chatFailureCode(updated.failure_code));
+      await syncChatJobTransition(
+        client,
+        row,
+        updated.state,
+        chatFailureCode(updated.failure_code),
+      );
     return publicJob(updated);
   }
   async claim(types: readonly string[]): Promise<JobClaim | null> {

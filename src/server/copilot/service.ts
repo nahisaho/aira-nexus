@@ -183,10 +183,7 @@ export class CopilotService {
       };
     });
   }
-  async currentChatCredential(
-    owner: Principal,
-    binding: ChatCredentialBinding,
-  ): Promise<string> {
+  async currentChatCredential(owner: Principal, binding: ChatCredentialBinding): Promise<string> {
     return this.transaction(owner, async (_client, row) => {
       if (!row.access_token || !row.connection_id)
         throw new CopilotError(409, 'COPILOT_CONNECTION_REQUIRED', 'Connect GitHub in settings.');

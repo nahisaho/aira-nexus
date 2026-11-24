@@ -66,7 +66,11 @@ async function main(): Promise<void> {
         provider: new GitHubDeviceProvider(chatConfig.copilot.clientId),
         secrets: new TokenVault(chatConfig.copilot.encryptionKey),
       });
-      for (const [type, handler] of chatHandlers(new ChatRepository(pool), copilot, new ChatRuntime()))
+      for (const [type, handler] of chatHandlers(
+        new ChatRepository(pool),
+        copilot,
+        new ChatRuntime(),
+      ))
         handlers.set(type, handler);
     }
     if (conversion && files) {

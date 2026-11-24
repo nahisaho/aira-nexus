@@ -1,15 +1,7 @@
 export type ChatRunState =
-  | 'queued'
-  | 'running'
-  | 'cancel_requested'
-  | 'succeeded'
-  | 'failed'
-  | 'cancelled';
+  'queued' | 'running' | 'cancel_requested' | 'succeeded' | 'failed' | 'cancelled';
 export type ChatFailureCode =
-  | 'handler_failed'
-  | 'interrupted'
-  | 'cancellation_unconfirmed'
-  | 'invalid_input';
+  'handler_failed' | 'interrupted' | 'cancellation_unconfirmed' | 'invalid_input';
 export type ChatTurnRole = 'user' | 'assistant';
 
 export interface ChatConversation {

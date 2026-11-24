@@ -66,7 +66,10 @@ export function registerChatRoutes(
   };
   app.use('/api/projects/:id/chat/*', async (c, next) => {
     const project = c.req.param('id');
-    if (!uuid.safeParse(project).success || !(await options.projects.get(c.get('principal'), project)))
+    if (
+      !uuid.safeParse(project).success ||
+      !(await options.projects.get(c.get('principal'), project))
+    )
       return failure(c, 404, 'NOT_FOUND', 'Project not found.');
     if (c.req.method === 'GET' && capabilitiesPath(c.req.path)) return next();
     if (!options.enabled) return failure(c, 503, 'CHAT_UNAVAILABLE', 'Chat is unavailable.');
@@ -105,11 +108,7 @@ export function registerChatRoutes(
   app.get('/api/projects/:id/chat/conversations', async (c) => {
     const cursor = queryParameter(c.req.url, 'cursor');
     return c.json(
-      await service().repository.listConversations(
-        c.get('principal'),
-        c.req.param('id'),
-        cursor,
-      ),
+      await service().repository.listConversations(c.get('principal'), c.req.param('id'), cursor),
     );
   });
 
@@ -166,7 +165,11 @@ export function registerChatRoutes(
   app.get('/api/projects/:id/chat/runs/:runId', async (c) => {
     requireNoQuery(c.req.url);
     return c.json(
-      await service().repository.getRun(c.get('principal'), c.req.param('id'), c.req.param('runId')),
+      await service().repository.getRun(
+        c.get('principal'),
+        c.req.param('id'),
+        c.req.param('runId'),
+      ),
     );
   });
 

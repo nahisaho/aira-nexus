@@ -68,7 +68,7 @@ export function canonicalJobInput(input: unknown): string {
   return encode(input, 0);
 }
 const jobInput = z.strictObject({ type: z.string().min(1).max(64), input: z.unknown() });
-/** @id CODE-SVC-012 @implements REQ-SVC-010 REQ-SVC-011 */
+/** @id CODE-SVC-012 @implements REQ-SVC-010 REQ-SVC-011 REQ-SVC-014 */
 export class JobService {
   constructor(
     public readonly repository: JobRepository,
@@ -81,6 +81,7 @@ export class JobService {
       !parsed.success ||
       parsed.data.type === 'document.convert' ||
       parsed.data.type === 'chat.generate' ||
+      parsed.data.type === 'notebook.execute' ||
       !Object.hasOwn(parsed.data, 'input') ||
       !key ||
       !/^[A-Za-z0-9._:-]{1,128}$/.test(key)

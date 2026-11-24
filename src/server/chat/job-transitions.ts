@@ -39,9 +39,8 @@ export async function syncChatJobTransition(
   if (!run) throw new Error('Chat job run is missing.');
   if (run.state === state) return;
 
-  const sequence = terminal.has(state) || state === 'cancel_requested'
-    ? run.last_sequence + 1
-    : run.last_sequence;
+  const sequence =
+    terminal.has(state) || state === 'cancel_requested' ? run.last_sequence + 1 : run.last_sequence;
   if (sequence > 2147483647) throw new Error('Chat event sequence exhausted.');
 
   if (sequence > run.last_sequence) {

@@ -19,5 +19,4 @@ export class ChatError extends Error {
 }
 
 export const chatMissing = () => new ChatError(404, 'NOT_FOUND', 'Conversation or run not found.');
-export const chatUnavailable = () =>
-  new ChatError(503, 'CHAT_UNAVAILABLE', 'Chat is unavailable.');
+export const chatUnavailable = () => new ChatError(503, 'CHAT_UNAVAILABLE', 'Chat is unavailable.');
