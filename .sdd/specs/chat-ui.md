@@ -4,7 +4,7 @@ tier: T2
 approval: human
 ---
 # Conversation selection, explicit sends and reconnectable chat
-Goal: smallest chat-only central tab using the existing project/auth/i18n shell. Depends on chat-history, chat-consent and chat-runtime. No Notebook, Jobs UI changes, rename/delete, attachment picker, Skills/MCP or tool controls.
+Goal: smallest chat-only central tab using the existing project/auth/i18n shell. Depends on chat-history, chat-consent and chat-runtime. No Jobs UI changes, rename/delete, attachment picker, Skills/MCP or tool controls.
 | ID | EARS requirement | Test |
 | --- | --- | --- |
 | REQ-CHU-001 | When an owner opens project chat, the UI shall list/create/select separate owned conversations and display ordered paginated retained turns with explicit queued/running/cancel_requested/succeeded/failed/cancelled labels; selecting a conversation shall not edit/delete another history or cancel its running generation. | TEST-CHU-001 |
