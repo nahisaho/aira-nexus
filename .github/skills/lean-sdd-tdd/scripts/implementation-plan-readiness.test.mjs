@@ -228,4 +228,10 @@ test('TEST-NPR-004 actual failed verification and adoption never substitute for 
   f.call(['gate'], 0, false);
   assertRetained(f, before);
   assertRetained(f, withFailure);
+  const ledger = path.join(f.root, '.sdd/tdd.jsonl'), ledgerBytes = fs.readFileSync(ledger);
+  try {
+    fs.unlinkSync(ledger);
+    const missingLedger = f.call(['gate', '--no-run'], 1);
+    assert.equal(missingLedger.planning.exit, 2, JSON.stringify(missingLedger.planning));
+  } finally { fs.writeFileSync(ledger, ledgerBytes); }
 });

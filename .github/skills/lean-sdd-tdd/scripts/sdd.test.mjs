@@ -5684,6 +5684,25 @@ test('#220 #223 C/C++ `TEST(name) {}` macro tests get isolated hash regions', ()
   const gg = sdd(g, 'tdd', 'green', 'TEST-CALC-001'); assert.equal(gg.code, 0, gg.out);
 });
 
+test('#236 legacy C/C++ test hashes are not masked by the test SHA cache', () => {
+  const d = batch2Source('t.c', '#define TEST(n) static int n(void)\n// @id TEST-CALC-001 @verifies REQ-CALC-001\nTEST(test_calc_001) { return 1; }\n// legacy shared comment\n');
+  const legacyScript = path.join(d, '.sdd', 'legacy-sdd.mjs');
+  const script = fs.readFileSync(SDD, 'utf8');
+  const legacyScriptText = script.replace('let cLegacy = false;', 'let cLegacy = true;');
+  assert.notEqual(legacyScriptText, script);
+  fs.writeFileSync(legacyScript, legacyScriptText);
+  const legacyRed = (...args) => {
+    const r = spawnSync('node', [legacyScript, '--root', d, ...args], { encoding: 'utf8', env: ENV });
+    return { code: r.status, out: r.stdout + r.stderr };
+  };
+  fakeOut(d, 'assertion failed: test_calc_001');
+  const red = legacyRed('tdd', 'red', 'TEST-CALC-001');
+  assert.equal(red.code, 0, red.out);
+  fakeOut(d, 'pass', 0);
+  const green = sdd(d, 'tdd', 'green', 'TEST-CALC-001');
+  assert.equal(green.code, 0, green.out);
+});
+
 test('#223 #220 macro-declared C tests use the macro argument as the exact CTest name', { skip: !has130('cmake') }, () => {
   const d = batch2Source('t.c', '#include <string.h>\n#define TEST(n) static int n(void)\n/** @id TEST-CALC-001 @verifies REQ-CALC-001 */\nTEST(test_calc_001) { return 0; }\nTEST(test_calc_001_extra) { return 1; }\nint main(int c, char **v) {\n  if (c > 1 && !strcmp(v[1], "test_calc_001")) return test_calc_001() ? 0 : 1;\n  if (c > 1 && !strcmp(v[1], "test_calc_001_extra")) return test_calc_001_extra() ? 0 : 1;\n  return 2;\n}\n');
   writeAll(d, { 'CMakeLists.txt': 'cmake_minimum_required(VERSION 3.16)\nproject(r C)\nenable_testing()\nadd_executable(t t.c)\nadd_test(NAME test_calc_001 COMMAND t test_calc_001)\nadd_test(NAME test_calc_001_extra COMMAND t test_calc_001_extra)\n' });

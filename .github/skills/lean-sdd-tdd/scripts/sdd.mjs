@@ -536,8 +536,9 @@ function scriptOracleImports(file, text, all = false) {
   for (const spec of specs) {
     if (!/^\.{1,2}\//.test(spec)) {
       if (spec.startsWith('node:')) continue;
-      files ??= new Set(workspaceFiles());
-      aliases ??= aliasMap(files);
+      const workspace = workspaceResolution();
+      files ??= workspace.files;
+      aliases ??= workspace.aliases;
       for (const target of aliasSources(aliases, files, spec, rel(file))) {
         const hit = path.join(ROOT, target);
         let code = false;
@@ -801,7 +802,8 @@ function juliaTestSha(txt, id) {
 // inl: a Rust file with a #[cfg(test)] module holds code next to its tests, so only the test's region counts even before @implements exists (#80)
 // eolNorm: BOM/CRLF are not content, so converting a test file's line endings does not stale its evidence (#102); ledgers recorded with raw hashes still match
 let eolNorm = false;
-const testShaVariant = (p, id, trim, norm = false, legacy = false, cut = true, inl = true) => {
+const testShaCache = new Map();
+const calculateTestShaVariant = (p, id, trim, norm = false, legacy = false, cut = true, inl = true) => {
   const raw = fs.readFileSync(path.join(ROOT, p), 'utf8');
   const txt0 = eolNorm ? raw.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n') : raw;
   const txt = stripCodeAnn ? txt0.replace(CODE_ANN_LINE, '') : txt0;
@@ -843,6 +845,17 @@ const testShaVariant = (p, id, trim, norm = false, legacy = false, cut = true, i
   const pre0 = ls.slice(0, begin(starts[0])).join('\n');
   const pre = symbolMode() && /\.(?:[cm]?[jt]sx?)$/.test(p) ? symbolPreamble(pre0, region) : pre0;
   return sha((norm ? normImports(pre) : pre) + '\u0000' + region);
+};
+const testShaVariant = (p, id, trim, norm = false, legacy = false, cut = true, inl = true) => {
+  const stat = fs.statSync(path.join(ROOT, p), { bigint: true });
+  const version = [stat.dev, stat.ino, stat.size, stat.mtimeNs, stat.ctimeNs].map(String).join(':');
+  const key = JSON.stringify([p, id, trim, norm, legacy, cut, inl, eolNorm, stripCodeAnn, symbolOff, symbolMode(), cLegacy]);
+  const cached = testShaCache.get(key);
+  if (cached?.version === version) return cached.hash;
+  const hash = calculateTestShaVariant(p, id, trim, norm, legacy, cut, inl);
+  if (testShaCache.size >= 32768) testShaCache.clear();
+  testShaCache.set(key, { version, hash });
+  return hash;
 };
 const testOwnSha = (p, id) => { eolNorm = true; try { return testShaVariant(p, id, true, true); } finally { eolNorm = false; } };
 const testSha = (p, id) => { eolNorm = true; try { return externalOracleSha(p, testShaVariant(p, id, true, true)); } finally { eolNorm = false; } };
@@ -899,6 +912,8 @@ const tail = (s, n = 15) => { const ls = s.trimEnd().split('\n'); const real = l
 const EXT = /\.(ts|tsx|js|jsx|mjs|cjs|py|go|rs|java|cs|kt|rb|sh|c|h|cc|cpp|cxx|hpp|hh|R|r|jl|php|ex|exs)$/;
 const SKIP = /(^|\/)(node_modules|\.git|\.sdd|dist|build|coverage|target|\.venv|venv|\.mastra|\.next|\.nuxt|\.turbo|\.output)\//;
 const globRe = (g) => new RegExp('^' + g.replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*\*$/, '\u0001').replace(/\*\*\/?/g, '\u0000').replace(/\*/g, '[^/]*').replace(/\?/g, '[^/]').replace(/\u0000/g, '(?:.*/)?').replace(/\u0001/g, '.*') + '$');
+let workspaceSnapshot = null;
+function clearWorkspaceSnapshot() { workspaceSnapshot = null; testShaCache.clear(); }
 function scanFilter(files) {
   const sc = (readJson(CONFIG, null) ?? {}).scan ?? {};
   const inc = (sc.include ?? []).map(globRe);
@@ -912,6 +927,7 @@ function dotnetOutputFilter(files) {
   return files.filter((f) => { for (let d = path.posix.dirname(f); ; d = path.posix.dirname(d)) { if (pd.has(d) && /^(bin|obj)\//.test(d === '.' ? f : f.slice(d.length + 1))) return false; if (d === '.' || d === '/') return true; } });
 }
 function workspaceFiles(base = ROOT) {
+  if (base === ROOT && workspaceSnapshot?.filesArray) return workspaceSnapshot.filesArray;
   const r = spawnSync('git', ['ls-files', '-co', '--exclude-standard'], { cwd: base, encoding: 'utf8', maxBuffer: 64e6 });
   let files;
   // tracked files deleted from the working tree but not staged are still listed by git (#228)
@@ -929,7 +945,15 @@ function workspaceFiles(base = ROOT) {
     walk(base);
   }
   files = [...new Set(files)]; // an unmerged path is listed once per index stage
-  return dotnetOutputFilter(files);
+  files = dotnetOutputFilter(files);
+  if (base === ROOT) workspaceSnapshot = { filesArray: files, files: null, aliases: null, gitFiles: new Map() };
+  return files;
+}
+function workspaceResolution() {
+  const filesArray = workspaceFiles();
+  workspaceSnapshot.files ??= new Set(filesArray);
+  workspaceSnapshot.aliases ??= aliasMap(workspaceSnapshot.files);
+  return workspaceSnapshot;
 }
 /** @id CODE-SCAN-001 @implements REQ-SCAN-001 REQ-SCAN-002 REQ-SCAN-003 */
 function listFiles() {
@@ -1149,6 +1173,11 @@ function approvalState(spec) {
 
 // ---------- ledger ----------
 const ledgerInputError = message => Object.assign(new Error(message), { code: 'ERR_NATIVE_LEDGER_INPUT', exit: 2 });
+let ledgerReadCache = null;
+function ledgerVersion() {
+  const stat = fs.statSync(LEDGER, { bigint: true });
+  return `${stat.dev}:${stat.ino}:${stat.size}:${stat.mtimeNs}:${stat.ctimeNs}`;
+}
 function ledgerPolicy() {
   const policy = loadConfig().planning ?? {};
   if (policy.required === false) return null;
@@ -1158,16 +1187,20 @@ function ledgerPolicy() {
 }
 function readLedger() {
   const policy = ledgerPolicy();
-  if (!fs.existsSync(LEDGER)) return [];
+  if (!fs.existsSync(LEDGER)) { ledgerReadCache = null; return []; }
   if (policy) {
+    const version = ledgerVersion();
+    if (ledgerReadCache?.version === version) return ledgerReadCache.entries;
     const fd = fs.openSync(LEDGER, 'r');
     try {
       const entries = readNativeLedgerEntries(fd, nativeLedgerReadBudget(policy), false);
       if (entries.some(e => !e || typeof e !== 'object' || Array.isArray(e)))
         throw ledgerInputError('Native ledger must contain event objects');
+      if (ledgerVersion() === version) ledgerReadCache = { version, entries };
       return entries;
     } finally { fs.closeSync(fd); }
   }
+  ledgerReadCache = null;
   const ls = fs.readFileSync(LEDGER, 'utf8').split('\n').filter(Boolean);
   if (ls.some((l) => /^(<{7}|={7}|>{7})/.test(l))) { out(`LEDGER CONFLICT: ${rel(LEDGER)} has git merge conflict markers. Run: tdd merge-ledger (keeps both branches' evidence, re-chains the ledger)`); process.exit(2); }
   return ls.map((l, i) => {
@@ -1204,20 +1237,39 @@ function ledgerEventProblem(e) {
   } else return 'unknown event type';
   return null;
 }
+const ledgerChainResults = new WeakMap();
 function verifyChain(entries) {
+  if (ledgerChainResults.has(entries)) return ledgerChainResults.get(entries);
   let prev = '';
   let at = -Infinity;
   for (let i = 0; i < entries.length; i++) {
     const e = entries[i];
-    if (e && typeof e === 'object' && !Array.isArray(e) && (e.prev !== prev || e.hash !== entryHash(e))) return `broken at seq ${e.seq ?? i + 1}`;
+    if (e && typeof e === 'object' && !Array.isArray(e) && (e.prev !== prev || e.hash !== entryHash(e))) {
+      const result = `broken at seq ${e.seq ?? i + 1}`;
+      ledgerChainResults.set(entries, result);
+      return result;
+    }
     const problem = ledgerEventProblem(e);
-    if (problem) return `invalid event at seq ${e?.seq ?? i + 1}: ${problem}`;
-    if (e.seq !== i + 1) return `invalid sequence at seq ${e.seq}: expected ${i + 1}`;
+    if (problem) {
+      const result = `invalid event at seq ${e?.seq ?? i + 1}: ${problem}`;
+      ledgerChainResults.set(entries, result);
+      return result;
+    }
+    if (e.seq !== i + 1) {
+      const result = `invalid sequence at seq ${e.seq}: expected ${i + 1}`;
+      ledgerChainResults.set(entries, result);
+      return result;
+    }
     const time = Date.parse(e.at);
-    if (time < at) return `invalid timestamp at seq ${e.seq}: time goes backwards`;
+    if (time < at) {
+      const result = `invalid timestamp at seq ${e.seq}: time goes backwards`;
+      ledgerChainResults.set(entries, result);
+      return result;
+    }
     prev = e.hash;
     at = time;
   }
+  ledgerChainResults.set(entries, null);
   return null;
 }
 // exclusive lock so concurrent tdd runs cannot fork the hash chain (#109)
@@ -1410,12 +1462,26 @@ function testRegionSha(p, id) {
   } catch { return undefined; }
 }
 const evidenceLedgerProblems = new WeakMap();
+const evidenceLedgerEntries = new WeakMap();
+function ledgerEntriesForTest(entries, testId) {
+  let byTest = evidenceLedgerEntries.get(entries);
+  if (!byTest) {
+    byTest = new Map();
+    for (const entry of entries) {
+      if (!entry.test) continue;
+      if (!byTest.has(entry.test)) byTest.set(entry.test, []);
+      byTest.get(entry.test).push(entry);
+    }
+    evidenceLedgerEntries.set(entries, byTest);
+  }
+  return byTest.get(testId) ?? [];
+}
 function evidenceStatus(testId, testPath, entries) {
   // Evidence checks share an immutable ledger snapshot; hash it once, not once per test.
   if (!evidenceLedgerProblems.has(entries)) evidenceLedgerProblems.set(entries, verifyChain(entries));
   const problem = evidenceLedgerProblems.get(entries);
   if (problem) return { ok: false, why: `invalid ledger: ${problem}` };
-  const es = entries.filter((e) => e.test === testId);
+  const es = ledgerEntriesForTest(entries, testId);
   // reverting to content that already has Green/Refactor evidence recovers it, even after a later refactor recorded against moved setup (#274)
   const gs = es.filter((e) => e.type === 'green');
   const g = gs.filter((e) => shaMatches(e.fileSha, testPath, testId)).at(-1) ?? gs.at(-1);
@@ -1687,7 +1753,7 @@ function run(cmd, timeoutMs, cwd = '.') {
   if (stamp && !/\berror (CS|MSB|NETSDK|NU)\d+|Build FAILED|Restore failed/i.test(r.text) && !r.timedOut) dotnetBuilt.set(key, stamp); else dotnetBuilt.delete(key);
   return r;
 }
-function run1(cmd, timeoutMs, cwd = '.', maxBuffer = 64e6) {
+function run1Uncached(cmd, timeoutMs, cwd = '.', maxBuffer = 64e6) {
   const t0 = Date.now();
   const pytest = pytestArgs(cmd);
   const safeCmd = pytest ? isolatedPytest(cmd, pytest, cwd) : cmd;
@@ -1707,6 +1773,10 @@ function run1(cmd, timeoutMs, cwd = '.', maxBuffer = 64e6) {
   return { exit: r.status ?? (r.error ? 127 : 1), signal: r.signal, text, ms: Date.now() - t0, timedOut, pytestResults,
     error: r.error?.message ?? null, stdout: r.stdout ?? Buffer.alloc(0), stderr: r.stderr ?? Buffer.alloc(0),
     outputLimit: r.error?.code === 'ENOBUFS' };
+}
+function run1(cmd, timeoutMs, cwd = '.', maxBuffer = 64e6) {
+  try { return run1Uncached(cmd, timeoutMs, cwd, maxBuffer); }
+  finally { clearWorkspaceSnapshot(); }
 }
 
 /** @id CODE-NODE-SUMMARY-OUTPUT @implements REQ-NODE-SUMMARY-003 */
@@ -6731,9 +6801,12 @@ const WORKSPACE_ROOT = [
   [/^([^/]+\.(csproj|sln|slnx)|Directory\.(Build|Packages)\.(props|targets)|global\.json|nuget\.config)$/i, [/\.(csproj|sln|slnx)$/]],
 ];
 function gitFiles(glob) {
+  if (workspaceSnapshot?.gitFiles.has(glob)) return workspaceSnapshot.gitFiles.get(glob);
   const r = spawnSync('git', ['ls-files', '-co', '--exclude-standard', glob], { cwd: ROOT, encoding: 'utf8' });
   const re = new RegExp('^' + glob.replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*').replace(/\?/g, '.') + '$');
-  return (r.status === 0 ? r.stdout.split('\n') : workspaceFiles().filter((f) => re.test(f))).filter((f) => f && !/(^|\/)(node_modules|vendor)\//.test(f));
+  const files = (r.status === 0 ? r.stdout.split('\n') : workspaceFiles().filter((f) => re.test(f))).filter((f) => f && !/(^|\/)(node_modules|vendor)\//.test(f));
+  workspaceSnapshot?.gitFiles.set(glob, files);
+  return files;
 }
 const stripJsonc = (t) => t.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:"'])\/\/.*$/gm, '$1').replace(/,(\s*[}\]])/g, '$1');
 // bare-specifier aliases: workspace package names and tsconfig paths -> source file candidates
@@ -7092,38 +7165,63 @@ function planningSession(specs, scanned) {
     const nativeChecks = task => task.tests.map(id => ({ name: `native-${id}`,
       argv: [process.execPath, nativeScript, 'tdd', 'refactor', id, '--root', ROOT],
       timeoutMs: Math.min(config.timeoutMs ?? 600000, 600000) }));
+    let inspectionSnapshot = null, inspectionSnapshotError = null;
+    let preloadedLedger = null;
+    const snapshotForInspection = () => {
+      if (inspectionSnapshot) return inspectionSnapshot;
+      if (inspectionSnapshotError) throw inspectionSnapshotError;
+      try {
+        const currentConfig = readPlanningConfiguration(ROOT, loadConfig);
+        const currentSpecs = loadSpecs(), { ents, dups } = scanEntities(listFiles());
+        const tool = sha(['sdd.mjs', 'implementation-plan.mjs', 'implementation-plan-evidence.mjs',
+          'implementation-plan-cli.mjs', 'implementation-plan-readiness.mjs', 'spec-context.mjs', 'context-planned-artifacts.mjs', 'native-ledger.mjs'].map(file => file + '\0'
+            + sha(fs.readFileSync(new URL(file, import.meta.url)))).join('\0'));
+        const trace = traceCheck(ents, dups, currentSpecs);
+        let entries = preloadedLedger?.entries ?? [], ledgerError = preloadedLedger?.ledgerError ?? null;
+        let ledgerUnavailable = preloadedLedger?.ledgerUnavailable ?? false;
+        let chain = preloadedLedger?.chain ?? null;
+        if (!preloadedLedger) {
+          try {
+            const fd = fs.openSync(LEDGER, 'r');
+            try {
+              entries = readNativeLedgerEntries(fd, nativeLedgerReadBudget(currentConfig.planning));
+            } finally { fs.closeSync(fd); }
+          } catch (error) {
+            ledgerError = error;
+            ledgerUnavailable = true;
+          }
+          chain = ledgerUnavailable ? null : verifyChain(entries);
+        }
+        inspectionSnapshot = { currentConfig, currentSpecs, ents, tool, trace, entries, ledgerError,
+          ledgerUnavailable, chain, lockStates: new Map(),
+          ledgerHashes: !chain && !ledgerUnavailable ? entries.map(entry => entry.hash) : null };
+        return inspectionSnapshot;
+      } catch (error) {
+        inspectionSnapshotError = error;
+        throw error;
+      }
+    };
     const inspect = task => {
       const bindings = Object.fromEntries(task.tests.map(id => [id, null])), errors = [], events = [];
       let ledgerHashes = null;
       const problem = (id, exit, reason, phase = 'input') => errors.push({ id, exit, reason, phase });
       try {
-        const currentConfig = readPlanningConfiguration(ROOT, loadConfig);
-        const currentSpecs = loadSpecs(), { ents, dups } = scanEntities(listFiles());
-        const tool = sha(['sdd.mjs', 'implementation-plan.mjs', 'implementation-plan-evidence.mjs',
-          'implementation-plan-cli.mjs', 'implementation-plan-readiness.mjs', 'spec-context.mjs', 'native-ledger.mjs'].map(file => file + '\0'
-            + sha(fs.readFileSync(new URL(file, import.meta.url)))).join('\0'));
-        const trace = traceCheck(ents, dups, currentSpecs);
+        const snapshot = snapshotForInspection();
+        const { currentConfig, currentSpecs, ents, tool, trace, entries, ledgerError,
+          ledgerUnavailable, chain } = snapshot;
+        ledgerHashes = !chain && !ledgerUnavailable ? entries.map(entry => entry.hash) : null;
         const ids = new Set([...task.reqs, ...task.tests]);
         for (const reason of trace.errors) if ([...reason.matchAll(/\b(?:REQ|TEST|CODE)-[A-Z0-9-]+\b/g)].some(match => ids.has(match[0]))) {
           problem(task.id, / has no test \(@verifies\)/.test(reason) ? 2 : 1, reason);
         }
-        let entries = [], ledgerUnavailable = false;
-        try {
-          const fd = fs.openSync(LEDGER, 'r');
-          try {
-            entries = readNativeLedgerEntries(fd, nativeLedgerReadBudget(currentConfig.planning));
-          } finally { fs.closeSync(fd); }
-        } catch (error) {
-          if (error instanceof PlanningError) problem(error.id, error.exit, error.message);
-          else if (error.code === 'ERR_NATIVE_LEDGER_BUDGET') problem(task.id, 2, error.message);
-          else if (error instanceof SyntaxError || error instanceof TypeError || error.code) {
+        if (ledgerError) {
+          if (ledgerError instanceof PlanningError) problem(ledgerError.id, ledgerError.exit, ledgerError.message);
+          else if (ledgerError.code === 'ERR_NATIVE_LEDGER_BUDGET') problem(task.id, 2, ledgerError.message);
+          else if (ledgerError instanceof SyntaxError || ledgerError instanceof TypeError || ledgerError.code) {
             problem(task.id, 2, 'Native ledger is unavailable or unparseable');
-          } else throw error;
-          ledgerUnavailable = true;
+          } else throw ledgerError;
         }
-        const chain = ledgerUnavailable ? null : verifyChain(entries);
         if (chain) problem(task.id, 1, `invalid native ledger: ${chain}`);
-        if (!chain && !ledgerUnavailable) ledgerHashes = entries.map(entry => entry.hash);
         for (const id of task.tests) {
           const entity = ents.get(id);
           if (!entity || entity.kind !== 'TEST') { problem(id, 2, 'Required native TEST is unavailable'); continue; }
@@ -7133,11 +7231,15 @@ function planningSession(specs, scanned) {
               .filter(req => entity.refs.verifies.includes(req.id)).map(req => [req.id, req.sha])),
             runner: project?.testCmd ?? currentConfig.testCmd, project: project?.root ?? '.' };
           for (const spec of currentSpecs.filter(spec => !ledgerUnavailable && spec.reqs.some(req => entity.refs.verifies.includes(req.id)))) {
-            if (needsLock(spec)) {
-              const state = approvalState(spec);
-              if (state !== 'ok') problem(id, state === 'missing' ? 2 : 1, `${spec.feature}: approval ${state}`);
-              const design = designProblem(spec);
-              if (design) problem(id, 1, design);
+            let lock = snapshot.lockStates.get(spec.feature);
+            if (!lock) {
+              const required = needsLock(spec);
+              lock = { required, state: required ? approvalState(spec) : null, design: designProblem(spec) };
+              snapshot.lockStates.set(spec.feature, lock);
+            }
+            if (lock.required) {
+              if (lock.state !== 'ok') problem(id, lock.state === 'missing' ? 2 : 1, `${spec.feature}: approval ${lock.state}`);
+              if (lock.design) problem(id, 1, lock.design);
             }
           }
           if (chain || ledgerUnavailable) continue;
@@ -7149,7 +7251,7 @@ function planningSession(specs, scanned) {
           }
           const hashes = new Set(), reds = new Map();
           let latest = null, matching = null;
-          for (const entry of entries.filter(entry => entry.test === id)) {
+          for (const entry of ledgerEntriesForTest(entries, id)) {
             if (entry.type === 'red') { reds.set(entry.fileSha, entry); continue; }
             if (!['green', 'refactor'].includes(entry.type)) continue;
             const current = shaMatches(entry.fileSha, entity.path, id);
@@ -7175,12 +7277,25 @@ function planningSession(specs, scanned) {
       }
       return { bindings, events, errors, ledgerHashes };
     };
-    return { ...loaded, adapter: { inspect, nativeChecks, run(argv, timeoutMs) {
-      const result = run1(argv, timeoutMs, '.', 8388609);
-      if (argv[1] === nativeScript && argv[2] === 'tdd' && result.exit === 2 && !result.error) {
-        result.error = 'Native verification is incomplete (exit 2)';
+    return { ...loaded, adapter: { inspect, nativeChecks, setLedgerSnapshot(entries, chain, ledgerUnavailable = false) {
+      preloadedLedger = { entries, chain, ledgerUnavailable,
+        ledgerError: ledgerUnavailable ? Object.assign(new Error(), { code: 'ENOENT' }) : null };
+      inspectionSnapshot = null;
+      inspectionSnapshotError = null;
+    }, run(argv, timeoutMs) {
+      preloadedLedger = null;
+      inspectionSnapshot = null;
+      inspectionSnapshotError = null;
+      try {
+        const result = run1(argv, timeoutMs, '.', 8388609);
+        if (argv[1] === nativeScript && argv[2] === 'tdd' && result.exit === 2 && !result.error) {
+          result.error = 'Native verification is incomplete (exit 2)';
+        }
+        return result;
+      } finally {
+        inspectionSnapshot = null;
+        inspectionSnapshotError = null;
       }
-      return result;
     } } };
   } catch (error) { return planningRefusal(error, 'structure'); }
 }
@@ -7209,6 +7324,7 @@ function cmdGate() {
   const inputSnapshot = flags['no-run'] ? null : gateInputSnapshot(specs, ents, cfg);
   let inputsStable = true;
   const checkInputs = (stage) => {
+    clearWorkspaceSnapshot();
     const changed = changedGateInputs(inputSnapshot, cfg);
     if (changed.length) {
       add(false, `gate inputs changed after ${stage}: ${changed.slice(0, 6).join(', ')}${changed.length > 6 ? `, … +${changed.length - 6}` : ''} — validated evidence no longer describes the checked files; restore inputs and re-record Red→Green`);
@@ -7228,9 +7344,10 @@ function cmdGate() {
   for (const s of specs.filter(needsLock)) { const st = approvalState(s); const ap = readJson(APPROVALS, {})[s.feature]; add(st === 'ok', `lock ${s.feature}: ${st}${ap ? ` [${ap.kind}${ap.kind === 'ai' ? `, review ${ap.review ? (ap.reviewSha ? 'file' : 'summary') : 'none'}` : ''}]` : ''}${s.approval === 'human' ? ' (human required)' : ''}${lockDrift(s) ? ` (policy loosened: ${lockDrift(s)} — human re-approval needed)` : ''}`); const dp = designProblem(s); if (dp) add(false, `design ${s.feature}: missing`, [dp]); }
   for (const [f, a] of Object.entries(readJson(APPROVALS, {}))) if (!specs.some((s) => s.feature === f) && (a.tier === 'T2' || a.requireHuman)) add(false, `lock ${f}: spec removed`, [`a locked ${a.tier === 'T2' ? 'T2' : 'human'} spec disappeared — if intended: approve retire ${f} --by <human name>`]);
 
+  const entries = readLedger();
   {
     const live = new Set(specs.flatMap((x) => x.reqs.map((q) => q.id))), retired = readJson(RETIRED_REQS, {});
-    const gone = [...new Set(readLedger().filter((e) => e.type === 'green').flatMap((e) => [e.req, ...Object.keys(e.reqShas ?? {})]).filter((r) => r && !live.has(r) && !retired[r]))];
+    const gone = [...new Set(entries.filter((e) => e.type === 'green').flatMap((e) => [e.req, ...Object.keys(e.reqShas ?? {})]).filter((r) => r && !live.has(r) && !retired[r]))];
     for (const r of gone) {
       const msg = `req ${r}: has Green evidence but no longer exists in any spec — if the removal is intended: approve retire ${r} --by <human name>; otherwise restore the REQ`;
       if (readJson(CONFIG, {}).scopePolicy === 'strict') add(false, `${msg} (scopePolicy strict)`); else lines.push(`! ${msg} (scopePolicy warn: set "scopePolicy": "strict" to fail)`);
@@ -7239,8 +7356,8 @@ function cmdGate() {
   const t = applyBaseline(traceCheck(ents, dups, specs));
   add(!t.errors.length, `trace: ${[...t.reqs.values()].filter((r) => !r.deferred).length} REQ${[...t.reqs.values()].some((r) => r.deferred) ? ` (+${[...t.reqs.values()].filter((r) => r.deferred).length} deferred, not tested: ${[...t.reqs.values()].filter((r) => r.deferred).map((r) => r.id).join(', ')})` : ''}, ${t.errors.length} errors${t.warnings.length ? `, ${t.warnings.length} warnings` : ''}`, [...t.errors.slice(0, 6), ...t.warnings.slice(0, flags.verbose ? t.warnings.length : 3).map((w) => `warning: ${w}`), ...(t.warnings.length > 3 && !flags.verbose ? [`… +${t.warnings.length - 3} more warnings (all: trace --verbose)`] : [])]);
 
-  const entries = readLedger();
   const chain = verifyChain(entries);
+  evidenceLedgerProblems.set(entries, chain);
   add(!chain, `ledger: ${chain ?? `${entries.length} entries, chain intact`}`);
 
   // a declared config `artifacts` file missing from disk (never created, or deleted in the diff) is an error in full and --changed gates (#320)
@@ -7267,6 +7384,7 @@ function cmdGate() {
     for (const e of ents.values()) if (e.kind === 'TEST') for (const r of e.refs.verifies) if (!relevant.has(r) && /changed in the spec/.test(evidenceStatus(e.id, e.path, entries).why ?? '')) relevant.add(r);
   }
   if (planning.enabled) {
+    planning.adapter.setLedgerSnapshot(entries, chain, !fs.existsSync(LEDGER));
     try { planningIds = planningTaskScope(planning.model, {
       changed: flags.changed ? changedFiles() : null, relevant, impactOne }); }
     catch (error) { return emitPlanningResult(planningRefusal(error, 'gate'), flags.json); }
@@ -7536,7 +7654,7 @@ function cmdGate() {
     }
     if (!flags['no-run'] && inputsStable) {
       // Include new definitions: an added higher-precedence config can narrow the run without changing a recorded file (#333).
-      const rec = readLedger().reverse().find((e) => e.checkDefShas)?.checkDefShas;
+      const rec = [...readLedger()].reverse().find((e) => e.checkDefShas)?.checkDefShas;
       if (rec) {
         const cur = checkDefShas(cfg);
         const diff = [...new Set([...Object.keys(rec), ...Object.keys(cur)])].filter((k) => cur[k] !== rec[k]).map((k) => { const [n, f] = k.split('|'); return `check ${n} (${f}${cur[k] === undefined ? ' no longer defines it' : rec[k] === undefined ? ' now defines it' : ' changed'})`; });
@@ -7641,7 +7759,7 @@ function cmdGate() {
       return modes.get(f) === '120000' ? baselineRead.raw(rel(path.resolve(ROOT, path.dirname(f), r.stdout.toString())), seen) : r.stdout;
     };
     const baselineDefs = checkDefClosure(cfg, baselineRead, [...modes.keys()]);
-    const recordedDefs = readLedger().reverse().find((e) => e.checkDefShas)?.checkDefShas ?? {};
+    const recordedDefs = [...readLedger()].reverse().find((e) => e.checkDefShas)?.checkDefShas ?? {};
     const defs = [...new Set([...currentDefs.keys(), ...baselineDefs.keys(), ...Object.keys(recordedDefs)])]
       .filter((k) => {
         if (k.startsWith('environment:msvc|')) return currentDefs.get(k)?.sha !== recordedDefs[k];
