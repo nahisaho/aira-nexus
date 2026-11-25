@@ -414,10 +414,7 @@ it('TEST-SVC-013 defaults disabled without job-table access and runs only inject
   const internalRun = vi.fn(async () => {});
   const internalJobs = new JobService(
     repository,
-    new Map([
-      ...handlers,
-      ['notebook.execute', { input: z.strictObject({}), run: internalRun }],
-    ]),
+    new Map([...handlers, ['notebook.execute', { input: z.strictObject({}), run: internalRun }]]),
   );
   const internalApp = createApp({
     config: { ...config, jobsEnabled: true },

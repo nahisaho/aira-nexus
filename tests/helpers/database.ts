@@ -2,6 +2,7 @@ import { GenericContainer, Wait } from 'testcontainers';
 import { createServer } from 'node:net';
 import { randomUUID } from 'node:crypto';
 import { Pool } from 'pg';
+import type { PoolClient } from 'pg';
 import { migrate } from '../../scripts/migrate.js';
 
 export async function testDatabase() {
@@ -37,17 +38,28 @@ export async function testDatabase() {
     connectionTimeoutMillis: 5000,
     statement_timeout: 10000,
   });
+  const clients = new Set<PoolClient>();
+  pool.on('connect', (client) => {
+    clients.add(client);
+    client.once('end', () => clients.delete(client));
+  });
+  const closePool = async () => {
+    await pool.end();
+    await Promise.all(
+      [...clients].map((client) => new Promise<void>((resolve) => client.once('end', resolve))),
+    );
+  };
   try {
     await migrate(pool);
   } catch (error) {
-    await pool.end();
+    await closePool();
     await container.stop();
     throw error;
   }
   return {
     pool,
     close: async () => {
-      await pool.end();
+      await closePool();
       await container.stop();
     },
   };

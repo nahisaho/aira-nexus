@@ -269,10 +269,10 @@
         ".sdd/specs/file-trash-drop.md": "aff8b0d8212afb8667ce6762c07376813982dbd4bd54bf7ae38203b9abe7cbca"
       },
       "dependencies": {
-        "file-explorer-actions": "6bd997572ce1eed49322b2da17afad0cb620ee7d4fb38884e74b3f99834a873a"
+        "file-explorer-actions": "5652ea44ed4a5866e66976425ec9af7e6474f214f6eabac53a8f918b1e86aa66"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/13cb60d7469d6477c3c52d092f905f44800db9967710c37c6e4a29f2a3740610/e18273a5c8067a04783aa0ec77edf61c675681a8354fef4e408329e251520cb2.json"
+      "receipt": ".sdd/plan-evidence/13cb60d7469d6477c3c52d092f905f44800db9967710c37c6e4a29f2a3740610/660fc46a2944137c3487d252375669a27f8edd098ec23c456cb70b048f70f5ba.json"
     },
     {
       "id": "file-trash-purge",
@@ -328,11 +328,11 @@
         ".sdd/specs/file-trash-purge.md": "b198f4c780c12a845865e7459f6538d5709b973d4bbae9affc4c7060c57f45fb"
       },
       "dependencies": {
-        "file-explorer-actions": "6bd997572ce1eed49322b2da17afad0cb620ee7d4fb38884e74b3f99834a873a",
-        "file-toolbar-actions": "22b7229805c277e99276f8dd2f397792aead8c0b06f91d21a7be0a844929c21c"
+        "file-explorer-actions": "5652ea44ed4a5866e66976425ec9af7e6474f214f6eabac53a8f918b1e86aa66",
+        "file-toolbar-actions": "e15c9094a8c92d2d5292916ed5ac72b7f3b0787587aaab3e393a2ea67532f473"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/0a05f411a66089fedccce14b80892eb2052f01dff7dffd10dde11b3e8220188b/9ea8b18abdaa434773a137acd7d3d06afa8004c0ba824243df1e9f622b111eb2.json"
+      "receipt": ".sdd/plan-evidence/0a05f411a66089fedccce14b80892eb2052f01dff7dffd10dde11b3e8220188b/4ef3e78761c72945d5321f47b73ab38d13d575cbefceec009e70f30b5b60779a.json"
     },
     {
       "id": "file-toolbar-actions",
@@ -370,10 +370,10 @@
         ".sdd/specs/file-toolbar.md": "7b17a796647c5b26daa32193692be5470261234505e35a1969726db3f1e9b412"
       },
       "dependencies": {
-        "file-explorer-actions": "6bd997572ce1eed49322b2da17afad0cb620ee7d4fb38884e74b3f99834a873a"
+        "file-explorer-actions": "5652ea44ed4a5866e66976425ec9af7e6474f214f6eabac53a8f918b1e86aa66"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/52f9131f4f383a09391ac750a940185ba52a90116453f3b6f648e474e2483037/c34c77057b659d78e1307f88da30738c826cb1e2b7665097573f17a9732e5f4f.json"
+      "receipt": ".sdd/plan-evidence/52f9131f4f383a09391ac750a940185ba52a90116453f3b6f648e474e2483037/57cf7665eacf11fa88ff7d781db54ceb3715a2c82468be7a087ea4187f9b3ac6.json"
     },
     {
       "id": "file-explorer-actions",
@@ -430,11 +430,11 @@
         ".sdd/specs/file-explorer.md": "f07b13fce4531daefe890e6a10c63caa1b02538a6fa31c6f3aa81d296727ed19"
       },
       "dependencies": {
-        "project-files-backend": "fa5c0ed193ea7b059cbb27d70db9b83cfb194214b8e54abeb2a2cff17d4eef22",
-        "project-files-ui": "11b84e9b14b90eecc21d40a8b78d15b319a6d816cbf74e0993bec4241bda2efa"
+        "project-files-backend": "09cb8c803d488ed889e56ef2fe8e35463def34782fa985c1feccabdd7857d83a",
+        "project-files-ui": "3d071abe99d5a5c0d30366e52f3fc602ca2875e7e73f267c10aa0237eba2b73f"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/ff09268faf77269e879718b17678ff1a8d4eb65a8a8e95125e1cb32317596f7a/8bdd102eb676fac40e52a43a874ef873e3b35717b6b2e8e920b6b20bf15fdf1c.json"
+      "receipt": ".sdd/plan-evidence/ff09268faf77269e879718b17678ff1a8d4eb65a8a8e95125e1cb32317596f7a/0e92626f987bab6471d55fae390a890fc02b64cfb2e13c599da0e9bd834b92c1.json"
     },
     {
       "id": "identity-foundation",
@@ -497,7 +497,7 @@
         "native-planner-readiness": "abd16853057a34da801eade5c8d8a1297a366bf709fc256f5f411fe4f18df765"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/01dfd5903b7cc23b9357f199c772b613f4ff02bec656aafd587b39e56c851fe7/28982ab19dcb5b6dd614ef35e3dbedc99334155662d6bb63da22fbd71b706ea5.json"
+      "receipt": ".sdd/plan-evidence/01dfd5903b7cc23b9357f199c772b613f4ff02bec656aafd587b39e56c851fe7/3a74cce7c6aa57690a96d1a951561372814d3d583677182732475ea3e044df9a.json"
     },
     {
       "id": "private-projects",
@@ -558,12 +558,12 @@
         ".sdd/specs/projects.md": "ffd4278243f6f7111a05347875ace97860d06f5814db2fbcf93200d537803bb5"
       },
       "dependencies": {
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
         "native-planner-readiness": "abd16853057a34da801eade5c8d8a1297a366bf709fc256f5f411fe4f18df765"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/4be3dce0ef8093cc43dc84e5974a043933714a7e93ee04736edb74ef955db9e9/6540fd035c64232ae522724b65a6cc95a1537b5de8931ec51d07182c0eb5ba57.json"
+      "receipt": ".sdd/plan-evidence/4be3dce0ef8093cc43dc84e5974a043933714a7e93ee04736edb74ef955db9e9/7d58c1fe75622ba52c1dbb2d811d619313277ab3427c5a62a906d8853c0933b7.json"
     },
     {
       "id": "research-shell",
@@ -645,13 +645,13 @@
         ".sdd/specs/workbench.md": "8b35c210b3ab78fee11de00124ab2e109854b1084c242dd35306196613a9813a"
       },
       "dependencies": {
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
         "native-planner-readiness": "abd16853057a34da801eade5c8d8a1297a366bf709fc256f5f411fe4f18df765",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/8941662ec8a935e7aa0ca54b2ef62f3b44667d205e0c3cfc00fd27bc3dc6146b/47641c16aced7c7e163a4c2abc3b9d2737f7ce1337d844c03993927d55406e71.json"
+      "receipt": ".sdd/plan-evidence/8941662ec8a935e7aa0ca54b2ef62f3b44667d205e0c3cfc00fd27bc3dc6146b/a5705dcd8739cae6e71ed0fe452e5f1e5f665a4422a65a5d5503327b07abe54f.json"
     },
     {
       "id": "ssh-nginx-proxy",
@@ -703,12 +703,12 @@
         ".sdd/specs/remote-proxy.md": "993e716f53e62eb593def9800fb993f0a045f88e25d45f9debc95ef77922a0b1"
       },
       "dependencies": {
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
         "native-planner-readiness": "abd16853057a34da801eade5c8d8a1297a366bf709fc256f5f411fe4f18df765"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/bd825289e9417f53e0edf8745b5d3c274b9caad93a1908acdeda6a621fe2aa98/9f7c935494454272f836ff3861d841517f3c1873fbbbc3934ba9f4c54774405f.json"
+      "receipt": ".sdd/plan-evidence/bd825289e9417f53e0edf8745b5d3c274b9caad93a1908acdeda6a621fe2aa98/dee278967201c78378e35ecb2724713de3cfb0789d51e5ca572b0fe14a98fdbc.json"
     },
     {
       "id": "msal-popup-callback",
@@ -747,15 +747,15 @@
         ".sdd/specs/auth-popup.md": "c94495595fc4f880110f0714758f97b148671da57c8a9d6b7d3b9b87ce321ff5"
       },
       "dependencies": {
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
         "native-planner-readiness": "abd16853057a34da801eade5c8d8a1297a366bf709fc256f5f411fe4f18df765",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a",
-        "ssh-nginx-proxy": "d7b892cc06091f7896fd7f629947bebaa6c516878eb668122a42d0219b26403f"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351",
+        "ssh-nginx-proxy": "1800d89d976d848f1d4a0f8a8ad74df5051a2c49ba40ed2c33bbbbc838746530"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/57bc4d44de6df2419c423392ac3d5eaa072af94cd48d5e0a5d49e2b74704442c/0647824fc7e9201e5a51e8afa4e7cfbc4e1a5985b48e9413a49e9cd88acfae11.json"
+      "receipt": ".sdd/plan-evidence/57bc4d44de6df2419c423392ac3d5eaa072af94cd48d5e0a5d49e2b74704442c/dd43e91f10c530c9c28c6552956dc2bf239fe3d92104d9c982f5b4c9475579d1.json"
     },
     {
       "id": "copilot-user-connection",
@@ -818,16 +818,16 @@
         ".sdd/specs/copilot-connection.md": "c6cf8642d21b196989b6ea11d80d27b7ef6dc222d612fcbc84c83ec3efb08f10"
       },
       "dependencies": {
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
-        "msal-popup-callback": "ff3e1e1e18f721f9f35daa1debf840cb38064e3d1b6fbb62fd25e2bac4653a33",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
+        "msal-popup-callback": "d45a5db983aa2887bf2b5c432e2e2f35b3d8ee720462a9aae0965ea67313dd8c",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
         "native-planner-readiness": "abd16853057a34da801eade5c8d8a1297a366bf709fc256f5f411fe4f18df765",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a",
-        "ssh-nginx-proxy": "d7b892cc06091f7896fd7f629947bebaa6c516878eb668122a42d0219b26403f"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351",
+        "ssh-nginx-proxy": "1800d89d976d848f1d4a0f8a8ad74df5051a2c49ba40ed2c33bbbbc838746530"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/2986eaf16e7147d4658d23d9a2bebacebabbc97d1e91aa4525c6d984d65eee6e/f34245306c9c0cebcee79ae3385a583c6cd4dc6c206f18cb36958bb899d4c5c2.json"
+      "receipt": ".sdd/plan-evidence/2986eaf16e7147d4658d23d9a2bebacebabbc97d1e91aa4525c6d984d65eee6e/059c06680932ab733e3443edee46a94d62d550d21316f4fdfd5430df2b6fdbee.json"
     },
     {
       "id": "user-preferences",
@@ -900,17 +900,17 @@
         ".sdd/specs/user-preferences.md": "7b2e47dd283769799cb47e1aa55ae86c1701dabb01a884726bd87b06a7e6631e"
       },
       "dependencies": {
-        "copilot-user-connection": "01ff0ecb4703359ad4afde5eb94c253787f8351f1f1c7bf82c005e6bc9f3a3bd",
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
-        "msal-popup-callback": "ff3e1e1e18f721f9f35daa1debf840cb38064e3d1b6fbb62fd25e2bac4653a33",
+        "copilot-user-connection": "e0a8f39c7534e33f7dd7a10c59c6564966cbd595028fe8864a139b4d124c4520",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
+        "msal-popup-callback": "d45a5db983aa2887bf2b5c432e2e2f35b3d8ee720462a9aae0965ea67313dd8c",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
         "native-planner-readiness": "abd16853057a34da801eade5c8d8a1297a366bf709fc256f5f411fe4f18df765",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a",
-        "ssh-nginx-proxy": "d7b892cc06091f7896fd7f629947bebaa6c516878eb668122a42d0219b26403f"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351",
+        "ssh-nginx-proxy": "1800d89d976d848f1d4a0f8a8ad74df5051a2c49ba40ed2c33bbbbc838746530"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/b93a2f57490ae4cf89e32f9a6524dd5ecacc83f3477f6bd71450275c0dd31300/2bf4166875ea3a14fcf10e234fc142fbabb9a83ae9a7f7bde32ebf53c5766a66.json"
+      "receipt": ".sdd/plan-evidence/b93a2f57490ae4cf89e32f9a6524dd5ecacc83f3477f6bd71450275c0dd31300/5aa81e52c19136619e951fe63927360c6584763e7112d49cf5f37c3cf05ed2ca.json"
     },
     {
       "id": "project-files-backend",
@@ -967,14 +967,14 @@
         ".sdd/specs/research-services.md": "9bbc0f0a835932f64fb56b68e3700cd4d89484ea0bd55821c039d6aeb5d51ad4"
       },
       "dependencies": {
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
         "native-planner-readiness": "abd16853057a34da801eade5c8d8a1297a366bf709fc256f5f411fe4f18df765",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/92d6f6fedfb4ccc30f89cb4ad81c6952ecb58ec0fb2e4d198d8d3dbf8219cea1/981366d06a19b8539ee1ba0bed5563580d85d7d78ae87439f105fb46eecece8b.json"
+      "receipt": ".sdd/plan-evidence/92d6f6fedfb4ccc30f89cb4ad81c6952ecb58ec0fb2e4d198d8d3dbf8219cea1/029a837fc4b4c18b3edbd665631d9ebe07ea4ba207a5b4bb8e0a5d5f7bfbd605.json"
     },
     {
       "id": "project-files-ui",
@@ -1045,16 +1045,16 @@
         ".sdd/specs/research-services.md": "9bbc0f0a835932f64fb56b68e3700cd4d89484ea0bd55821c039d6aeb5d51ad4"
       },
       "dependencies": {
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
         "native-planner-readiness": "abd16853057a34da801eade5c8d8a1297a366bf709fc256f5f411fe4f18df765",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "project-files-backend": "fa5c0ed193ea7b059cbb27d70db9b83cfb194214b8e54abeb2a2cff17d4eef22",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a",
-        "user-preferences": "f4d3056cf7993ec0411e703b6167e9357edd743949f424aca6085d93e39f2d24"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "project-files-backend": "09cb8c803d488ed889e56ef2fe8e35463def34782fa985c1feccabdd7857d83a",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351",
+        "user-preferences": "f7c106ad2f188d2683d2a750178a03f4725ea7932d82d1c3ff1d76ca1748e0b1"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/3483ada355bc5a3dc97a1ed33e306a411df6e69877f2ecc246719957aae99113/151694f501c01bfa240aa70f03009d064a801e63685d11642d362565a35ca9b3.json"
+      "receipt": ".sdd/plan-evidence/3483ada355bc5a3dc97a1ed33e306a411df6e69877f2ecc246719957aae99113/acd92578c85fe85ffb0dae3abf5f6a55ad47f54801a3d313614d2b458a4e4a1e.json"
     },
     {
       "id": "durable-jobs-foundation",
@@ -1115,15 +1115,15 @@
         ".sdd/specs/research-services.md": "9bbc0f0a835932f64fb56b68e3700cd4d89484ea0bd55821c039d6aeb5d51ad4"
       },
       "dependencies": {
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
         "native-planner-readiness": "abd16853057a34da801eade5c8d8a1297a366bf709fc256f5f411fe4f18df765",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "project-files-ui": "11b84e9b14b90eecc21d40a8b78d15b319a6d816cbf74e0993bec4241bda2efa",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "project-files-ui": "3d071abe99d5a5c0d30366e52f3fc602ca2875e7e73f267c10aa0237eba2b73f",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/c208d846dd79dc0c0c9662865a3e2222c59a1e5d4047eea7348ae0f45042cc1c/e75a3e40921ae864ea6cc7f87e864148fa73b0c52888a0117133d2a602e385a6.json"
+      "receipt": ".sdd/plan-evidence/c208d846dd79dc0c0c9662865a3e2222c59a1e5d4047eea7348ae0f45042cc1c/845764bef042ebde4f186b6acd37dcb8a6a264b134175ef535be63f760ad5092.json"
     },
     {
       "id": "project-pins-backend",
@@ -1177,14 +1177,14 @@
         ".sdd/specs/project-sidebar.md": "0100f3f142c58f10eeaa6a7173625f81602c26d29ff711cb1a05e8c8b60bf2d4"
       },
       "dependencies": {
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
         "native-planner-readiness": "abd16853057a34da801eade5c8d8a1297a366bf709fc256f5f411fe4f18df765",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/ca3e513dfc58ec4400a74109d79005e5635e7e8df76b29c910fd29000025f5da/ed9564fa7820241c2569c132c9d608d5ed3e4128dd845b9db4e84a6f866ed964.json"
+      "receipt": ".sdd/plan-evidence/ca3e513dfc58ec4400a74109d79005e5635e7e8df76b29c910fd29000025f5da/0d395b75827784cdf2e78690441bc74397a8d2c4f4f52eba79bfc32e1727f72d.json"
     },
     {
       "id": "project-sidebar-ui",
@@ -1255,17 +1255,17 @@
         ".sdd/specs/project-sidebar.md": "0100f3f142c58f10eeaa6a7173625f81602c26d29ff711cb1a05e8c8b60bf2d4"
       },
       "dependencies": {
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
         "native-planner-readiness": "abd16853057a34da801eade5c8d8a1297a366bf709fc256f5f411fe4f18df765",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "project-files-ui": "11b84e9b14b90eecc21d40a8b78d15b319a6d816cbf74e0993bec4241bda2efa",
-        "project-pins-backend": "0162959d77a591019ca8f600b42514b2d841a8f233d637b3c0ab56437a72c828",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a",
-        "user-preferences": "f4d3056cf7993ec0411e703b6167e9357edd743949f424aca6085d93e39f2d24"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "project-files-ui": "3d071abe99d5a5c0d30366e52f3fc602ca2875e7e73f267c10aa0237eba2b73f",
+        "project-pins-backend": "3fbf22606831ee68b69870a3cdf6189e9c0b085e343c85f2eaf15cbe1b0c46e6",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351",
+        "user-preferences": "f7c106ad2f188d2683d2a750178a03f4725ea7932d82d1c3ff1d76ca1748e0b1"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/b031862480e72820d3abcd42524ae9ac2780cbb9cb3061dad8e302aaa5764aa2/6af5c6986e2ccb4d9bd0216ff2fae99d75bcc1ee19c95b47347c6aa254a19e1d.json"
+      "receipt": ".sdd/plan-evidence/b031862480e72820d3abcd42524ae9ac2780cbb9cb3061dad8e302aaa5764aa2/795e429e93ad0c7a0a3a48d7282f43cbf1a85c1c84f094c3d460970e9d693ae3.json"
     },
     {
       "id": "native-ledger-reader",
@@ -1481,18 +1481,18 @@
         ".sdd/specs/document-conversion.md": "4ef6c4bf978adf2a123f1b70556829e5f0f2059e1ccb6edc11cfa9e92e9dcb0e"
       },
       "dependencies": {
-        "chat-integration": "e8b0d04610ac3ac1fbacb9a516c0ccf2fd79bd1f8694736b77d9a1c815f4a066",
+        "chat-integration": "44c4cdd4de403fe6d52c0ec06cfa1e92ac047c98e83ddfe1989228405db594cc",
         "docling-runtime": "fd58a3f776db4e2bcff8c27b6a846501a8f1d49604fb5e0dd9550c47c88e84ee",
-        "durable-jobs-foundation": "5721594ddd9ddbb5396c9c098fe872ea3294717bd6f12df7e5f0a9c611f54277",
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "durable-jobs-foundation": "004193816fc974bf4252fa7d7a75e26ce12dde4271c5573a43a5ef3381ebfc1d",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "project-files-backend": "fa5c0ed193ea7b059cbb27d70db9b83cfb194214b8e54abeb2a2cff17d4eef22",
-        "project-files-ui": "11b84e9b14b90eecc21d40a8b78d15b319a6d816cbf74e0993bec4241bda2efa",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "project-files-backend": "09cb8c803d488ed889e56ef2fe8e35463def34782fa985c1feccabdd7857d83a",
+        "project-files-ui": "3d071abe99d5a5c0d30366e52f3fc602ca2875e7e73f267c10aa0237eba2b73f",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/e7ffc474c59366ebda4eaee0ec714b835580df338e450b57e56adfc843226f36/498ecf8e206e0abb5d23758a640359f4c4c064fe30ca11caf8739b41ea316a64.json"
+      "receipt": ".sdd/plan-evidence/e7ffc474c59366ebda4eaee0ec714b835580df338e450b57e56adfc843226f36/b76fa5ab52be180752b7a85068a2bd1a4d6a2b2f00a39314f73b2672be395579.json"
     },
     {
       "id": "conversion-jobs-ui",
@@ -1559,19 +1559,19 @@
         ".sdd/specs/conversion-job-ui.md": "1755631c61b97455a9714c9f1f19f4cc3d0aa7e79b053ceb752dcd880bc13617"
       },
       "dependencies": {
-        "chat-integration": "e8b0d04610ac3ac1fbacb9a516c0ccf2fd79bd1f8694736b77d9a1c815f4a066",
+        "chat-integration": "44c4cdd4de403fe6d52c0ec06cfa1e92ac047c98e83ddfe1989228405db594cc",
         "docling-runtime": "fd58a3f776db4e2bcff8c27b6a846501a8f1d49604fb5e0dd9550c47c88e84ee",
-        "document-conversion": "ba64d671ed5a8221deaf723e5115765826f4abeea2721469ab05cd3753847b32",
-        "durable-jobs-foundation": "5721594ddd9ddbb5396c9c098fe872ea3294717bd6f12df7e5f0a9c611f54277",
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "document-conversion": "2c2073d7b77bec27c1580d3fec2e193d8baaf2c2ee6994f6d5ccd55be2bf6bf2",
+        "durable-jobs-foundation": "004193816fc974bf4252fa7d7a75e26ce12dde4271c5573a43a5ef3381ebfc1d",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "project-files-backend": "fa5c0ed193ea7b059cbb27d70db9b83cfb194214b8e54abeb2a2cff17d4eef22",
-        "project-files-ui": "11b84e9b14b90eecc21d40a8b78d15b319a6d816cbf74e0993bec4241bda2efa",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "project-files-backend": "09cb8c803d488ed889e56ef2fe8e35463def34782fa985c1feccabdd7857d83a",
+        "project-files-ui": "3d071abe99d5a5c0d30366e52f3fc602ca2875e7e73f267c10aa0237eba2b73f",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/26a5524077018a8de8c948fffe83f4926dc3c8e7fc512aa76a4cccd466f03a24/9857bc60c27c6cc30feb93c88e92ddc8e1e045240a82ceab2f964614978a1108.json"
+      "receipt": ".sdd/plan-evidence/26a5524077018a8de8c948fffe83f4926dc3c8e7fc512aa76a4cccd466f03a24/924d3830477481b72af706b9367e8cd4ba15bd10e715745acda3a84617803072.json"
     },
     {
       "id": "chat-history",
@@ -1638,13 +1638,13 @@
         ".sdd/specs/chat-history.md": "8cd103bfce08930cccdc8f75f0516fead8fa997ee9a5035294741ef743d4899a"
       },
       "dependencies": {
-        "durable-jobs-foundation": "5721594ddd9ddbb5396c9c098fe872ea3294717bd6f12df7e5f0a9c611f54277",
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "durable-jobs-foundation": "004193816fc974bf4252fa7d7a75e26ce12dde4271c5573a43a5ef3381ebfc1d",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/c97b7220174b694d8bc0d06e5682dbff78fa8f3b8754499ca32482ffa0a2a4fd/9cf799391da2dee9b067c0370521ec325309fcbea293784f9c1394dafbf62c7b.json"
+      "receipt": ".sdd/plan-evidence/c97b7220174b694d8bc0d06e5682dbff78fa8f3b8754499ca32482ffa0a2a4fd/69eae4fe7cad14d9bb9e34ab0e540cafc61e2fd4503b80a52cac5aa6ee5680da.json"
     },
     {
       "id": "chat-consent",
@@ -1713,17 +1713,17 @@
         ".sdd/specs/chat-consent.md": "3202286d32ab2a98e577cf3d3d3c9e04b6151826b72d4b3b8ae9626c9a9deafe"
       },
       "dependencies": {
-        "chat-history": "4c012c0ffc2f319b7bcf99aa169459cb21880184cb4e13c14e1a4dc5972d4430",
-        "copilot-user-connection": "01ff0ecb4703359ad4afde5eb94c253787f8351f1f1c7bf82c005e6bc9f3a3bd",
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
-        "msal-popup-callback": "ff3e1e1e18f721f9f35daa1debf840cb38064e3d1b6fbb62fd25e2bac4653a33",
+        "chat-history": "0b1f03a2acc6b8ed3841f84c8b60a473d1a23b225317c599b65655e756c697de",
+        "copilot-user-connection": "e0a8f39c7534e33f7dd7a10c59c6564966cbd595028fe8864a139b4d124c4520",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
+        "msal-popup-callback": "d45a5db983aa2887bf2b5c432e2e2f35b3d8ee720462a9aae0965ea67313dd8c",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a",
-        "ssh-nginx-proxy": "d7b892cc06091f7896fd7f629947bebaa6c516878eb668122a42d0219b26403f"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351",
+        "ssh-nginx-proxy": "1800d89d976d848f1d4a0f8a8ad74df5051a2c49ba40ed2c33bbbbc838746530"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/2c8b56b253c5be4672d3a8e78334b9141a65fe97e7114e494c4cdf79272920a2/89696d3f373797fb4140968a915e0a9e1e2363a15c1c7e00c6b3b8a6b87d4f97.json"
+      "receipt": ".sdd/plan-evidence/2c8b56b253c5be4672d3a8e78334b9141a65fe97e7114e494c4cdf79272920a2/17524ed4b2aebbf7d2f4cb37980d04fe7ab18b1b21d5bcd9e402d982f6be172c.json"
     },
     {
       "id": "chat-runtime",
@@ -1800,19 +1800,19 @@
         ".sdd/specs/chat-runtime.md": "84a6ee563a82afffaf829c2e081b4e0a87c0a96d3db2aef1075e84820042543a"
       },
       "dependencies": {
-        "chat-consent": "9d869045c2f2ba3d45b97ad2d654c6a2c378e1a07d30ab9223c7f39f92bc1881",
-        "chat-history": "4c012c0ffc2f319b7bcf99aa169459cb21880184cb4e13c14e1a4dc5972d4430",
-        "copilot-user-connection": "01ff0ecb4703359ad4afde5eb94c253787f8351f1f1c7bf82c005e6bc9f3a3bd",
-        "durable-jobs-foundation": "5721594ddd9ddbb5396c9c098fe872ea3294717bd6f12df7e5f0a9c611f54277",
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
-        "msal-popup-callback": "ff3e1e1e18f721f9f35daa1debf840cb38064e3d1b6fbb62fd25e2bac4653a33",
+        "chat-consent": "7ce0864c2be71b77a4eb8f7f7ecb1cac6e9584d244e852deb47b75539a36a137",
+        "chat-history": "0b1f03a2acc6b8ed3841f84c8b60a473d1a23b225317c599b65655e756c697de",
+        "copilot-user-connection": "e0a8f39c7534e33f7dd7a10c59c6564966cbd595028fe8864a139b4d124c4520",
+        "durable-jobs-foundation": "004193816fc974bf4252fa7d7a75e26ce12dde4271c5573a43a5ef3381ebfc1d",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
+        "msal-popup-callback": "d45a5db983aa2887bf2b5c432e2e2f35b3d8ee720462a9aae0965ea67313dd8c",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a",
-        "ssh-nginx-proxy": "d7b892cc06091f7896fd7f629947bebaa6c516878eb668122a42d0219b26403f"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351",
+        "ssh-nginx-proxy": "1800d89d976d848f1d4a0f8a8ad74df5051a2c49ba40ed2c33bbbbc838746530"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/75b48740be758ecae7fc44c77308d11c9d8000dbc48839a0490aa92fda57957d/bffbe9937e8cdf4fbc3e69e7e2fbda8f0e342de387d56f0ab7b354e3134031ba.json"
+      "receipt": ".sdd/plan-evidence/75b48740be758ecae7fc44c77308d11c9d8000dbc48839a0490aa92fda57957d/f153becd60bb0e48d3ccb9dedc099d4638f5182f0968f3db50b51fca9df5156d.json"
     },
     {
       "id": "chat-ui",
@@ -1873,19 +1873,19 @@
         ".sdd/specs/chat-ui.md": "6c4cbbf3642545bd34369ed7628ebe8d029b58d9fdd5b69bc257776367554706"
       },
       "dependencies": {
-        "chat-consent": "9d869045c2f2ba3d45b97ad2d654c6a2c378e1a07d30ab9223c7f39f92bc1881",
-        "chat-history": "4c012c0ffc2f319b7bcf99aa169459cb21880184cb4e13c14e1a4dc5972d4430",
-        "chat-runtime": "43bfcee485397240e03bbd404a1dbd78ccfed007d449987c53cecaa22b9fd473",
-        "copilot-user-connection": "01ff0ecb4703359ad4afde5eb94c253787f8351f1f1c7bf82c005e6bc9f3a3bd",
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
-        "msal-popup-callback": "ff3e1e1e18f721f9f35daa1debf840cb38064e3d1b6fbb62fd25e2bac4653a33",
+        "chat-consent": "7ce0864c2be71b77a4eb8f7f7ecb1cac6e9584d244e852deb47b75539a36a137",
+        "chat-history": "0b1f03a2acc6b8ed3841f84c8b60a473d1a23b225317c599b65655e756c697de",
+        "chat-runtime": "6cb06bbf295c71ae741a494e90582f31f17f77125cdbb3c685521e6e1c380809",
+        "copilot-user-connection": "e0a8f39c7534e33f7dd7a10c59c6564966cbd595028fe8864a139b4d124c4520",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
+        "msal-popup-callback": "d45a5db983aa2887bf2b5c432e2e2f35b3d8ee720462a9aae0965ea67313dd8c",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a",
-        "ssh-nginx-proxy": "d7b892cc06091f7896fd7f629947bebaa6c516878eb668122a42d0219b26403f"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351",
+        "ssh-nginx-proxy": "1800d89d976d848f1d4a0f8a8ad74df5051a2c49ba40ed2c33bbbbc838746530"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/c44c5634553fa0fdabc866399721ca88ac7a5f53f64240a97e80f1fc962dc77d/0ff385563580144bcf1c47c8dbdb4cf630667d3d003288a02ae2435ca4e300b4.json"
+      "receipt": ".sdd/plan-evidence/c44c5634553fa0fdabc866399721ca88ac7a5f53f64240a97e80f1fc962dc77d/073ea790ab5e944d0a6451a24f34b9f904eb5b8e79ce38395e016a403b1227d1.json"
     },
     {
       "id": "chat-integration",
@@ -1938,17 +1938,17 @@
         ".sdd/specs/research-services.md": "9bbc0f0a835932f64fb56b68e3700cd4d89484ea0bd55821c039d6aeb5d51ad4"
       },
       "dependencies": {
-        "chat-consent": "9d869045c2f2ba3d45b97ad2d654c6a2c378e1a07d30ab9223c7f39f92bc1881",
-        "chat-history": "4c012c0ffc2f319b7bcf99aa169459cb21880184cb4e13c14e1a4dc5972d4430",
-        "chat-runtime": "43bfcee485397240e03bbd404a1dbd78ccfed007d449987c53cecaa22b9fd473",
-        "chat-ui": "190f860cc01cc4d48cb1fd4495cfcee177c7ec1b21a9a31e91177a9da7130ce5",
-        "identity-foundation": "b7856fe5e5fc864f22b8ec3fd36e9a59f0b7e6eee7e4f5fb5dfb80b1231f458e",
+        "chat-consent": "7ce0864c2be71b77a4eb8f7f7ecb1cac6e9584d244e852deb47b75539a36a137",
+        "chat-history": "0b1f03a2acc6b8ed3841f84c8b60a473d1a23b225317c599b65655e756c697de",
+        "chat-runtime": "6cb06bbf295c71ae741a494e90582f31f17f77125cdbb3c685521e6e1c380809",
+        "chat-ui": "60aae546ffa40a8c344ecf2b8165674926c6f5f306b5bfab765ee38fa4a93df5",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
-        "private-projects": "a41ab32bbae75565571c33c3d6332ad1bebc1eff17842498ecfa79fc00fcd020",
-        "research-shell": "8b31c2c2bf302e485533d437df48f469e4257cfe1a1e364991a0bcc89a32e83a"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351"
       },
       "status": "complete",
-      "receipt": ".sdd/plan-evidence/9ca50881c96275b9bc65b096dea8e62b187a015b86742846d6b7227f64463501/d01896181c615ad065790c2a34d1c9a8fe8a667f65edd9d396778f14875f6d71.json"
+      "receipt": ".sdd/plan-evidence/9ca50881c96275b9bc65b096dea8e62b187a015b86742846d6b7227f64463501/a31d81242289c8df6bd17eb40e5aa52fbcd11440f28b1883dfde7913797a60f5.json"
     },
     {
       "id": "notebook-runtime",
@@ -1993,6 +1993,9 @@
         "k8s/notebook/test-postgres.yaml",
         "tests/notebook-runtime.test.ts",
         "tests/notebook-ui.test.tsx",
+        "tests/notebook-cluster-script.test.ts",
+        "tests/database.test.ts",
+        "tests/helpers/database.ts",
         "tests/helpers/notebook.ts",
         "scripts/verify-notebook-cluster.mjs",
         "docs/notebook.md",
@@ -2021,7 +2024,9 @@
             "node_modules/vitest/vitest.mjs",
             "run",
             "tests/notebook-runtime.test.ts",
-            "tests/notebook-ui.test.tsx"
+            "tests/notebook-ui.test.tsx",
+            "tests/notebook-cluster-script.test.ts",
+            "tests/database.test.ts"
           ],
           "timeoutMs": 300000
         },
@@ -2038,17 +2043,17 @@
         ".sdd/specs/notebook-runtime.md": "65453619a7e3d076a1e920ee0318aced6b34564c6512fda110908eb14a0fc5d5"
       },
       "dependencies": {
-        "chat-integration": "ccb580296c874a507bd4b3ed0b74cd293dfeb2e6937718089a44f0cfbff83b1a",
-        "durable-jobs-foundation": "143203b4084c82585ec07f614dec359f94cdcd4519f028efe6aa23d3396d9ff2",
-        "identity-foundation": "34c038dceb9fb2fd44a3a965bdcc8e9733df416ac56a84b6f46d2b7eee91737f",
+        "chat-integration": "44c4cdd4de403fe6d52c0ec06cfa1e92ac047c98e83ddfe1989228405db594cc",
+        "durable-jobs-foundation": "004193816fc974bf4252fa7d7a75e26ce12dde4271c5573a43a5ef3381ebfc1d",
+        "identity-foundation": "493267cb0d472d754a2fa3f9cb4f08fad6055969f3523dbd0f07b52d6baea3bf",
         "native-ledger-reader": "97dd4d63be2203bdb46db5f259cb0eb87614ff5dbc9b0424002812973bbc546a",
-        "private-projects": "910b3eca00e436eccd637f1e510edcac1f9ee2adec1223df1f9f0d701b8c1af3",
-        "project-files-backend": "c4ad50d95217f93e1e86573cd96dd645c30cf600e6935e506f93eabd9bbe3cf5",
-        "project-files-ui": "0d5960abccbfcfd1e83abbbf6169169cb6ac1362ec5a93c5a0de68c90ad619e3",
-        "research-shell": "1e04eae6d50e39b7babe92b36baf3c89b93dd595df4f43d6e5035c3bfdebe5e8"
+        "private-projects": "a7628f70142894ff0c8fa7343c2eeb8359fd1393d6872ce50a9a245791a13b74",
+        "project-files-backend": "09cb8c803d488ed889e56ef2fe8e35463def34782fa985c1feccabdd7857d83a",
+        "project-files-ui": "3d071abe99d5a5c0d30366e52f3fc602ca2875e7e73f267c10aa0237eba2b73f",
+        "research-shell": "08a6f004cb0fa263db4f650a35193ce03aa5c3cb1570b1afe85739acb0a94351"
       },
-      "status": "in-progress",
-      "receipt": null
+      "status": "complete",
+      "receipt": ".sdd/plan-evidence/3694b35c626e718c293126ddcd3944fa44a68738912cb98ed131747845be5b9a/afcd0d456c1885941562c63daa35a6a92f15921c8fe21ada5a6f6b5c47913ac1.json"
     },
     {
       "id": "context-planned-artifacts",

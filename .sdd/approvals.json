@@ -1,23 +1,25 @@
 {
   "identity": {
-    "by": "Hisaho Nakata",
+    "by": "nahisaho",
     "kind": "human",
-    "at": "2026-11-23T22:07:27.426Z",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:10:58.852Z",
     "artifacts": {
       ".sdd/specs/identity.md": "af219aa84624f12b43eef036fd9644a4e4f3ae0c998598af6f8c9e8cd5cf53ab"
     },
     "tier": "T2",
     "requireHuman": true,
     "code": {
-      "src/server/app.ts": "097515d8e418ae67324d1b9a4b15d42f81a96bfcb12506eacd3111fb7d5ee3c0",
-      "src/server/config.ts": "176241d55d8372f0e14bdd011f5d84ce2a4912f64b74ebed201397a024e6357c",
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2",
+      "src/server/config.ts": "fdd97662dda1764bde47aab99142fa795f6f4cff8d0554a42e467d9c23847461",
       "src/server/identity.ts": "e25556736d3754e1475fb74dd1421fc3bb9edaf46005dff76f57d0f48b1c529c"
     }
   },
   "projects": {
-    "by": "Hisaho Nakata",
+    "by": "nahisaho",
     "kind": "human",
-    "at": "2026-11-23T22:07:31.465Z",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:11:18.993Z",
     "artifacts": {
       ".sdd/specs/projects.md": "ffd4278243f6f7111a05347875ace97860d06f5814db2fbcf93200d537803bb5"
     },
@@ -25,8 +27,8 @@
     "requireHuman": true,
     "code": {
       "scripts/migrate.ts": "5b484a3f4d933b6cd01c38dddfe46a12892358fec0ea43f9f2e149b250abe526",
-      "src/server/app.ts": "097515d8e418ae67324d1b9a4b15d42f81a96bfcb12506eacd3111fb7d5ee3c0",
-      "src/server/config.ts": "176241d55d8372f0e14bdd011f5d84ce2a4912f64b74ebed201397a024e6357c",
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2",
+      "src/server/config.ts": "fdd97662dda1764bde47aab99142fa795f6f4cff8d0554a42e467d9c23847461",
       "src/server/http-input.ts": "9287c2303aeeb89d651f9d5b65c35c3a3097d9e868f17ab54640f44f8dac8278",
       "src/server/projects.ts": "285719ae907fdb75b4bf76a5d8ff4ef45d68c843833522a7a07174c75bfbabe4"
     }
@@ -45,8 +47,8 @@
   "research-services": {
     "by": "nahisaho",
     "kind": "human",
-    "review": "Owner approved the exact artifact hash on 2026-11-25; Orca item 4 で aira に回答, relayed by aira via msg_121564d5a694. Source-only/offline validation, no production activation or migration.",
-    "at": "2026-11-24T20:38:11.674Z",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:11:37.776Z",
     "artifacts": {
       ".sdd/specs/research-services.md": "9bbc0f0a835932f64fb56b68e3700cd4d89484ea0bd55821c039d6aeb5d51ad4"
     },
@@ -60,7 +62,7 @@
       "src/client/components/project-files.tsx": "64e81a83ed61aa75d94ed4cb8ac19ae7349ae63b8a33a5012981266c16986774",
       "src/client/files-api.ts": "b21f23068b167053b12eb8e4372960d83f8b5b69e863dad88cfaed2054d9064f",
       "src/client/markdown-renderer.ts": "43550536345b4d0d5cf79680af4709806690c61a06bbfc215048f71e66a995db",
-      "src/server/app.ts": "12d2598b622eb77eac1b5da917d886d3bc1de4eee6b3948d62763f6b17f66c38",
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2",
       "src/server/files/repository.ts": "c32e2065375145a302c436567c66f7e3e01e1a03d7f7ea3803f3bf1798f1b373",
       "src/server/files/service.ts": "c2bb3c3d36d80f216b26cbc3151c7406848089d17a50c22b3b50e990e9025ca2",
       "src/server/jobs/index.ts": "ce882b22813687ed06fb4f71b18b12e9c8711c383939dc6aa89698e264cd09fd",
@@ -73,13 +75,23 @@
   "notebook-runtime": {
     "by": "nahisaho",
     "kind": "human",
-    "at": "2026-11-24T06:14:44.270Z",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:11:08.203Z",
     "artifacts": {
       ".sdd/specs/notebook-runtime.md": "65453619a7e3d076a1e920ee0318aced6b34564c6512fda110908eb14a0fc5d5"
     },
     "tier": "T2",
     "requireHuman": true,
-    "code": {}
+    "code": {
+      "src/client/components/notebook.tsx": "130edc740001137eed6c24f41f400559653ac4aaf24613edf744f83694a157f6",
+      "src/client/notebook-api.ts": "05b1dd1dc441c6385615668a06ba87ab82964ac10d9b9ffe77fd529b3e8a74ab",
+      "src/server/notebook/config.ts": "dc59ba942a93232d8b18fe72991f532e11dd34a0bd1c5d73245204106fe72827",
+      "src/server/notebook/kubernetes.ts": "5921c14626f60ef488da27d1c8f6e21905b3056ce79b5fda21635a48658ef9f5",
+      "src/server/notebook/repository.ts": "9e345dbc9cd587050a07609da6f36bae34816d16e8ff2c9aa3b4e730734c9502",
+      "src/server/notebook/routes.ts": "a061fffbf0ab393ab9d2de63756862612046229250dab7f061f7e17cd967a957",
+      "src/server/notebook/runtime.ts": "dc194ae360c1c30ad878971406d8d0ca6ffa0fafdee2429942b6ed900b8b0fa6",
+      "src/server/notebook/service.ts": "6161240045d500ac33087ae467aa46f5258e0403c37a7fc465312e7eb5e951da"
+    }
   },
   "agent-extensions": {
     "by": "ai:claude-sonnet-5.5",
@@ -115,9 +127,10 @@
     "requireHuman": false
   },
   "remote-proxy": {
-    "by": "Hisaho Nakata",
+    "by": "nahisaho",
     "kind": "human",
-    "at": "2026-11-23T22:07:39.461Z",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:11:28.376Z",
     "artifacts": {
       ".sdd/specs/remote-proxy.md": "993e716f53e62eb593def9800fb993f0a045f88e25d45f9debc95ef77922a0b1"
     },
@@ -126,26 +139,28 @@
     "code": {
       "scripts/check-loopback.sh": "104f2cbaf0d906f97d84be2e6ec4e1fe5e1a3c6086f9bae3906644e00f97e610",
       "scripts/proxy.sh": "b708d55964a02b95b8886615f629087178e34aa0ba41831f83f9de06121b55f5",
-      "src/server/index.ts": "30e02a91098c0f8a69c85776f5fbb30daf01e0fe6e05618f61c937697e74d9c1"
+      "src/server/index.ts": "a6c540a65fe1ac0d2977605a1cc12446a3a2f482b3d2e1681db9db5562b1a95d"
     }
   },
   "auth-popup": {
-    "by": "Hisaho Nakata",
+    "by": "nahisaho",
     "kind": "human",
-    "at": "2026-11-23T22:07:43.519Z",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:10:09.544Z",
     "artifacts": {
       ".sdd/specs/auth-popup.md": "c94495595fc4f880110f0714758f97b148671da57c8a9d6b7d3b9b87ce321ff5"
     },
     "tier": "T2",
     "requireHuman": true,
     "code": {
-      "src/server/app.ts": "097515d8e418ae67324d1b9a4b15d42f81a96bfcb12506eacd3111fb7d5ee3c0"
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2"
     }
   },
   "copilot-connection": {
-    "by": "Hisaho Nakata",
+    "by": "nahisaho",
     "kind": "human",
-    "at": "2026-11-23T22:07:47.555Z",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:10:30.187Z",
     "artifacts": {
       ".sdd/specs/copilot-connection.md": "c6cf8642d21b196989b6ea11d80d27b7ef6dc222d612fcbc84c83ec3efb08f10"
     },
@@ -154,8 +169,8 @@
     "code": {
       "src/client/api.ts": "6d85e6bff113146eba325bfaead01eef7f4dab9dd6b3ffc3add85ee828dd3597",
       "src/client/components/copilot-settings.tsx": "e021ca46f3b08e53a192c415c1749eb66a003057ba3ea75ed7e1392b8b95b51e",
-      "src/server/app.ts": "097515d8e418ae67324d1b9a4b15d42f81a96bfcb12506eacd3111fb7d5ee3c0",
-      "src/server/config.ts": "176241d55d8372f0e14bdd011f5d84ce2a4912f64b74ebed201397a024e6357c",
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2",
+      "src/server/config.ts": "fdd97662dda1764bde47aab99142fa795f6f4cff8d0554a42e467d9c23847461",
       "src/server/copilot/provider.ts": "d080b93b96e1cdcacddbb21c7010e94e19d43810de2208751a35f18b5a8d9f18",
       "src/server/copilot/secrets.ts": "35fcf7a239857e50cf129029338d05e412aea4b93313a941b0f0d18ade5847b1",
       "src/server/copilot/service.ts": "39ceba7f4a8f00397422cb1a7857a2b57241139d76a2d2b8ed6a004851dedbe7",
@@ -212,9 +227,10 @@
     }
   },
   "file-explorer": {
-    "by": "Hisaho Nakata",
+    "by": "nahisaho",
     "kind": "human",
-    "at": "2026-11-23T22:07:51.558Z",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:10:39.873Z",
     "artifacts": {
       ".sdd/specs/file-explorer.md": "f07b13fce4531daefe890e6a10c63caa1b02538a6fa31c6f3aa81d296727ed19"
     },
@@ -223,15 +239,16 @@
     "code": {
       "src/client/components/project-files.tsx": "64e81a83ed61aa75d94ed4cb8ac19ae7349ae63b8a33a5012981266c16986774",
       "src/client/files-api.ts": "b21f23068b167053b12eb8e4372960d83f8b5b69e863dad88cfaed2054d9064f",
-      "src/server/app.ts": "097515d8e418ae67324d1b9a4b15d42f81a96bfcb12506eacd3111fb7d5ee3c0",
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2",
       "src/server/files/repository.ts": "c32e2065375145a302c436567c66f7e3e01e1a03d7f7ea3803f3bf1798f1b373",
       "src/server/files/service.ts": "c2bb3c3d36d80f216b26cbc3151c7406848089d17a50c22b3b50e990e9025ca2"
     }
   },
   "file-trash-purge": {
-    "by": "Hisaho Nakata",
+    "by": "nahisaho",
     "kind": "human",
-    "at": "2026-11-23T22:07:55.622Z",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:10:49.534Z",
     "artifacts": {
       ".sdd/specs/file-trash-purge.md": "b198f4c780c12a845865e7459f6538d5709b973d4bbae9affc4c7060c57f45fb"
     },
@@ -240,7 +257,7 @@
     "code": {
       "src/client/components/project-files.tsx": "64e81a83ed61aa75d94ed4cb8ac19ae7349ae63b8a33a5012981266c16986774",
       "src/client/files-api.ts": "b21f23068b167053b12eb8e4372960d83f8b5b69e863dad88cfaed2054d9064f",
-      "src/server/app.ts": "097515d8e418ae67324d1b9a4b15d42f81a96bfcb12506eacd3111fb7d5ee3c0",
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2",
       "src/server/files/repository.ts": "c32e2065375145a302c436567c66f7e3e01e1a03d7f7ea3803f3bf1798f1b373",
       "src/server/files/service.ts": "c2bb3c3d36d80f216b26cbc3151c7406848089d17a50c22b3b50e990e9025ca2",
       "src/server/files/store.ts": "85b74a533cabead7b7b0b2456a9903522ead0e1a094347fffc9e31c03129a369"
@@ -367,14 +384,15 @@
   "context-planned-artifacts": {
     "by": "nahisaho",
     "kind": "human",
-    "at": "2026-11-24T07:45:30.212Z",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:10:19.224Z",
     "artifacts": {
       ".sdd/specs/context-planned-artifacts.md": "2fca16ca447118d4674191a4e6387296202e5d9f1ac974f7a559cf30446400b2"
     },
     "tier": "T2",
     "requireHuman": true,
     "code": {
-      ".github/skills/lean-sdd-tdd/scripts/context-planned-artifacts.mjs": "c43faf904df3a7af69fe15c15cd4ecff11894ae506442133d190de633635479f"
+      ".github/skills/lean-sdd-tdd/scripts/context-planned-artifacts.mjs": "a63e7cde2b02dbdda6a12334468abad7d4074c76d7d0c7669ef6b29532a5ae20"
     }
   }
 }

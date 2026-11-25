@@ -119,9 +119,14 @@ export function createApp(options: {
   notebook?: { pool: Pool; runtime: NotebookDriver; files?: FileService };
 }) {
   const app = new Hono<Environment>();
-  const notebook = options.config.notebookEnabled && options.notebook
-    ? new NotebookService(new NotebookRepository(options.notebook.pool),options.notebook.runtime,options.notebook.files)
-    : undefined;
+  const notebook =
+    options.config.notebookEnabled && options.notebook
+      ? new NotebookService(
+          new NotebookRepository(options.notebook.pool),
+          options.notebook.runtime,
+          options.notebook.files,
+        )
+      : undefined;
   app.use('*', async (c, next) => {
     c.set('requestId', randomUUID());
     c.header('X-Request-ID', c.get('requestId'));
@@ -152,7 +157,7 @@ export function createApp(options: {
   });
   app.onError((_error, c) => {
     if (_error instanceof NotebookError)
-      return failure(c,_error.status,'NOTEBOOK_ERROR',_error.message);
+      return failure(c, _error.status, 'NOTEBOOK_ERROR', _error.message);
     if (_error instanceof ProjectError)
       return failure(c, _error.status, _error.code, _error.message);
     if (_error instanceof ChatError) {
@@ -330,9 +335,10 @@ export function createApp(options: {
       const id = managementId(c.req.param('id'));
       const version = projectVersion(c.req.header('If-Match'));
       const change = () => options.projects[action](c.get('principal'), id, version);
-      const result = action === 'trash' && notebook
-        ? await notebook.trash(c.get('principal'),id,change)
-        : await change();
+      const result =
+        action === 'trash' && notebook
+          ? await notebook.trash(c.get('principal'), id, change)
+          : await change();
       c.header('ETag', `"${result.project.version}"`);
       return c.json(result);
     });
@@ -537,7 +543,7 @@ export function createApp(options: {
     projects: options.projects,
     enabled: options.config.notebookEnabled === true,
     origin: options.config.publicOrigin,
-    ...(notebook ? {service:notebook} : {}),
+    ...(notebook ? { service: notebook } : {}),
   });
   registerConversionRoutes(app, {
     projects: options.projects,

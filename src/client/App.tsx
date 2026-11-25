@@ -1,12 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import {
-  ArrowRight,
-  BookOpen,
-  LogOut,
-  Microscope,
-  PanelLeftOpen,
-  ShieldCheck,
-} from 'lucide-react';
+import { ArrowRight, BookOpen, LogOut, Microscope, PanelLeftOpen, ShieldCheck } from 'lucide-react';
 import type { BrowserAuth, UserAccount } from './auth';
 import { ApiError } from './api';
 import type { ProjectsApi } from './api';
@@ -99,7 +92,10 @@ export function App({
     [auth, injectedConversionsApi],
   );
   const chatApi = useMemo(() => injectedChatApi ?? createChatApi(auth), [auth, injectedChatApi]);
-  const notebookApi = useMemo(()=>injectedNotebookApi ?? createNotebookApi(auth),[auth,injectedNotebookApi]);
+  const notebookApi = useMemo(
+    () => injectedNotebookApi ?? createNotebookApi(auth),
+    [auth, injectedNotebookApi],
+  );
   const [connectionEpoch, setConnectionEpoch] = useState(0);
   const [jobsRevision, setJobsRevision] = useState(0);
   const mounted = useRef(false);
@@ -494,9 +490,11 @@ export function App({
                 )
               }
               notebook={
-                selectedId && user
-                  ? <Notebook key={scopeKey} api={notebookApi} projectId={selectedId} t={t} />
-                  : <p>{t('まずプロジェクトを作成または選択してください。')}</p>
+                selectedId && user ? (
+                  <Notebook key={scopeKey} api={notebookApi} projectId={selectedId} t={t} />
+                ) : (
+                  <p>{t('まずプロジェクトを作成または選択してください。')}</p>
+                )
               }
             />
           </section>

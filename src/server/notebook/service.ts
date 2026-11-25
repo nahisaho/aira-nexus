@@ -21,7 +21,22 @@ export interface NotebookDriver {
   execute(kernel: NotebookKernel, code: string, signal: AbortSignal): Promise<string>;
   artifact(kernel: NotebookKernel, name: string): Promise<Uint8Array>;
 }
-function boundedOutput(output: string) {
+export function startNotebookReclaimer(service: Pick<NotebookService, 'reclaim'>): () => void {
+  let running = false;
+  const timer = setInterval(() => {
+    if (running) return;
+    running = true;
+    void service
+      .reclaim()
+      .catch(() => console.error(JSON.stringify({ event: 'notebook_reclaim_failed' })))
+      .finally(() => {
+        running = false;
+      });
+  }, 1000);
+  timer.unref();
+  return () => clearInterval(timer);
+}
+export function boundedOutput(output: string) {
   const bytes = Buffer.from(output);
   if (bytes.length <= NOTEBOOK_OUTPUT_BYTES) return output;
   const suffix = '\n[output truncated]';

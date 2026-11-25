@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: aira-notebook-qualification
+  labels:
+    aira.nexus/role: notebook-gateway
+    aira.nexus/purpose: notebook-qualification

@@ -22,6 +22,9 @@ import { productionJobHandlers } from './jobs/worker.js';
 import { ConversionFileRepository, ConversionRepository } from './conversion/repository.js';
 import { ChatRepository } from './chat/repository.js';
 import { ChatService } from './chat/service.js';
+import { createNotebookOptions } from './notebook/runtime.js';
+import { NotebookRepository } from './notebook/repository.js';
+import { NotebookService, startNotebookReclaimer } from './notebook/service.js';
 
 const config = readConfig(process.env);
 const pool = new Pool({
@@ -46,6 +49,18 @@ const chatConsent =
 const chat = config.chatEnabled
   ? new ChatService(new ChatRepository(pool), config, !!chatConsent, chatConsent)
   : undefined;
+const files = config.files
+  ? new FileService(
+      conversions ? new ConversionFileRepository(pool, conversions) : new FileRepository(pool),
+      new AzureBlobStore(config.files),
+    )
+  : undefined;
+const notebook = createNotebookOptions(config.notebookEnabled === true, pool, files);
+const stopNotebookReclaimer = notebook
+  ? startNotebookReclaimer(
+      new NotebookService(new NotebookRepository(pool), notebook.runtime, files),
+    )
+  : undefined;
 /** @id CODE-SID-005 @implements REQ-SID-002 */
 const app = createApp({
   config,
@@ -59,14 +74,8 @@ const app = createApp({
   ...(config.jobsEnabled
     ? { jobs: new JobService(new JobRepository(pool), productionJobHandlers) }
     : {}),
-  ...(config.files
-    ? {
-        files: new FileService(
-          conversions ? new ConversionFileRepository(pool, conversions) : new FileRepository(pool),
-          new AzureBlobStore(config.files),
-        ),
-      }
-    : {}),
+  ...(files ? { files } : {}),
+  ...(notebook ? { notebook } : {}),
   ...(copilot ? { copilot } : {}),
 });
 app.get('/assets/*', serveStatic({ root: './dist/client' }));
@@ -83,6 +92,7 @@ const server = serve({ fetch: app.fetch, hostname, port: config.port }, () => {
   console.info(`AIRA Nexus listening on port ${config.port}.`);
 });
 function shutdown() {
+  stopNotebookReclaimer?.();
   const deadline = setTimeout(() => {
     console.error('Shutdown deadline exceeded.');
     process.exit(1);
