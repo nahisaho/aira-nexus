@@ -1,0 +1,9 @@
+references/
+.github/
+node_modules/
+dist/
+package-lock.json
+.sdd/tdd.jsonl
+.sdd/approvals.json
+.sdd/evidence/
+.sdd/specs/

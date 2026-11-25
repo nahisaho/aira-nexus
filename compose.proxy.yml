@@ -1,0 +1,26 @@
+name: aira-nexus-proxy
+services:
+  nginx:
+    image: nginx:stable-alpine@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311
+    network_mode: host
+    user: nginx
+    read_only: true
+    entrypoint: [nginx]
+    command: [-g, 'daemon off;']
+    cap_drop: [ALL]
+    security_opt: ['no-new-privileges:true']
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m,mode=1777
+      - /var/cache/nginx:rw,noexec,nosuid,size=16m,mode=1777
+    volumes:
+      - ./nginx/tunnel.conf:/etc/nginx/nginx.conf:ro
+      - ./scripts/check-loopback.sh:/usr/local/bin/aira-check-loopback.sh:ro
+    healthcheck:
+      test:
+        [
+          CMD-SHELL,
+          'sh /usr/local/bin/aira-check-loopback.sh 3000 && wget -q -O /dev/null http://127.0.0.1:18080/health/live',
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 3

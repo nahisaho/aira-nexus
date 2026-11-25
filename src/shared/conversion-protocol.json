@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "engine": {
+    "distribution": "docling-slim",
+    "version": "2.150.0"
+  },
+  "failureCodes": [
+    "handler_failed",
+    "interrupted",
+    "cancellation_unconfirmed",
+    "invalid_input",
+    "unsupported_type",
+    "input_too_large",
+    "page_limit",
+    "invalid_document",
+    "conversion_failed",
+    "timeout",
+    "runtime_unavailable",
+    "output_invalid",
+    "output_too_large",
+    "source_unavailable",
+    "source_changed",
+    "quota_exceeded"
+  ],
+  "formats": ["pdf", "docx", "pptx", "xlsx", "png", "jpg", "jpeg"],
+  "limits": {
+    "inputBytes": 25000000,
+    "outputBytes": 25000000,
+    "pdfPages": 200,
+    "timeoutMs": 300000,
+    "stdoutBytes": 70000000,
+    "stderrBytes": 65536,
+    "stopMs": 15000
+  }
+}

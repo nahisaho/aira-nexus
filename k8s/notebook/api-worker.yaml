@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: notebook-qualification-gateway
+  namespace: aira-notebook-qualification
+  labels:
+    aira.nexus/component: notebook-gateway
+spec:
+  serviceAccountName: notebook-qualification
+  restartPolicy: Never
+  containers:
+    - name: gateway
+      image: aira-nexus-notebook-api:qualification
+      imagePullPolicy: IfNotPresent
+      command: ['node', '-e', 'setInterval(() => {}, 2147483647)']
+      env:
+        - name: NOTEBOOK_GATEWAY_NAMESPACE
+          value: aira-notebook-qualification
+        - name: NOTEBOOK_DEPLOYMENT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: notebook-qualification
+              key: deployment-id
+        - name: NOTEBOOK_KERNEL_IMAGE
+          valueFrom:
+            configMapKeyRef:
+              name: notebook-qualification
+              key: kernel-image
+        - name: NOTEBOOK_NAMESPACE_PREFIX
+          value: aira-qual-
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: notebook-qualification-postgres
+              key: password
+        - name: AZURITE_ACCOUNT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: notebook-qualification-postgres
+              key: blob-key
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 2
+          memory: 1Gi
+    - name: azurite
+      image: mcr.microsoft.com/azure-storage/azurite@sha256:f9791d0a0613e93057c06ae31f7ac0c0222f0530590e67e020b0986c66a36fa6
+      args:
+        [
+          'azurite-blob',
+          '--blobHost',
+          '127.0.0.1',
+          '--blobPort',
+          '10000',
+          '--location',
+          '/tmp/blob',
+          '--silent',
+          '--disableTelemetry',
+        ]
+      env:
+        - name: AZURITE_ACCOUNT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: notebook-qualification-postgres
+              key: blob-key
+        - name: AZURITE_ACCOUNTS
+          value: 'notebooktest:$(AZURITE_ACCOUNT_KEY)'
+      readinessProbe:
+        exec:
+          command:
+            [
+              'node',
+              '-e',
+              "const s=require('node:net').connect(10000,'127.0.0.1');s.on('connect',()=>{s.end();process.exit(0)});s.on('error',()=>process.exit(1));",
+            ]
+        periodSeconds: 1
+        failureThreshold: 60
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 1
+          memory: 512Mi

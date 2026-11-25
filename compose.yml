@@ -1,0 +1,49 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: aira_nexus
+      POSTGRES_USER: aira
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a local development database password in .env}
+    ports:
+      - '127.0.0.1:5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U aira -d aira_nexus']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  blob:
+    profiles: ['files']
+    image: mcr.microsoft.com/azure-storage/azurite@sha256:830430c1da1a2d537e08f3e6764dd1f5ae00cf0346bcaf625b968ec3f0971fd5
+    environment:
+      AZURITE_ACCOUNTS: '${AZURITE_ACCOUNT_NAME:-airanexus}:${AZURITE_ACCOUNT_KEY:-}'
+    ports:
+      - '127.0.0.1:10000:10000'
+    entrypoint:
+      - /bin/sh
+      - -ec
+      - |
+        case "$$AZURITE_ACCOUNTS" in *:) echo 'Configure a private Azurite account key before enabling files.' >&2; exit 1;; esac
+        exec "$$@"
+      - azurite-require-key
+    command:
+      [
+        'azurite-blob',
+        '--blobHost',
+        '0.0.0.0',
+        '--blobPort',
+        '10000',
+        '--location',
+        '/data',
+        '--silent',
+        '--disableTelemetry',
+      ]
+    volumes:
+      - blob_data:/data
+    mem_limit: 512m
+    cpus: 1
+volumes:
+  postgres_data:
+  blob_data:

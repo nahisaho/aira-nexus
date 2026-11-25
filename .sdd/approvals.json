@@ -1,0 +1,398 @@
+{
+  "identity": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:10:58.852Z",
+    "artifacts": {
+      ".sdd/specs/identity.md": "af219aa84624f12b43eef036fd9644a4e4f3ae0c998598af6f8c9e8cd5cf53ab"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2",
+      "src/server/config.ts": "fdd97662dda1764bde47aab99142fa795f6f4cff8d0554a42e467d9c23847461",
+      "src/server/identity.ts": "e25556736d3754e1475fb74dd1421fc3bb9edaf46005dff76f57d0f48b1c529c"
+    }
+  },
+  "projects": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:11:18.993Z",
+    "artifacts": {
+      ".sdd/specs/projects.md": "ffd4278243f6f7111a05347875ace97860d06f5814db2fbcf93200d537803bb5"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "scripts/migrate.ts": "5b484a3f4d933b6cd01c38dddfe46a12892358fec0ea43f9f2e149b250abe526",
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2",
+      "src/server/config.ts": "fdd97662dda1764bde47aab99142fa795f6f4cff8d0554a42e467d9c23847461",
+      "src/server/http-input.ts": "9287c2303aeeb89d651f9d5b65c35c3a3097d9e868f17ab54640f44f8dac8278",
+      "src/server/projects.ts": "285719ae907fdb75b4bf76a5d8ff4ef45d68c843833522a7a07174c75bfbabe4"
+    }
+  },
+  "workbench": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Owner approved the exact artifact hash on 2026-11-25; Orca item 4 で aira に回答, relayed by aira via msg_121564d5a694. Source-only/offline validation, no production activation or migration.",
+    "at": "2026-11-24T20:38:18.675Z",
+    "artifacts": {
+      ".sdd/specs/workbench.md": "8b35c210b3ab78fee11de00124ab2e109854b1084c242dd35306196613a9813a"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "research-services": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:11:37.776Z",
+    "artifacts": {
+      ".sdd/specs/research-services.md": "9bbc0f0a835932f64fb56b68e3700cd4d89484ea0bd55821c039d6aeb5d51ad4"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/client/chat-api.ts": "39fa898e4fa95f40bb6a9fc48b3170fc658abb04473569906c32341efa2f605d",
+      "src/client/components/image-safety.ts": "41511b4d03f4f48e13bb57944ad0d2408159a09c3a1983c43a6a31a4956dc7ba",
+      "src/client/components/markdown-preview.tsx": "9674aa7c22f6add40292dc8fb4cb65eeca11258f024b5df9b8f4fadc754b7203",
+      "src/client/components/pdf-viewer.tsx": "8220de609087c1fea04954ada7c9c66fe280109fa3ea0b02907545b3cc3cac21",
+      "src/client/components/project-files.tsx": "64e81a83ed61aa75d94ed4cb8ac19ae7349ae63b8a33a5012981266c16986774",
+      "src/client/files-api.ts": "b21f23068b167053b12eb8e4372960d83f8b5b69e863dad88cfaed2054d9064f",
+      "src/client/markdown-renderer.ts": "43550536345b4d0d5cf79680af4709806690c61a06bbfc215048f71e66a995db",
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2",
+      "src/server/files/repository.ts": "c32e2065375145a302c436567c66f7e3e01e1a03d7f7ea3803f3bf1798f1b373",
+      "src/server/files/service.ts": "c2bb3c3d36d80f216b26cbc3151c7406848089d17a50c22b3b50e990e9025ca2",
+      "src/server/jobs/index.ts": "ce882b22813687ed06fb4f71b18b12e9c8711c383939dc6aa89698e264cd09fd",
+      "src/server/jobs/repository.ts": "38750c54cc3f8e74709cd2b4b077e643072a8e3f924b6181b78d3f32cf69d41c",
+      "src/server/jobs/service.ts": "dd0445b9edb249685857cba625bf4dbfe95204ff4f444dfebbb96ab5645b0677",
+      "src/server/jobs/worker.ts": "92fa681e15bc977b92ba8858801e57bf725ae533e2e632122be47d20fba9ffb1",
+      "src/shared/jobs.ts": "4064f099f7b33b4d0d0efb934e90e5ae84a497f67f9dc45aeac24cbf899526f2"
+    }
+  },
+  "notebook-runtime": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:11:08.203Z",
+    "artifacts": {
+      ".sdd/specs/notebook-runtime.md": "65453619a7e3d076a1e920ee0318aced6b34564c6512fda110908eb14a0fc5d5"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/client/components/notebook.tsx": "130edc740001137eed6c24f41f400559653ac4aaf24613edf744f83694a157f6",
+      "src/client/notebook-api.ts": "05b1dd1dc441c6385615668a06ba87ab82964ac10d9b9ffe77fd529b3e8a74ab",
+      "src/server/notebook/config.ts": "dc59ba942a93232d8b18fe72991f532e11dd34a0bd1c5d73245204106fe72827",
+      "src/server/notebook/kubernetes.ts": "5921c14626f60ef488da27d1c8f6e21905b3056ce79b5fda21635a48658ef9f5",
+      "src/server/notebook/repository.ts": "9e345dbc9cd587050a07609da6f36bae34816d16e8ff2c9aa3b4e730734c9502",
+      "src/server/notebook/routes.ts": "a061fffbf0ab393ab9d2de63756862612046229250dab7f061f7e17cd967a957",
+      "src/server/notebook/runtime.ts": "dc194ae360c1c30ad878971406d8d0ca6ffa0fafdee2429942b6ed900b8b0fa6",
+      "src/server/notebook/service.ts": "6161240045d500ac33087ae467aa46f5258e0403c37a7fc465312e7eb5e951da"
+    }
+  },
+  "agent-extensions": {
+    "by": "ai:claude-sonnet-5.5",
+    "kind": "ai",
+    "review": "Claude Sonnet 5.5 independent review: no blocking findings for unchanged deferred future intent only. No activation, spike, implementation, readiness or publication approval; activation follow-ups recorded in the feature review ledger.",
+    "at": "2026-11-12T10:41:22.344Z",
+    "artifacts": {
+      ".sdd/specs/agent-extensions.md": "52d151eec80f825f42747432410018152517047388eb1a239e69c508831d563d"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "research-evidence": {
+    "by": "ai:claude-sonnet-5.5",
+    "kind": "ai",
+    "review": "Claude Sonnet 5.5 independent review: no blocking findings for unchanged deferred future intent only. No activation, spike, implementation, readiness or publication approval; activation follow-ups recorded in the feature review ledger.",
+    "at": "2026-11-12T10:41:22.530Z",
+    "artifacts": {
+      ".sdd/specs/research-evidence.md": "ef8f3c431bf283026cde5d4d0bcc01ace610d8947eca6f841a480c5ed13223a2"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "platform-operations": {
+    "by": "ai:claude-sonnet-5.5",
+    "kind": "ai",
+    "review": "Claude Sonnet 5.5 independent review: no blocking findings for unchanged deferred future intent only. No activation, spike, implementation, readiness or publication approval; activation follow-ups recorded in the feature review ledger.",
+    "at": "2026-11-12T10:41:22.712Z",
+    "artifacts": {
+      ".sdd/specs/platform-operations.md": "c8d8937cca093218b60e32034e8b5ef2fdaf9ecdd56c4336b85a51cb028b95c2"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "remote-proxy": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:11:28.376Z",
+    "artifacts": {
+      ".sdd/specs/remote-proxy.md": "993e716f53e62eb593def9800fb993f0a045f88e25d45f9debc95ef77922a0b1"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "scripts/check-loopback.sh": "104f2cbaf0d906f97d84be2e6ec4e1fe5e1a3c6086f9bae3906644e00f97e610",
+      "scripts/proxy.sh": "b708d55964a02b95b8886615f629087178e34aa0ba41831f83f9de06121b55f5",
+      "src/server/index.ts": "a6c540a65fe1ac0d2977605a1cc12446a3a2f482b3d2e1681db9db5562b1a95d"
+    }
+  },
+  "auth-popup": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:10:09.544Z",
+    "artifacts": {
+      ".sdd/specs/auth-popup.md": "c94495595fc4f880110f0714758f97b148671da57c8a9d6b7d3b9b87ce321ff5"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2"
+    }
+  },
+  "copilot-connection": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:10:30.187Z",
+    "artifacts": {
+      ".sdd/specs/copilot-connection.md": "c6cf8642d21b196989b6ea11d80d27b7ef6dc222d612fcbc84c83ec3efb08f10"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/client/api.ts": "6d85e6bff113146eba325bfaead01eef7f4dab9dd6b3ffc3add85ee828dd3597",
+      "src/client/components/copilot-settings.tsx": "e021ca46f3b08e53a192c415c1749eb66a003057ba3ea75ed7e1392b8b95b51e",
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2",
+      "src/server/config.ts": "fdd97662dda1764bde47aab99142fa795f6f4cff8d0554a42e467d9c23847461",
+      "src/server/copilot/provider.ts": "d080b93b96e1cdcacddbb21c7010e94e19d43810de2208751a35f18b5a8d9f18",
+      "src/server/copilot/secrets.ts": "35fcf7a239857e50cf129029338d05e412aea4b93313a941b0f0d18ade5847b1",
+      "src/server/copilot/service.ts": "39ceba7f4a8f00397422cb1a7857a2b57241139d76a2d2b8ed6a004851dedbe7",
+      "src/shared/copilot.ts": "d89393f5b259d84a78a92f2525e9bff399f07c1e927edcb0c7720580e89b205f"
+    }
+  },
+  "user-preferences": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Human approved exact spec7b2e47dd283769799cb47e1aa55ae86c1701dabb01a884726bd87b06a7e6631e: extra-small70%, compatible additive constraint migration, isolated SQL/CSS spikes passed.",
+    "at": "2026-11-16T10:28:30.539Z",
+    "artifacts": {
+      ".sdd/specs/user-preferences.md": "7b2e47dd283769799cb47e1aa55ae86c1701dabb01a884726bd87b06a7e6631e"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "project-sidebar": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Human approved exact spec 0100f3f142c58f10eeaa6a7173625f81602c26d29ff711cb1a05e8c8b60bf2d4 after direct-archive feasibility spike and explicit no-confirmation clarification.",
+    "at": "2026-11-16T10:06:49.390Z",
+    "artifacts": {
+      ".sdd/specs/project-sidebar.md": "0100f3f142c58f10eeaa6a7173625f81602c26d29ff711cb1a05e8c8b60bf2d4"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "native-ledger-capacity": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Human approved .sdd/specs/native-ledger-capacity.md SHA2560904b4a08c41c30544edf3ac67b9e262fb139fa2335f9629c444b89d22669f5b with record/merge/memory constraints and isolated implementation only; frozen-artifact Root512MiB opt-in requires separate human approval.",
+    "at": "2026-11-17T12:47:45.883Z",
+    "artifacts": {
+      ".sdd/specs/native-ledger-capacity.md": "0904b4a08c41c30544edf3ac67b9e262fb139fa2335f9629c444b89d22669f5b"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      ".github/skills/lean-sdd-tdd/scripts/native-ledger.mjs": "b23930997727802b4ec539e003afc5b5ff1d8f87204d4182f13a628dddada0d7"
+    }
+  },
+  "native-plan-replanning": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-14T11:09:46.041Z",
+    "artifacts": {
+      ".sdd/specs/native-plan-replanning.md": "e0cb6855d62e1b63ea4344a9c4e3e3e53fc4edc5e429f00234b58d92c5f4a5e6"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      ".github/skills/lean-sdd-tdd/scripts/implementation-plan-readiness.mjs": "668f5c726dc71a29a7a12d569c65fe10baf55a599c8deb5d8a1398275f9db333"
+    }
+  },
+  "file-explorer": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:10:39.873Z",
+    "artifacts": {
+      ".sdd/specs/file-explorer.md": "f07b13fce4531daefe890e6a10c63caa1b02538a6fa31c6f3aa81d296727ed19"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/client/components/project-files.tsx": "64e81a83ed61aa75d94ed4cb8ac19ae7349ae63b8a33a5012981266c16986774",
+      "src/client/files-api.ts": "b21f23068b167053b12eb8e4372960d83f8b5b69e863dad88cfaed2054d9064f",
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2",
+      "src/server/files/repository.ts": "c32e2065375145a302c436567c66f7e3e01e1a03d7f7ea3803f3bf1798f1b373",
+      "src/server/files/service.ts": "c2bb3c3d36d80f216b26cbc3151c7406848089d17a50c22b3b50e990e9025ca2"
+    }
+  },
+  "file-trash-purge": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:10:49.534Z",
+    "artifacts": {
+      ".sdd/specs/file-trash-purge.md": "b198f4c780c12a845865e7459f6538d5709b973d4bbae9affc4c7060c57f45fb"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/client/components/project-files.tsx": "64e81a83ed61aa75d94ed4cb8ac19ae7349ae63b8a33a5012981266c16986774",
+      "src/client/files-api.ts": "b21f23068b167053b12eb8e4372960d83f8b5b69e863dad88cfaed2054d9064f",
+      "src/server/app.ts": "2186fa4cf1c0f335d15355be84bffb7a9c34913f0288ed25820d360be0ce43d2",
+      "src/server/files/repository.ts": "c32e2065375145a302c436567c66f7e3e01e1a03d7f7ea3803f3bf1798f1b373",
+      "src/server/files/service.ts": "c2bb3c3d36d80f216b26cbc3151c7406848089d17a50c22b3b50e990e9025ca2",
+      "src/server/files/store.ts": "85b74a533cabead7b7b0b2456a9903522ead0e1a094347fffc9e31c03129a369"
+    }
+  },
+  "native-discovery-capacity": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-16T13:35:58.529Z",
+    "artifacts": {
+      ".sdd/specs/native-discovery-capacity.md": "b9530ca6c157735f608c48e61559d96d24e4d94276b10a95db5316f2d657311d"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {}
+  },
+  "docling-runtime": {
+    "by": "Hisaho Nakata",
+    "kind": "human",
+    "at": "2026-11-23T22:07:59.512Z",
+    "artifacts": {
+      ".sdd/specs/docling-runtime.md": "001ddb7391eed94ea331130f644c32621a2aca56817ee4ac8e87f742887699ee"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/conversion/parser.py": "6fdb7b9e80977be091eb6334f9b22bfb50f7fb8287caef779756398dbe1e86ab",
+      "src/server/conversion/runtime.ts": "cb8b332116c53ae3a8f74cfb9e6f538a2ce549a5034aa0811ceca741e35337a7"
+    }
+  },
+  "document-conversion": {
+    "by": "nahisaho",
+    "kind": "human",
+    "at": "2026-11-24T00:47:32.839Z",
+    "artifacts": {
+      ".sdd/specs/document-conversion.md": "4ef6c4bf978adf2a123f1b70556829e5f0f2059e1ccb6edc11cfa9e92e9dcb0e"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/conversion/config.ts": "2848d9826dbce0ae66aab888bf9385ef2c319912af403e402d6b6044c8d76604",
+      "src/server/conversion/repository.ts": "007a64e29686ed291f347af890bc1990e073ff1e92751fcad66a41a8faab7438",
+      "src/server/conversion/worker.ts": "a873ba4ab5f12835799f16265cbe25633007c8beefab6d4796c4d0a9ba68ef2a",
+      "src/shared/conversions.ts": "4f94b1e2e2b552151142f1139be02b56b530356d6c1e661a73906b43449e5975"
+    }
+  },
+  "conversion-job-ui": {
+    "by": "ai:claude-sonnet-5.5",
+    "kind": "ai",
+    "review": "Design-only re-lock: approved spec SHA 1755631c61b97455a9714c9f1f19f4cc3d0aa7e79b053ceb752dcd880bc13617 is unchanged; original independent Sonnet design approval is retained in .sdd/ui-work-evidence/baseline.json. Current implementation findings remain OPEN in .sdd/review-conversion-job-ui.md; this is not implementation approval or gate evidence.",
+    "at": "2026-11-18T00:14:22.386Z",
+    "artifacts": {
+      ".sdd/specs/conversion-job-ui.md": "1755631c61b97455a9714c9f1f19f4cc3d0aa7e79b053ceb752dcd880bc13617"
+    },
+    "tier": "T2",
+    "requireHuman": false
+  },
+  "chat-consent": {
+    "by": "Hisaho Nakata",
+    "kind": "human",
+    "at": "2026-11-23T22:08:03.385Z",
+    "artifacts": {
+      ".sdd/specs/chat-consent.md": "3202286d32ab2a98e577cf3d3d3c9e04b6151826b72d4b3b8ae9626c9a9deafe"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/chat/consent.ts": "70150dee4f093bfc6a8c9553bfe07b5759852cca59dcdd8fdd02689be1b9e178",
+      "src/server/chat/models.ts": "956b5ba42073436130ba255211adc9c1915c47384e8cf391ecb727ef001a8c2e",
+      "src/server/chat/repository.ts": "7abfb27caec8c88f58fb81963c5595a846f26133c58b124046f6bbc2cc09d5da",
+      "src/server/chat/runtime.ts": "f1a03a10f26d34aa6e027e03ba63e148bf9eb6803b653036ebe2f00b3155e0af",
+      "src/server/chat/sdk-child.ts": "83c251342c12ee04d7f259314ee1f1d9639b5b74094e20c2fa6ec093ce4d8a41",
+      "src/server/chat/snapshot.ts": "cad456308a9bc10e3f7772391c9955a13c68c3779964c4be8bfeb44bf9234ce9",
+      "src/server/chat/worker.ts": "c50269d44452c4f666b1c2ca171e3bbe62e4c577e84d356ad73df505b5eb638d",
+      "src/server/copilot/service.ts": "39ceba7f4a8f00397422cb1a7857a2b57241139d76a2d2b8ed6a004851dedbe7"
+    }
+  },
+  "chat-history": {
+    "by": "Hisaho Nakata",
+    "kind": "human",
+    "at": "2026-11-23T22:08:07.309Z",
+    "artifacts": {
+      ".sdd/specs/chat-history.md": "8cd103bfce08930cccdc8f75f0516fead8fa997ee9a5035294741ef743d4899a"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/chat/config.ts": "a7c2345426fa9edf6dbce18397d2f1f276f68b2c84add50090cf006848dbccb8",
+      "src/server/chat/repository.ts": "7abfb27caec8c88f58fb81963c5595a846f26133c58b124046f6bbc2cc09d5da"
+    }
+  },
+  "chat-runtime": {
+    "by": "Hisaho Nakata",
+    "kind": "human",
+    "at": "2026-11-23T22:08:11.201Z",
+    "artifacts": {
+      ".sdd/specs/chat-runtime.md": "84a6ee563a82afffaf829c2e081b4e0a87c0a96d3db2aef1075e84820042543a"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/server/chat/event-writer.ts": "2d03a27343a540589907bab3840190dfca94bb3904bdbedd8fa0f57a93845c19",
+      "src/server/chat/repository.ts": "7abfb27caec8c88f58fb81963c5595a846f26133c58b124046f6bbc2cc09d5da",
+      "src/server/chat/runtime.ts": "f1a03a10f26d34aa6e027e03ba63e148bf9eb6803b653036ebe2f00b3155e0af",
+      "src/server/chat/sdk-child.ts": "83c251342c12ee04d7f259314ee1f1d9639b5b74094e20c2fa6ec093ce4d8a41",
+      "src/server/chat/stream.ts": "caf23997c30f566fb4fffa57d67383960617b100c28ed5512e7c813de07bc289"
+    }
+  },
+  "chat-ui": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Owner approved the exact artifact hash on 2026-11-25; Orca item 4 で aira に回答, relayed by aira via msg_121564d5a694. Source-only/offline validation, no production activation or migration.",
+    "at": "2026-11-24T20:38:15.188Z",
+    "artifacts": {
+      ".sdd/specs/chat-ui.md": "6c4cbbf3642545bd34369ed7628ebe8d029b58d9fdd5b69bc257776367554706"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      "src/client/chat-api.ts": "39fa898e4fa95f40bb6a9fc48b3170fc658abb04473569906c32341efa2f605d",
+      "src/client/components/project-chat.tsx": "48e04603394e9d1577ac9a777361fe92dcf96951161954f4f07dd3766b46aedf"
+    }
+  },
+  "context-planned-artifacts": {
+    "by": "nahisaho",
+    "kind": "human",
+    "review": "Owner nahisaho re-approved the reported implementation snapshots via Orca item 4 to aira to msg_5f5c7295794a and msg_7eb2b3115b58. Accepted risks: NetworkPolicy race without admission; >2GiB behavior NOT_RUN; node-origin traffic and production equivalence unproven. No production activation approval.",
+    "at": "2026-11-25T06:10:19.224Z",
+    "artifacts": {
+      ".sdd/specs/context-planned-artifacts.md": "2fca16ca447118d4674191a4e6387296202e5d9f1ac974f7a559cf30446400b2"
+    },
+    "tier": "T2",
+    "requireHuman": true,
+    "code": {
+      ".github/skills/lean-sdd-tdd/scripts/context-planned-artifacts.mjs": "a63e7cde2b02dbdda6a12334468abad7d4074c76d7d0c7669ef6b29532a5ae20"
+    }
+  }
+}

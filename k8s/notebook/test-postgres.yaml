@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: notebook-qualification-postgres
+  namespace: aira-notebook-qualification
+  labels:
+    app: notebook-qualification-postgres
+spec:
+  automountServiceAccountToken: false
+  restartPolicy: Never
+  containers:
+    - name: postgres
+      image: postgres@sha256:4717f90960a225c2d1c5dac50508c401230f693ff626e06e84e6db0a68ded508
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: POSTGRES_USER
+          value: notebooktest
+        - name: POSTGRES_DB
+          value: notebooktest
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: notebook-qualification-postgres
+              key: password
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+      readinessProbe:
+        exec:
+          command: ['pg_isready', '-U', 'notebooktest', '-d', 'notebooktest']
+        periodSeconds: 1
+        failureThreshold: 60
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 1
+          memory: 512Mi
+      volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
+  volumes:
+    - name: data
+      emptyDir:
+        sizeLimit: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notebook-qualification-postgres
+  namespace: aira-notebook-qualification
+spec:
+  selector:
+    app: notebook-qualification-postgres
+  ports:
+    - port: 5432

@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: notebook-isolation
+spec:
+  podSelector: {}
+  policyTypes: ['Ingress', 'Egress']
+  egress: []
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: aira-notebook-qualification
+              aira.nexus/role: notebook-gateway
+          podSelector:
+            matchLabels:
+              aira.nexus/component: notebook-gateway
+      ports:
+        - protocol: TCP
+          port: 8888
+        - protocol: TCP
+          port: 8889

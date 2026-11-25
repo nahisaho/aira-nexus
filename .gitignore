@@ -1,0 +1,12 @@
+/references/
+/node_modules/
+/dist/
+/coverage/
+/.consulting/
+/test-results/
+/playwright-report/
+/.playwright-mcp/
+/.env
+/.env.*
+!/.env.example
+/.sdd/prepare-cache.json
